@@ -6,6 +6,33 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.0.0] - 2025-12-07
+
+### Aggiunto
+- **Nuova sezione Cibo** 🍽️ con gestione completa scorte
+- **Inventario prodotti**: scatolette (Natural Code, Schesir, Oasy, Life Cat) e crocchette (Farmina)
+- **Gestione quantità**: pulsanti +/- per aggiornare velocemente le scorte
+- **Avviso scorte basse**: notifica quando le scatolette scendono sotto 15 unità
+- **Preferenze gatte**: traccia quali gusti piacciono a Minou e Matisse
+- **Valutazioni prodotti**: ❤️ Adorano, 👍 Piace, 😐 Ok, 👎 No
+- **Formati scatolette**: supporto per 50g, 70g, 85g e 400g
+- **Gusti preconfigurati**: tonno, pollo, tacchino, misti e personalizzati
+- **Riepilogo scorte**: visualizzazione totale scatolette e kg crocchette
+- Nuova tab "Cibo" nella navigazione (ora 4 tab)
+- Sincronizzazione dati cibo con GitHub
+
+---
+
+## [1.5.2] - 2025-12-07
+
+### Corretto
+- **Fix definitivo layout Android**: riscritta completamente la barra di navigazione con layout più semplice
+- Altezza fissa navbar (60px) per consistenza su tutti i dispositivi
+- Rimossi stili complessi che causavano problemi su Android
+- Aggiunto supporto corretto per safe-area su iOS
+
+---
+
 ## [1.5.1] - 2025-12-07
 
 ### Corretto

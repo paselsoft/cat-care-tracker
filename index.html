@@ -589,6 +589,338 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Food Section Styles */
+        .low-stock-alert {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 2px solid #f59e0b;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .low-stock-alert {
+                background: linear-gradient(135deg, #78350f, #92400e);
+                border-color: #f59e0b;
+            }
+        }
+
+        .alert-icon {
+            font-size: 2rem;
+        }
+
+        .alert-content strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .alert-content p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .food-summary {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .summary-item {
+            flex: 1;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 4px 15px var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .summary-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .summary-value {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .summary-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .food-section {
+            margin-bottom: 24px;
+        }
+
+        .food-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .food-section-header h3 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .add-btn {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .food-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .food-item {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 10px var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .food-item.low-stock {
+            border-color: var(--warning);
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .food-item-icon {
+            font-size: 1.5rem;
+        }
+
+        .food-item-info {
+            flex: 1;
+        }
+
+        .food-item-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .food-item-details {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .food-item-cats {
+            display: flex;
+            gap: 2px;
+        }
+
+        .food-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qty-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn.minus {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .qty-btn.plus {
+            background: var(--success);
+            color: white;
+        }
+
+        .qty-value {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .qty-value.low {
+            color: var(--warning);
+        }
+
+        .food-item-actions {
+            display: flex;
+            gap: 4px;
+        }
+
+        .food-action-btn {
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 8px;
+        }
+
+        .food-action-btn:active {
+            background: var(--bg-secondary);
+        }
+
+        /* Preferences */
+        .preferences-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .preference-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 14px;
+            box-shadow: 0 2px 10px var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .preference-card.minou-pref {
+            border-top: 3px solid #fbbf24;
+        }
+
+        .preference-card.matisse-pref {
+            border-top: 3px solid #60a5fa;
+        }
+
+        .pref-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .pref-cat-name {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .pref-cat-emoji {
+            font-size: 1.3rem;
+        }
+
+        .pref-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .pref-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            padding: 4px 0;
+        }
+
+        .pref-item-name {
+            color: var(--text-secondary);
+        }
+
+        .pref-item-rating {
+            font-size: 0.9rem;
+        }
+
+        .empty-prefs {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        /* Modal large */
+        .modal-large {
+            max-width: 380px;
+        }
+
+        .preference-checkboxes {
+            display: flex;
+            gap: 16px;
+        }
+
+        .pref-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .pref-checkbox input {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary);
+        }
+
+        .pref-check-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .pref-check-label.minou {
+            color: #d97706;
+        }
+
+        .pref-check-label.matisse {
+            color: #3b82f6;
+        }
+
+        .rating-selector {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .rating-btn {
+            padding: 8px 12px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .rating-btn.active {
+            border-color: var(--primary);
+            background: rgba(124, 58, 237, 0.1);
+        }
+
         /* Settings */
         .settings-card {
             background: var(--bg-card);
@@ -1143,6 +1475,84 @@
             </section>
         </div>
 
+        <!-- Tab: Food -->
+        <div class="tab-content" id="tabFood">
+            <section class="section">
+                <h2 class="section-title">🍽️ Gestione Cibo</h2>
+                
+                <!-- Alert scorte basse -->
+                <div class="low-stock-alert" id="lowStockAlert" style="display: none;">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-content">
+                        <strong>Scorte basse!</strong>
+                        <p id="lowStockText">Alcuni prodotti stanno finendo</p>
+                    </div>
+                </div>
+
+                <!-- Riepilogo scorte -->
+                <div class="food-summary">
+                    <div class="summary-item">
+                        <span class="summary-icon">🥫</span>
+                        <span class="summary-value" id="totalCans">0</span>
+                        <span class="summary-label">Scatolette</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-icon">🥣</span>
+                        <span class="summary-value" id="totalKibble">0</span>
+                        <span class="summary-label">Kg Crocchette</span>
+                    </div>
+                </div>
+
+                <!-- Lista prodotti -->
+                <div class="food-section">
+                    <div class="food-section-header">
+                        <h3>🥫 Scatolette</h3>
+                        <button class="add-btn" onclick="showAddProductModal('scatoletta')">+ Aggiungi</button>
+                    </div>
+                    <div class="food-list" id="cansList">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="food-section">
+                    <div class="food-section-header">
+                        <h3>🥣 Crocchette</h3>
+                        <button class="add-btn" onclick="showAddProductModal('crocchette')">+ Aggiungi</button>
+                    </div>
+                    <div class="food-list" id="kibbleList">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Preferenze gatte -->
+                <div class="food-section">
+                    <div class="food-section-header">
+                        <h3>❤️ Preferenze Gatte</h3>
+                    </div>
+                    <div class="preferences-grid">
+                        <div class="preference-card minou-pref">
+                            <div class="pref-header">
+                                <span class="pref-cat-name">Minou</span>
+                                <span class="pref-cat-emoji">🐱</span>
+                            </div>
+                            <div class="pref-list" id="minouPrefs">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                        <div class="preference-card matisse-pref">
+                            <div class="pref-header">
+                                <span class="pref-cat-name">Matisse</span>
+                                <span class="pref-cat-emoji">🐱</span>
+                            </div>
+                            <div class="pref-list" id="matissePrefs">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
         <!-- Tab: Settings -->
         <div class="tab-content" id="tabSettings">
             <section class="section">
@@ -1211,7 +1621,7 @@
                     <h3>📱 App</h3>
                     <div class="setting-row">
                         <span class="setting-label">Versione</span>
-                        <span class="setting-value">1.5.2</span>
+                        <span class="setting-value">2.0.0</span>
                     </div>
                     <div class="setting-row">
                         <span class="setting-label">Tema</span>
@@ -1227,6 +1637,10 @@
         <button class="nav-btn active" data-tab="Home">
             <span class="nav-icon">🏠</span>
             <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-btn" data-tab="Food">
+            <span class="nav-icon">🍽️</span>
+            <span class="nav-label">Cibo</span>
         </button>
         <button class="nav-btn" data-tab="History">
             <span class="nav-icon">📋</span>
@@ -1254,6 +1668,98 @@
             <div class="modal-buttons">
                 <button class="modal-btn cancel" onclick="closeSyncConfigModal()">Annulla</button>
                 <button class="modal-btn confirm" onclick="saveSyncConfig()">Salva</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal modal-large">
+            <div class="modal-icon">🥫</div>
+            <h3 id="productModalTitle">Aggiungi Prodotto</h3>
+            
+            <div class="input-wrapper">
+                <label for="productBrand">Marca:</label>
+                <select id="productBrand" class="text-input">
+                    <option value="">Seleziona marca...</option>
+                    <option value="Natural Code">Natural Code</option>
+                    <option value="Schesir">Schesir</option>
+                    <option value="Oasy">Oasy</option>
+                    <option value="Life Cat">Life Cat</option>
+                    <option value="Farmina">Farmina</option>
+                    <option value="Altro">Altro...</option>
+                </select>
+            </div>
+            
+            <div class="input-wrapper" id="customBrandWrapper" style="display: none;">
+                <label for="customBrand">Nome marca:</label>
+                <input type="text" id="customBrand" class="text-input" placeholder="Inserisci marca">
+            </div>
+            
+            <div class="input-wrapper">
+                <label for="productFlavor">Gusto:</label>
+                <select id="productFlavor" class="text-input">
+                    <option value="">Seleziona gusto...</option>
+                    <option value="Tonno">Tonno</option>
+                    <option value="Pollo">Pollo</option>
+                    <option value="Tacchino">Tacchino</option>
+                    <option value="Tonno e Pollo">Tonno e Pollo</option>
+                    <option value="Tonno e Tacchino">Tonno e Tacchino</option>
+                    <option value="Pollo e Tacchino">Pollo e Tacchino</option>
+                    <option value="Manzo">Manzo</option>
+                    <option value="Pesce">Pesce</option>
+                    <option value="Misto">Misto</option>
+                    <option value="Altro">Altro...</option>
+                </select>
+            </div>
+            
+            <div class="input-wrapper" id="customFlavorWrapper" style="display: none;">
+                <label for="customFlavor">Nome gusto:</label>
+                <input type="text" id="customFlavor" class="text-input" placeholder="Inserisci gusto">
+            </div>
+            
+            <div class="input-wrapper" id="sizeWrapper">
+                <label for="productSize">Formato:</label>
+                <select id="productSize" class="text-input">
+                    <option value="50g">50g</option>
+                    <option value="70g">70g</option>
+                    <option value="85g" selected>85g</option>
+                    <option value="400g">400g</option>
+                </select>
+            </div>
+            
+            <div class="input-wrapper">
+                <label for="productQuantity">Quantità in stock:</label>
+                <input type="number" id="productQuantity" class="text-input" min="0" value="0">
+            </div>
+            
+            <div class="input-wrapper">
+                <label>Piace a:</label>
+                <div class="preference-checkboxes">
+                    <label class="pref-checkbox">
+                        <input type="checkbox" id="likesMinou" checked>
+                        <span class="pref-check-label minou">Minou 🐱</span>
+                    </label>
+                    <label class="pref-checkbox">
+                        <input type="checkbox" id="likesMatisse" checked>
+                        <span class="pref-check-label matisse">Matisse 🐱</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="input-wrapper">
+                <label>Valutazione:</label>
+                <div class="rating-selector">
+                    <button type="button" class="rating-btn" data-rating="love" onclick="setRating('love')">❤️ Adorano</button>
+                    <button type="button" class="rating-btn active" data-rating="like" onclick="setRating('like')">👍 Piace</button>
+                    <button type="button" class="rating-btn" data-rating="ok" onclick="setRating('ok')">😐 Ok</button>
+                    <button type="button" class="rating-btn" data-rating="dislike" onclick="setRating('dislike')">👎 No</button>
+                </div>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" onclick="closeProductModal()">Annulla</button>
+                <button class="modal-btn confirm" onclick="saveProduct()">Salva</button>
             </div>
         </div>
     </div>
@@ -1301,6 +1807,7 @@
     <script>
         // App State
         const CLEANING_INTERVAL = 15; // days
+        const LOW_STOCK_THRESHOLD = 15; // scatolette
         const GITHUB_REPO = 'paselsoft/cat-care-tracker';
         const GITHUB_FILE = 'data.json';
         
@@ -1313,11 +1820,18 @@
             settings: {
                 notifications: false,
                 dayBefore: true
+            },
+            food: {
+                products: [],
+                lastUpdated: null
             }
         };
         
         let githubToken = null;
         let isSyncing = false;
+        let currentProductType = 'scatoletta';
+        let editingProductId = null;
+        let currentRating = 'like';
 
         // Initialize
         document.addEventListener('DOMContentLoaded', async () => {
@@ -1325,15 +1839,30 @@
             loadGitHubToken();
             updateSyncUI();
             updateUI();
+            updateFoodUI();
             checkInstallPrompt();
             requestNotificationPermission();
             initNavigation();
+            initProductModalListeners();
             
             // Se abbiamo il token, sincronizza all'avvio
             if (githubToken) {
                 await syncFromGitHub();
             }
         });
+
+        // Product Modal Listeners
+        function initProductModalListeners() {
+            document.getElementById('productBrand').addEventListener('change', function() {
+                const customWrapper = document.getElementById('customBrandWrapper');
+                customWrapper.style.display = this.value === 'Altro' ? 'block' : 'none';
+            });
+            
+            document.getElementById('productFlavor').addEventListener('change', function() {
+                const customWrapper = document.getElementById('customFlavorWrapper');
+                customWrapper.style.display = this.value === 'Altro' ? 'block' : 'none';
+            });
+        }
 
         // GitHub Token Management
         function loadGitHubToken() {
@@ -1426,9 +1955,11 @@
                     // Aggiorna i dati locali con quelli remoti
                     appData.toilets = content.toilets || appData.toilets;
                     appData.history = content.history || appData.history;
+                    appData.food = content.food || appData.food || { products: [], lastUpdated: null };
                     
                     saveLocalData();
                     updateUI();
+                    updateFoodUI();
                     
                     localStorage.setItem('lastSyncTime', new Date().toISOString());
                     localStorage.setItem('githubFileSha', data.sha);
@@ -1486,6 +2017,7 @@
                 const dataToSave = {
                     toilets: appData.toilets,
                     history: appData.history,
+                    food: appData.food,
                     lastUpdated: new Date().toISOString()
                 };
                 
@@ -2102,6 +2634,322 @@
 
         // Inizializza pull to refresh
         initPullToRefresh();
+
+        // ==========================================
+        // FOOD MANAGEMENT FUNCTIONS
+        // ==========================================
+
+        function updateFoodUI() {
+            if (!appData.food) {
+                appData.food = { products: [], lastUpdated: null };
+            }
+            
+            updateFoodSummary();
+            updateFoodLists();
+            updatePreferences();
+            checkLowStock();
+        }
+
+        function updateFoodSummary() {
+            const products = appData.food.products || [];
+            
+            // Conta scatolette totali
+            const totalCans = products
+                .filter(p => p.type === 'scatoletta')
+                .reduce((sum, p) => sum + (p.quantity || 0), 0);
+            
+            // Somma kg crocchette
+            const totalKibble = products
+                .filter(p => p.type === 'crocchette')
+                .reduce((sum, p) => sum + (p.quantity || 0), 0);
+            
+            document.getElementById('totalCans').textContent = totalCans;
+            document.getElementById('totalKibble').textContent = totalKibble;
+        }
+
+        function updateFoodLists() {
+            const products = appData.food.products || [];
+            
+            // Lista scatolette
+            const cansList = document.getElementById('cansList');
+            const cans = products.filter(p => p.type === 'scatoletta');
+            
+            if (cans.length === 0) {
+                cansList.innerHTML = '<div class="empty-prefs">Nessuna scatoletta aggiunta</div>';
+            } else {
+                cansList.innerHTML = cans.map(p => renderFoodItem(p)).join('');
+            }
+            
+            // Lista crocchette
+            const kibbleList = document.getElementById('kibbleList');
+            const kibble = products.filter(p => p.type === 'crocchette');
+            
+            if (kibble.length === 0) {
+                kibbleList.innerHTML = '<div class="empty-prefs">Nessuna crocchetta aggiunta</div>';
+            } else {
+                kibbleList.innerHTML = kibble.map(p => renderFoodItem(p)).join('');
+            }
+        }
+
+        function renderFoodItem(product) {
+            const isLowStock = product.type === 'scatoletta' && product.quantity < LOW_STOCK_THRESHOLD;
+            const ratingEmoji = {
+                'love': '❤️',
+                'like': '👍',
+                'ok': '😐',
+                'dislike': '👎'
+            };
+            
+            const catsEmoji = [];
+            if (product.likesMinou) catsEmoji.push('🐱');
+            if (product.likesMatisse) catsEmoji.push('🐱');
+            
+            return `
+                <div class="food-item ${isLowStock ? 'low-stock' : ''}">
+                    <span class="food-item-icon">${product.type === 'scatoletta' ? '🥫' : '🥣'}</span>
+                    <div class="food-item-info">
+                        <div class="food-item-name">${product.brand} - ${product.flavor}</div>
+                        <div class="food-item-details">
+                            <span>${product.size || ''}</span>
+                            <span>${ratingEmoji[product.rating] || '👍'}</span>
+                            <span class="food-item-cats">${catsEmoji.join('')}</span>
+                        </div>
+                    </div>
+                    <div class="food-item-qty">
+                        <button class="qty-btn minus" onclick="updateQuantity('${product.id}', -1)">−</button>
+                        <span class="qty-value ${isLowStock ? 'low' : ''}">${product.quantity}</span>
+                        <button class="qty-btn plus" onclick="updateQuantity('${product.id}', 1)">+</button>
+                    </div>
+                    <div class="food-item-actions">
+                        <button class="food-action-btn" onclick="editProduct('${product.id}')">✏️</button>
+                        <button class="food-action-btn" onclick="deleteProduct('${product.id}')">🗑️</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updatePreferences() {
+            const products = appData.food.products || [];
+            
+            const ratingEmoji = {
+                'love': '❤️',
+                'like': '👍',
+                'ok': '😐',
+                'dislike': '👎'
+            };
+            
+            // Preferenze Minou
+            const minouPrefs = document.getElementById('minouPrefs');
+            const minouProducts = products.filter(p => p.likesMinou && p.rating !== 'dislike');
+            
+            if (minouProducts.length === 0) {
+                minouPrefs.innerHTML = '<div class="empty-prefs">Nessuna preferenza</div>';
+            } else {
+                minouPrefs.innerHTML = minouProducts.slice(0, 5).map(p => `
+                    <div class="pref-item">
+                        <span class="pref-item-name">${p.brand} ${p.flavor}</span>
+                        <span class="pref-item-rating">${ratingEmoji[p.rating]}</span>
+                    </div>
+                `).join('');
+            }
+            
+            // Preferenze Matisse
+            const matissePrefs = document.getElementById('matissePrefs');
+            const matisseProducts = products.filter(p => p.likesMatisse && p.rating !== 'dislike');
+            
+            if (matisseProducts.length === 0) {
+                matissePrefs.innerHTML = '<div class="empty-prefs">Nessuna preferenza</div>';
+            } else {
+                matissePrefs.innerHTML = matisseProducts.slice(0, 5).map(p => `
+                    <div class="pref-item">
+                        <span class="pref-item-name">${p.brand} ${p.flavor}</span>
+                        <span class="pref-item-rating">${ratingEmoji[p.rating]}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function checkLowStock() {
+            const products = appData.food.products || [];
+            const lowStockProducts = products.filter(p => 
+                p.type === 'scatoletta' && p.quantity < LOW_STOCK_THRESHOLD
+            );
+            
+            const alertEl = document.getElementById('lowStockAlert');
+            const alertText = document.getElementById('lowStockText');
+            
+            if (lowStockProducts.length > 0) {
+                alertEl.style.display = 'flex';
+                if (lowStockProducts.length === 1) {
+                    alertText.textContent = `${lowStockProducts[0].brand} ${lowStockProducts[0].flavor} sta finendo!`;
+                } else {
+                    alertText.textContent = `${lowStockProducts.length} prodotti stanno finendo!`;
+                }
+            } else {
+                alertEl.style.display = 'none';
+            }
+        }
+
+        function updateQuantity(productId, delta) {
+            const product = appData.food.products.find(p => p.id === productId);
+            if (product) {
+                product.quantity = Math.max(0, product.quantity + delta);
+                saveData();
+                updateFoodUI();
+            }
+        }
+
+        function showAddProductModal(type) {
+            currentProductType = type;
+            editingProductId = null;
+            currentRating = 'like';
+            
+            document.getElementById('productModalTitle').textContent = 
+                type === 'scatoletta' ? 'Aggiungi Scatoletta' : 'Aggiungi Crocchette';
+            
+            // Reset form
+            document.getElementById('productBrand').value = '';
+            document.getElementById('customBrand').value = '';
+            document.getElementById('customBrandWrapper').style.display = 'none';
+            document.getElementById('productFlavor').value = '';
+            document.getElementById('customFlavor').value = '';
+            document.getElementById('customFlavorWrapper').style.display = 'none';
+            document.getElementById('productQuantity').value = type === 'scatoletta' ? '1' : '1';
+            document.getElementById('likesMinou').checked = true;
+            document.getElementById('likesMatisse').checked = true;
+            
+            // Mostra/nascondi formato
+            document.getElementById('sizeWrapper').style.display = type === 'scatoletta' ? 'block' : 'none';
+            document.getElementById('productSize').value = '85g';
+            
+            // Reset rating
+            document.querySelectorAll('.rating-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.rating-btn[data-rating="like"]').classList.add('active');
+            
+            document.getElementById('productModal').classList.add('active');
+        }
+
+        function editProduct(productId) {
+            const product = appData.food.products.find(p => p.id === productId);
+            if (!product) return;
+            
+            editingProductId = productId;
+            currentProductType = product.type;
+            currentRating = product.rating || 'like';
+            
+            document.getElementById('productModalTitle').textContent = 'Modifica Prodotto';
+            
+            // Popola form
+            if (['Natural Code', 'Schesir', 'Oasy', 'Life Cat', 'Farmina'].includes(product.brand)) {
+                document.getElementById('productBrand').value = product.brand;
+                document.getElementById('customBrandWrapper').style.display = 'none';
+            } else {
+                document.getElementById('productBrand').value = 'Altro';
+                document.getElementById('customBrand').value = product.brand;
+                document.getElementById('customBrandWrapper').style.display = 'block';
+            }
+            
+            if (['Tonno', 'Pollo', 'Tacchino', 'Tonno e Pollo', 'Tonno e Tacchino', 'Pollo e Tacchino', 'Manzo', 'Pesce', 'Misto'].includes(product.flavor)) {
+                document.getElementById('productFlavor').value = product.flavor;
+                document.getElementById('customFlavorWrapper').style.display = 'none';
+            } else {
+                document.getElementById('productFlavor').value = 'Altro';
+                document.getElementById('customFlavor').value = product.flavor;
+                document.getElementById('customFlavorWrapper').style.display = 'block';
+            }
+            
+            document.getElementById('productQuantity').value = product.quantity;
+            document.getElementById('likesMinou').checked = product.likesMinou;
+            document.getElementById('likesMatisse').checked = product.likesMatisse;
+            
+            document.getElementById('sizeWrapper').style.display = product.type === 'scatoletta' ? 'block' : 'none';
+            if (product.size) document.getElementById('productSize').value = product.size;
+            
+            // Set rating
+            document.querySelectorAll('.rating-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.rating-btn[data-rating="${currentRating}"]`).classList.add('active');
+            
+            document.getElementById('productModal').classList.add('active');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.remove('active');
+            editingProductId = null;
+        }
+
+        function setRating(rating) {
+            currentRating = rating;
+            document.querySelectorAll('.rating-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.rating-btn[data-rating="${rating}"]`).classList.add('active');
+        }
+
+        function saveProduct() {
+            let brand = document.getElementById('productBrand').value;
+            if (brand === 'Altro') {
+                brand = document.getElementById('customBrand').value.trim();
+            }
+            
+            let flavor = document.getElementById('productFlavor').value;
+            if (flavor === 'Altro') {
+                flavor = document.getElementById('customFlavor').value.trim();
+            }
+            
+            const quantity = parseInt(document.getElementById('productQuantity').value) || 0;
+            const size = currentProductType === 'scatoletta' ? document.getElementById('productSize').value : null;
+            const likesMinou = document.getElementById('likesMinou').checked;
+            const likesMatisse = document.getElementById('likesMatisse').checked;
+            
+            if (!brand || !flavor) {
+                showToast('Inserisci marca e gusto');
+                return;
+            }
+            
+            if (editingProductId) {
+                // Modifica prodotto esistente
+                const product = appData.food.products.find(p => p.id === editingProductId);
+                if (product) {
+                    product.brand = brand;
+                    product.flavor = flavor;
+                    product.quantity = quantity;
+                    product.size = size;
+                    product.likesMinou = likesMinou;
+                    product.likesMatisse = likesMatisse;
+                    product.rating = currentRating;
+                }
+                showToast('Prodotto modificato! ✏️');
+            } else {
+                // Nuovo prodotto
+                const newProduct = {
+                    id: Date.now().toString(),
+                    type: currentProductType,
+                    brand,
+                    flavor,
+                    quantity,
+                    size,
+                    likesMinou,
+                    likesMatisse,
+                    rating: currentRating,
+                    createdAt: new Date().toISOString()
+                };
+                
+                appData.food.products.push(newProduct);
+                showToast('Prodotto aggiunto! 🥫');
+            }
+            
+            appData.food.lastUpdated = new Date().toISOString();
+            saveData();
+            updateFoodUI();
+            closeProductModal();
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Eliminare questo prodotto?')) {
+                appData.food.products = appData.food.products.filter(p => p.id !== productId);
+                saveData();
+                updateFoodUI();
+                showToast('Prodotto eliminato');
+            }
+        }
     </script>
 </body>
 </html>
