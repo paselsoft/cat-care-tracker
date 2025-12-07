@@ -828,6 +828,44 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        /* Pull to Refresh */
+        .pull-to-refresh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            gap: 10px;
+        }
+
+        .pull-to-refresh.visible {
+            transform: translateY(0);
+        }
+
+        .pull-to-refresh.refreshing .pull-icon {
+            animation: spin 1s linear infinite;
+        }
+
+        .pull-icon {
+            font-size: 1.3rem;
+            transition: transform 0.2s ease;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         /* Install prompt */
         .install-prompt {
             background: var(--bg-card);
@@ -882,6 +920,12 @@
     </style>
 </head>
 <body>
+    <!-- Pull to Refresh indicator -->
+    <div class="pull-to-refresh" id="pullToRefresh">
+        <span class="pull-icon">🔄</span>
+        <span class="pull-text">Rilascia per aggiornare</span>
+    </div>
+
     <div class="app-container">
         <!-- Header -->
         <header class="header">
@@ -1046,7 +1090,7 @@
                     <h3>📱 App</h3>
                     <div class="setting-row">
                         <span class="setting-label">Versione</span>
-                        <span class="setting-value">1.3.0</span>
+                        <span class="setting-value">1.4.0</span>
                     </div>
                     <div class="setting-row">
                         <span class="setting-label">Tema</span>
@@ -1605,12 +1649,93 @@
             return Math.floor((then - now) / (1000 * 60 * 60 * 24));
         }
 
+        // Pull to Refresh
+        function initPullToRefresh() {
+            const pullIndicator = document.getElementById('pullToRefresh');
+            const pullText = pullIndicator.querySelector('.pull-text');
+            let startY = 0;
+            let currentY = 0;
+            let pulling = false;
+            const threshold = 80;
+
+            document.addEventListener('touchstart', (e) => {
+                // Solo se siamo in cima alla pagina
+                if (window.scrollY === 0) {
+                    startY = e.touches[0].pageY;
+                    pulling = true;
+                }
+            }, { passive: true });
+
+            document.addEventListener('touchmove', (e) => {
+                if (!pulling) return;
+                
+                currentY = e.touches[0].pageY;
+                const pullDistance = currentY - startY;
+
+                if (pullDistance > 0 && window.scrollY === 0) {
+                    // Mostra l'indicatore proporzionalmente
+                    if (pullDistance > 30) {
+                        pullIndicator.classList.add('visible');
+                        
+                        if (pullDistance >= threshold) {
+                            pullText.textContent = 'Rilascia per aggiornare';
+                        } else {
+                            pullText.textContent = 'Scorri per aggiornare';
+                        }
+                    }
+                }
+            }, { passive: true });
+
+            document.addEventListener('touchend', () => {
+                if (!pulling) return;
+                
+                const pullDistance = currentY - startY;
+                
+                if (pullDistance >= threshold && window.scrollY === 0) {
+                    // Esegui il refresh
+                    pullIndicator.classList.add('refreshing');
+                    pullText.textContent = 'Aggiornamento...';
+                    
+                    // Cancella la cache del Service Worker e ricarica
+                    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+                        caches.keys().then(names => {
+                            return Promise.all(names.map(name => caches.delete(name)));
+                        }).then(() => {
+                            setTimeout(() => {
+                                window.location.reload(true);
+                            }, 500);
+                        });
+                    } else {
+                        setTimeout(() => {
+                            window.location.reload(true);
+                        }, 500);
+                    }
+                } else {
+                    pullIndicator.classList.remove('visible');
+                }
+                
+                pulling = false;
+                startY = 0;
+                currentY = 0;
+            }, { passive: true });
+        }
+
         // Register Service Worker
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js')
-                .then(reg => console.log('Service Worker registered'))
+                .then(reg => {
+                    console.log('Service Worker registered');
+                    
+                    // Controlla aggiornamenti periodicamente
+                    setInterval(() => {
+                        reg.update();
+                    }, 60000); // Ogni minuto
+                })
                 .catch(err => console.log('Service Worker registration failed:', err));
         }
+
+        // Inizializza pull to refresh
+        initPullToRefresh();
     </script>
 </body>
 </html>

@@ -6,6 +6,15 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [1.4.0] - 2025-12-07
+
+### Aggiunto
+- **Pull to Refresh**: scorri verso il basso dalla cima della pagina per aggiornare l'app e scaricare nuove versioni
+- Controllo automatico aggiornamenti Service Worker ogni minuto
+- Cancellazione cache automatica durante il refresh
+
+---
+
 ## [1.3.0] - 2025-12-07
 
 ### Corretto
