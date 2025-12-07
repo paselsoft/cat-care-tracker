@@ -20,8 +20,21 @@
     }
   ],
   "food": {
-    "products": [],
-    "lastUpdated": null
+    "products": [
+      {
+        "id": "1765149166645",
+        "type": "crocchette",
+        "brand": "Farmina",
+        "flavor": "N&D Quinoa Hairball",
+        "quantity": 1,
+        "size": null,
+        "likesMinou": true,
+        "likesMatisse": true,
+        "rating": "love",
+        "createdAt": "2025-12-07T23:12:46.645Z"
+      }
+    ],
+    "lastUpdated": "2025-12-07T23:12:46.645Z"
   },
-  "lastUpdated": "2025-12-07T12:00:00Z"
+  "lastUpdated": "2025-12-07T23:12:46.647Z"
 }
