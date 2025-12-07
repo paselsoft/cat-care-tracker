@@ -26,7 +26,7 @@
         "type": "crocchette",
         "brand": "Farmina",
         "flavor": "N&D Quinoa Hairball",
-        "quantity": 0,
+        "quantity": 1,
         "size": null,
         "likesMinou": true,
         "likesMatisse": true,
@@ -36,5 +36,5 @@
     ],
     "lastUpdated": "2025-12-07T23:13:20.955Z"
   },
-  "lastUpdated": "2025-12-07T23:13:20.955Z"
+  "lastUpdated": "2025-12-07T23:13:26.559Z"
 }
