@@ -1221,17 +1221,21 @@
             let nextToilet, nextCleanDate;
 
             if (!grandeDate && !piccoloDate) {
+                // Nessuna pulizia registrata - pulisci oggi
                 nextToilet = 'grande';
                 nextCleanDate = new Date();
-            } else if (!grandeDate) {
+            } else if (!grandeDate && piccoloDate) {
+                // Solo Piccolo è stato pulito - Grande va pulito 15 giorni dopo Piccolo
                 nextToilet = 'grande';
-                nextCleanDate = new Date();
-            } else if (!piccoloDate) {
+                nextCleanDate = new Date(piccoloDate);
+                nextCleanDate.setDate(nextCleanDate.getDate() + CLEANING_INTERVAL);
+            } else if (grandeDate && !piccoloDate) {
+                // Solo Grande è stato pulito - Piccolo va pulito 15 giorni dopo Grande
                 nextToilet = 'piccolo';
-                const grandeNext = new Date(grandeDate);
-                grandeNext.setDate(grandeNext.getDate() + CLEANING_INTERVAL);
-                nextCleanDate = grandeNext;
+                nextCleanDate = new Date(grandeDate);
+                nextCleanDate.setDate(nextCleanDate.getDate() + CLEANING_INTERVAL);
             } else {
+                // Entrambi sono stati puliti - calcola quale scade prima
                 const grandeNext = new Date(grandeDate);
                 grandeNext.setDate(grandeNext.getDate() + CLEANING_INTERVAL);
                 const piccoloNext = new Date(piccoloDate);
