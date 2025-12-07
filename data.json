@@ -39,9 +39,21 @@
         "likesMatisse": true,
         "rating": "love",
         "createdAt": "2025-12-07T23:18:30.334Z"
+      },
+      {
+        "id": "1765149885884",
+        "type": "scatoletta",
+        "brand": "Natural Code",
+        "flavor": "Pollo e Verdure",
+        "quantity": 1,
+        "size": "85g",
+        "likesMinou": true,
+        "likesMatisse": true,
+        "rating": "like",
+        "createdAt": "2025-12-07T23:24:45.884Z"
       }
     ],
-    "lastUpdated": "2025-12-07T23:18:53.848Z"
+    "lastUpdated": "2025-12-07T23:24:45.884Z"
   },
-  "lastUpdated": "2025-12-07T23:18:53.848Z"
+  "lastUpdated": "2025-12-07T23:24:45.886Z"
 }
