@@ -1,0 +1,79 @@
+{
+    "name": "Cat Care Tracker - Minou & Matisse",
+    "short_name": "Cat Care",
+    "description": "Gestisci la pulizia delle toilette per le tue gatte",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#0f172a",
+    "theme_color": "#7c3aed",
+    "orientation": "portrait",
+    "scope": "/",
+    "lang": "it",
+    "icons": [
+        {
+            "src": "icons/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-152.png",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-384.png",
+            "sizes": "384x384",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["lifestyle", "utilities"],
+    "shortcuts": [
+        {
+            "name": "Pulisci Bagno Grande",
+            "short_name": "Bagno Grande",
+            "description": "Registra pulizia Bagno Grande",
+            "url": "/index.html?action=clean&toilet=grande",
+            "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+        },
+        {
+            "name": "Pulisci Bagno Piccolo",
+            "short_name": "Bagno Piccolo",
+            "description": "Registra pulizia Bagno Piccolo",
+            "url": "/index.html?action=clean&toilet=piccolo",
+            "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+        }
+    ]
+}

@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Cat Care">
+    <title>Cat Care Tracker - Minou & Matisse</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --primary-light: #a78bfa;
+            --primary-dark: #5b21b6;
+            --success: #10b981;
+            --success-light: #34d399;
+            --warning: #f59e0b;
+            --warning-light: #fbbf24;
+            --danger: #ef4444;
+            --bg-primary: #fefefe;
+            --bg-secondary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --shadow-lg: rgba(0, 0, 0, 0.12);
+            --gradient-start: #7c3aed;
+            --gradient-end: #ec4899;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #a78bfa;
+                --primary-light: #c4b5fd;
+                --primary-dark: #7c3aed;
+                --success: #34d399;
+                --success-light: #6ee7b7;
+                --warning: #fbbf24;
+                --warning-light: #fcd34d;
+                --danger: #f87171;
+                --bg-primary: #0f172a;
+                --bg-secondary: #1e293b;
+                --bg-card: #1e293b;
+                --text-primary: #f1f5f9;
+                --text-secondary: #cbd5e1;
+                --text-muted: #64748b;
+                --border: #334155;
+                --shadow: rgba(0, 0, 0, 0.3);
+                --shadow-lg: rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            min-height: 100dvh;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 16px 100px;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            padding: 24px 0 16px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100vw;
+            right: -100vw;
+            height: 200px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 2px 4px var(--shadow));
+        }
+
+        .logo h1 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .cat-names {
+            display: flex;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        .cat-name {
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .cat-name.minou {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #92400e;
+        }
+
+        .cat-name.matisse {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            color: #1e40af;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .cat-name.minou {
+                background: linear-gradient(135deg, #78350f, #92400e);
+                color: #fef3c7;
+            }
+            .cat-name.matisse {
+                background: linear-gradient(135deg, #1e3a8a, #1e40af);
+                color: #dbeafe;
+            }
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Toilet Cards */
+        .toilet-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .toilet-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 20px var(--shadow);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .toilet-card:active {
+            transform: scale(0.98);
+        }
+
+        .toilet-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .toilet-card.grande::before {
+            background: linear-gradient(90deg, #10b981, #34d399);
+        }
+
+        .toilet-card.piccolo::before {
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+        }
+
+        .toilet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .toilet-info h3 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .toilet-location {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .toilet-icon {
+            font-size: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .toilet-status {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .status-value {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-badge.ok {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+
+        .status-badge.warning {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+        }
+
+        .status-badge.urgent {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-fill.ok {
+            background: linear-gradient(90deg, var(--success), var(--success-light));
+        }
+
+        .progress-fill.warning {
+            background: linear-gradient(90deg, var(--warning), var(--warning-light));
+        }
+
+        .progress-fill.urgent {
+            background: linear-gradient(90deg, var(--danger), #fca5a5);
+        }
+
+        .clean-btn {
+            width: 100%;
+            margin-top: 16px;
+            padding: 14px;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .clean-btn.grande {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .clean-btn.piccolo {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+
+        .clean-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Next Cleaning Alert */
+        .next-alert {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 20px;
+            padding: 20px;
+            color: white;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
+        }
+
+        .next-alert-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .next-alert-icon {
+            font-size: 2rem;
+        }
+
+        .next-alert h3 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .next-alert-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .next-alert-toilet {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .next-alert-date {
+            text-align: right;
+        }
+
+        .next-alert-date .date {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .next-alert-date .days {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* History */
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .history-item {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 2px 10px var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .history-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .history-icon.grande {
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        .history-icon.piccolo {
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        .history-details {
+            flex: 1;
+        }
+
+        .history-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .history-date {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .history-delete {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .history-delete:hover {
+            color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-history-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            opacity: 0.5;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 8px 0;
+            padding-bottom: max(8px, env(safe-area-inset-bottom));
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            z-index: 100;
+            box-shadow: 0 -4px 20px var(--shadow);
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 14px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+        }
+
+        .nav-btn:not(.active):hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .nav-icon {
+            font-size: 1.4rem;
+        }
+
+        .nav-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* Tabs content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Settings */
+        .settings-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .settings-card h3 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+
+        .setting-label {
+            font-size: 0.9rem;
+        }
+
+        .setting-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Toggle Switch */
+        .toggle {
+            position: relative;
+            width: 52px;
+            height: 28px;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-secondary);
+            border-radius: 28px;
+            transition: 0.3s;
+            border: 2px solid var(--border);
+        }
+
+        .toggle-slider::before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        .toggle input:checked + .toggle-slider {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-color: transparent;
+        }
+
+        .toggle input:checked + .toggle-slider::before {
+            transform: translateX(24px);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 28px;
+            max-width: 340px;
+            width: 100%;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+
+        .modal h3 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .modal p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .modal-btn.cancel {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .modal-btn.confirm {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+        }
+
+        .modal-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 14px 24px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            z-index: 1001;
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 30px var(--shadow-lg);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Install prompt */
+        .install-prompt {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px var(--shadow);
+            border: 2px dashed var(--primary);
+            text-align: center;
+        }
+
+        .install-prompt h3 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .install-prompt p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .install-btn {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .install-btn:active {
+            transform: scale(0.96);
+        }
+
+        .install-dismiss {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🐱</span>
+                <h1>Cat Care</h1>
+            </div>
+            <div class="subtitle">
+                <span class="cat-names">
+                    <span class="cat-name minou">Minou</span>
+                    <span class="cat-name matisse">Matisse</span>
+                </span>
+            </div>
+        </header>
+
+        <!-- Install Prompt (shown only when installable) -->
+        <div class="install-prompt" id="installPrompt" style="display: none;">
+            <h3>📲 Installa l'app</h3>
+            <p>Aggiungi Cat Care alla schermata home per accedere rapidamente!</p>
+            <button class="install-btn" id="installBtn">
+                <span>⬇️</span> Installa
+            </button>
+            <button class="install-dismiss" id="installDismiss">Non ora</button>
+        </div>
+
+        <!-- Tab: Home -->
+        <div class="tab-content active" id="tabHome">
+            <!-- Next Cleaning Alert -->
+            <div class="next-alert" id="nextAlert">
+                <div class="next-alert-header">
+                    <span class="next-alert-icon">🔔</span>
+                    <h3>Prossima pulizia</h3>
+                </div>
+                <div class="next-alert-content">
+                    <div class="next-alert-toilet" id="nextToilet">Bagno Grande</div>
+                    <div class="next-alert-date">
+                        <div class="date" id="nextDate">14 Dic</div>
+                        <div class="days" id="nextDays">tra 7 giorni</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toilets Section -->
+            <section class="section">
+                <h2 class="section-title">🚽 Stato Toilette</h2>
+                <div class="toilet-grid">
+                    <!-- Bagno Grande -->
+                    <div class="toilet-card grande">
+                        <div class="toilet-header">
+                            <div class="toilet-info">
+                                <h3>Bagno Grande</h3>
+                                <div class="toilet-location">📍 Bagno principale</div>
+                            </div>
+                            <span class="toilet-icon">🪣</span>
+                        </div>
+                        <div class="toilet-status">
+                            <div class="status-row">
+                                <span class="status-label">Ultima pulizia</span>
+                                <span class="status-value" id="grandeLastClean">--</span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-label">Stato</span>
+                                <span class="status-badge ok" id="grandeStatus">
+                                    <span>✓</span> Pulita
+                                </span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill ok" id="grandeProgress" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <button class="clean-btn grande" onclick="showConfirmModal('grande')">
+                            <span>✨</span> Segna come pulita
+                        </button>
+                    </div>
+
+                    <!-- Bagno Piccolo -->
+                    <div class="toilet-card piccolo">
+                        <div class="toilet-header">
+                            <div class="toilet-info">
+                                <h3>Bagno Piccolo</h3>
+                                <div class="toilet-location">📍 Bagno secondario</div>
+                            </div>
+                            <span class="toilet-icon">🪣</span>
+                        </div>
+                        <div class="toilet-status">
+                            <div class="status-row">
+                                <span class="status-label">Ultima pulizia</span>
+                                <span class="status-value" id="piccoloLastClean">--</span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-label">Stato</span>
+                                <span class="status-badge ok" id="piccoloStatus">
+                                    <span>✓</span> Pulita
+                                </span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill ok" id="piccoloProgress" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <button class="clean-btn piccolo" onclick="showConfirmModal('piccolo')">
+                            <span>✨</span> Segna come pulita
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Tab: History -->
+        <div class="tab-content" id="tabHistory">
+            <section class="section">
+                <h2 class="section-title">📋 Storico Pulizie</h2>
+                <div class="history-list" id="historyList">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Tab: Settings -->
+        <div class="tab-content" id="tabSettings">
+            <section class="section">
+                <h2 class="section-title">⚙️ Impostazioni</h2>
+
+                <div class="settings-card">
+                    <h3>🔔 Notifiche</h3>
+                    <div class="setting-row">
+                        <span class="setting-label">Abilita notifiche</span>
+                        <label class="toggle">
+                            <input type="checkbox" id="notificationsToggle" onchange="toggleNotifications()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Promemoria giorno prima</span>
+                        <label class="toggle">
+                            <input type="checkbox" id="dayBeforeToggle" checked onchange="saveSettings()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+                    <h3>⏱️ Intervallo pulizia</h3>
+                    <div class="setting-row">
+                        <span class="setting-label">Giorni tra le pulizie</span>
+                        <span class="setting-value" id="intervalValue">15 giorni</span>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+                    <h3>🐱 Le tue gatte</h3>
+                    <div class="setting-row">
+                        <span class="setting-label">Minou</span>
+                        <span class="cat-name minou">🐱</span>
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Matisse</span>
+                        <span class="cat-name matisse">🐱</span>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+                    <h3>📱 App</h3>
+                    <div class="setting-row">
+                        <span class="setting-label">Versione</span>
+                        <span class="setting-value">1.0.0</span>
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Tema</span>
+                        <span class="setting-value">Automatico</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-btn active" onclick="switchTab('Home')">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-btn" onclick="switchTab('History')">
+            <span class="nav-icon">📋</span>
+            <span class="nav-label">Storico</span>
+        </button>
+        <button class="nav-btn" onclick="switchTab('Settings')">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">Impostazioni</span>
+        </button>
+    </nav>
+
+    <!-- Confirm Modal -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal">
+            <div class="modal-icon">✨</div>
+            <h3>Conferma pulizia</h3>
+            <p id="modalText">Hai pulito la toilette del Bagno Grande?</p>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" onclick="closeModal()">Annulla</button>
+                <button class="modal-btn confirm" id="confirmBtn">Conferma</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span>✅</span>
+        <span id="toastText">Pulizia registrata!</span>
+    </div>
+
+    <script>
+        // App State
+        const CLEANING_INTERVAL = 15; // days
+        let appData = {
+            toilets: {
+                grande: { lastClean: null },
+                piccolo: { lastClean: null }
+            },
+            history: [],
+            settings: {
+                notifications: false,
+                dayBefore: true
+            }
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            updateUI();
+            checkInstallPrompt();
+            requestNotificationPermission();
+        });
+
+        // Data Management
+        function loadData() {
+            const saved = localStorage.getItem('catCareData');
+            if (saved) {
+                appData = JSON.parse(saved);
+            } else {
+                // Initial data: Bagno Grande cleaned on 29/11/2025
+                appData.toilets.grande.lastClean = '2025-11-29';
+                appData.history.push({
+                    id: Date.now(),
+                    toilet: 'grande',
+                    date: '2025-11-29'
+                });
+                saveData();
+            }
+
+            // Load settings
+            document.getElementById('dayBeforeToggle').checked = appData.settings.dayBefore;
+            document.getElementById('notificationsToggle').checked = appData.settings.notifications;
+        }
+
+        function saveData() {
+            localStorage.setItem('catCareData', JSON.stringify(appData));
+        }
+
+        function saveSettings() {
+            appData.settings.dayBefore = document.getElementById('dayBeforeToggle').checked;
+            saveData();
+        }
+
+        // UI Updates
+        function updateUI() {
+            updateToiletCards();
+            updateNextAlert();
+            updateHistory();
+        }
+
+        function updateToiletCards() {
+            ['grande', 'piccolo'].forEach(toilet => {
+                const lastClean = appData.toilets[toilet].lastClean;
+                const lastCleanEl = document.getElementById(`${toilet}LastClean`);
+                const statusEl = document.getElementById(`${toilet}Status`);
+                const progressEl = document.getElementById(`${toilet}Progress`);
+
+                if (lastClean) {
+                    const date = new Date(lastClean);
+                    lastCleanEl.textContent = formatDate(date);
+
+                    const daysSince = getDaysSince(date);
+                    const progress = Math.min((daysSince / CLEANING_INTERVAL) * 100, 100);
+
+                    progressEl.style.width = `${progress}%`;
+
+                    if (daysSince >= CLEANING_INTERVAL) {
+                        statusEl.className = 'status-badge urgent';
+                        statusEl.innerHTML = '<span>⚠️</span> Da pulire!';
+                        progressEl.className = 'progress-fill urgent';
+                    } else if (daysSince >= CLEANING_INTERVAL - 3) {
+                        statusEl.className = 'status-badge warning';
+                        statusEl.innerHTML = '<span>⏰</span> Quasi';
+                        progressEl.className = 'progress-fill warning';
+                    } else {
+                        statusEl.className = 'status-badge ok';
+                        statusEl.innerHTML = '<span>✓</span> Pulita';
+                        progressEl.className = 'progress-fill ok';
+                    }
+                } else {
+                    lastCleanEl.textContent = 'Mai pulita';
+                    statusEl.className = 'status-badge urgent';
+                    statusEl.innerHTML = '<span>⚠️</span> Da pulire!';
+                    progressEl.style.width = '100%';
+                    progressEl.className = 'progress-fill urgent';
+                }
+            });
+        }
+
+        function updateNextAlert() {
+            // Find which toilet needs cleaning next
+            const grandeDate = appData.toilets.grande.lastClean ? new Date(appData.toilets.grande.lastClean) : null;
+            const piccoloDate = appData.toilets.piccolo.lastClean ? new Date(appData.toilets.piccolo.lastClean) : null;
+
+            let nextToilet, nextCleanDate;
+
+            if (!grandeDate && !piccoloDate) {
+                nextToilet = 'grande';
+                nextCleanDate = new Date();
+            } else if (!grandeDate) {
+                nextToilet = 'grande';
+                nextCleanDate = new Date();
+            } else if (!piccoloDate) {
+                nextToilet = 'piccolo';
+                const grandeNext = new Date(grandeDate);
+                grandeNext.setDate(grandeNext.getDate() + CLEANING_INTERVAL);
+                nextCleanDate = grandeNext;
+            } else {
+                const grandeNext = new Date(grandeDate);
+                grandeNext.setDate(grandeNext.getDate() + CLEANING_INTERVAL);
+                const piccoloNext = new Date(piccoloDate);
+                piccoloNext.setDate(piccoloNext.getDate() + CLEANING_INTERVAL);
+
+                if (grandeNext <= piccoloNext) {
+                    nextToilet = 'grande';
+                    nextCleanDate = grandeNext;
+                } else {
+                    nextToilet = 'piccolo';
+                    nextCleanDate = piccoloNext;
+                }
+            }
+
+            const toiletName = nextToilet === 'grande' ? 'Bagno Grande' : 'Bagno Piccolo';
+            document.getElementById('nextToilet').textContent = toiletName;
+            document.getElementById('nextDate').textContent = formatDateShort(nextCleanDate);
+
+            const daysUntil = getDaysUntil(nextCleanDate);
+            let daysText;
+            if (daysUntil < 0) {
+                daysText = `${Math.abs(daysUntil)} giorni fa!`;
+            } else if (daysUntil === 0) {
+                daysText = 'Oggi!';
+            } else if (daysUntil === 1) {
+                daysText = 'Domani';
+            } else {
+                daysText = `tra ${daysUntil} giorni`;
+            }
+            document.getElementById('nextDays').textContent = daysText;
+
+            // Schedule notification
+            if (appData.settings.notifications) {
+                scheduleNotification(toiletName, nextCleanDate);
+            }
+        }
+
+        function updateHistory() {
+            const historyList = document.getElementById('historyList');
+            
+            if (appData.history.length === 0) {
+                historyList.innerHTML = `
+                    <div class="empty-history">
+                        <div class="empty-history-icon">📝</div>
+                        <p>Nessuna pulizia registrata</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Sort by date descending
+            const sorted = [...appData.history].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            historyList.innerHTML = sorted.map(item => {
+                const toiletName = item.toilet === 'grande' ? 'Bagno Grande' : 'Bagno Piccolo';
+                const date = new Date(item.date);
+                return `
+                    <div class="history-item">
+                        <div class="history-icon ${item.toilet}">🪣</div>
+                        <div class="history-details">
+                            <div class="history-title">${toiletName}</div>
+                            <div class="history-date">${formatDateFull(date)}</div>
+                        </div>
+                        <button class="history-delete" onclick="deleteHistoryItem(${item.id})">🗑️</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Actions
+        let currentToilet = null;
+
+        function showConfirmModal(toilet) {
+            currentToilet = toilet;
+            const toiletName = toilet === 'grande' ? 'Bagno Grande' : 'Bagno Piccolo';
+            document.getElementById('modalText').textContent = `Hai pulito la toilette del ${toiletName}?`;
+            document.getElementById('confirmModal').classList.add('active');
+            document.getElementById('confirmBtn').onclick = () => confirmClean(toilet);
+        }
+
+        function closeModal() {
+            document.getElementById('confirmModal').classList.remove('active');
+            currentToilet = null;
+        }
+
+        function confirmClean(toilet) {
+            const today = new Date().toISOString().split('T')[0];
+            
+            appData.toilets[toilet].lastClean = today;
+            appData.history.push({
+                id: Date.now(),
+                toilet: toilet,
+                date: today
+            });
+            
+            saveData();
+            updateUI();
+            closeModal();
+            showToast('Pulizia registrata! 🎉');
+        }
+
+        function deleteHistoryItem(id) {
+            const item = appData.history.find(h => h.id === id);
+            if (!item) return;
+
+            // Check if this is the most recent clean for that toilet
+            const toiletHistory = appData.history
+                .filter(h => h.toilet === item.toilet)
+                .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            appData.history = appData.history.filter(h => h.id !== id);
+
+            // Update last clean date
+            if (toiletHistory.length > 0 && toiletHistory[0].id === id) {
+                if (toiletHistory.length > 1) {
+                    appData.toilets[item.toilet].lastClean = toiletHistory[1].date;
+                } else {
+                    appData.toilets[item.toilet].lastClean = null;
+                }
+            }
+
+            saveData();
+            updateUI();
+            showToast('Voce eliminata');
+        }
+
+        // Navigation
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(`tab${tab}`).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Notifications
+        async function requestNotificationPermission() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                // Will be requested when user enables notifications
+            }
+        }
+
+        async function toggleNotifications() {
+            const toggle = document.getElementById('notificationsToggle');
+            
+            if (toggle.checked) {
+                if ('Notification' in window) {
+                    const permission = await Notification.requestPermission();
+                    if (permission === 'granted') {
+                        appData.settings.notifications = true;
+                        showToast('Notifiche attivate! 🔔');
+                    } else {
+                        toggle.checked = false;
+                        showToast('Permesso negato');
+                    }
+                } else {
+                    toggle.checked = false;
+                    showToast('Notifiche non supportate');
+                }
+            } else {
+                appData.settings.notifications = false;
+            }
+            saveData();
+            updateUI();
+        }
+
+        function scheduleNotification(toiletName, date) {
+            // For a real PWA, you'd use the Push API with a backend
+            // This is a simplified local notification approach
+            if ('serviceWorker' in navigator && appData.settings.notifications) {
+                const now = new Date();
+                const notifDate = new Date(date);
+                
+                // Day before notification
+                if (appData.settings.dayBefore) {
+                    const dayBefore = new Date(notifDate);
+                    dayBefore.setDate(dayBefore.getDate() - 1);
+                    dayBefore.setHours(9, 0, 0, 0);
+                    
+                    if (dayBefore > now) {
+                        const delay = dayBefore - now;
+                        setTimeout(() => {
+                            showNotification(`Promemoria: domani pulire ${toiletName}`, 'Non dimenticare la pulizia programmata! 🐱');
+                        }, delay);
+                    }
+                }
+
+                // Same day notification
+                notifDate.setHours(9, 0, 0, 0);
+                if (notifDate > now) {
+                    const delay = notifDate - now;
+                    setTimeout(() => {
+                        showNotification(`Oggi: pulire ${toiletName}`, 'È il giorno della pulizia! ✨');
+                    }, delay);
+                }
+            }
+        }
+
+        function showNotification(title, body) {
+            if (Notification.permission === 'granted') {
+                new Notification(title, {
+                    body: body,
+                    icon: 'icons/icon-192.png',
+                    badge: 'icons/icon-192.png',
+                    tag: 'cat-care-reminder'
+                });
+            }
+        }
+
+        // Toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastText').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Install Prompt
+        let deferredPrompt;
+
+        function checkInstallPrompt() {
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                
+                if (!localStorage.getItem('installDismissed')) {
+                    document.getElementById('installPrompt').style.display = 'block';
+                }
+            });
+
+            document.getElementById('installBtn').addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    if (outcome === 'accepted') {
+                        showToast('App installata! 🎉');
+                    }
+                    deferredPrompt = null;
+                    document.getElementById('installPrompt').style.display = 'none';
+                }
+            });
+
+            document.getElementById('installDismiss').addEventListener('click', () => {
+                document.getElementById('installPrompt').style.display = 'none';
+                localStorage.setItem('installDismissed', 'true');
+            });
+        }
+
+        // Utility Functions
+        function formatDate(date) {
+            return date.toLocaleDateString('it-IT', { 
+                day: 'numeric', 
+                month: 'short' 
+            });
+        }
+
+        function formatDateShort(date) {
+            return date.toLocaleDateString('it-IT', { 
+                day: 'numeric', 
+                month: 'short' 
+            });
+        }
+
+        function formatDateFull(date) {
+            return date.toLocaleDateString('it-IT', { 
+                weekday: 'long',
+                day: 'numeric', 
+                month: 'long',
+                year: 'numeric'
+            });
+        }
+
+        function getDaysSince(date) {
+            const now = new Date();
+            now.setHours(0, 0, 0, 0);
+            const then = new Date(date);
+            then.setHours(0, 0, 0, 0);
+            return Math.floor((now - then) / (1000 * 60 * 60 * 24));
+        }
+
+        function getDaysUntil(date) {
+            const now = new Date();
+            now.setHours(0, 0, 0, 0);
+            const then = new Date(date);
+            then.setHours(0, 0, 0, 0);
+            return Math.floor((then - now) / (1000 * 60 * 60 * 24));
+        }
+
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('Service Worker registered'))
+                .catch(err => console.log('Service Worker registration failed:', err));
+        }
+    </script>
+</body>
+</html>
