@@ -65,23 +65,26 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             font-family: 'Nunito', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
-            min-height: 100dvh;
-            overflow-x: hidden;
+            min-height: -webkit-fill-available;
+            padding-bottom: 70px; /* Spazio per la navbar */
         }
 
         .app-container {
             max-width: 500px;
             margin: 0 auto;
-            padding: 0 16px 80px;
+            padding: 0 16px 20px;
             position: relative;
-            min-height: 100vh;
-            min-height: 100dvh;
-            box-sizing: border-box;
         }
 
         /* Header */
@@ -511,34 +514,28 @@
             opacity: 0.5;
         }
 
-        /* Bottom Nav */
+        /* Bottom Nav - Riscritta per compatibilità Android */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            width: 100%;
+            height: 60px;
             background: var(--bg-card);
             border-top: 1px solid var(--border);
-            padding: 8px 12px;
-            padding-bottom: max(8px, env(safe-area-inset-bottom, 0px));
             display: flex;
-            justify-content: space-around;
+            flex-direction: row;
+            justify-content: space-evenly;
             align-items: center;
-            gap: 4px;
-            z-index: 100;
-            box-shadow: 0 -4px 20px var(--shadow);
-            /* Fix rendering issues */
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
-            box-sizing: border-box;
+            z-index: 9999;
+            box-shadow: 0 -2px 10px var(--shadow);
         }
 
         .nav-btn {
-            background: none;
+            background: transparent;
             border: none;
-            padding: 10px 16px;
-            border-radius: 12px;
+            padding: 8px 20px;
+            border-radius: 10px;
             cursor: pointer;
             display: flex;
             flex-direction: column;
@@ -546,17 +543,8 @@
             justify-content: center;
             gap: 2px;
             color: var(--text-muted);
-            transition: background 0.15s ease, color 0.15s ease;
-            /* Fix touch issues */
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
-            touch-action: manipulation;
-            flex: 1;
-            max-width: 100px;
-            min-height: 50px;
-            position: relative;
-            z-index: 1;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .nav-btn.active {
@@ -564,29 +552,26 @@
             color: white;
         }
 
-        .nav-btn:not(.active):active {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-        }
-
-        @media (hover: hover) {
-            .nav-btn:not(.active):hover {
-                background: var(--bg-secondary);
-                color: var(--text-primary);
-            }
-        }
-
         .nav-icon {
-            font-size: 1.3rem;
-            pointer-events: none;
+            font-size: 1.2rem;
             line-height: 1;
         }
 
         .nav-label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 600;
-            pointer-events: none;
-            white-space: nowrap;
+            line-height: 1;
+        }
+
+        /* Spazio extra per iOS safe area */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .bottom-nav {
+                height: calc(60px + env(safe-area-inset-bottom));
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+            body {
+                padding-bottom: calc(70px + env(safe-area-inset-bottom));
+            }
         }
 
         /* Tabs content */
@@ -1226,7 +1211,7 @@
                     <h3>📱 App</h3>
                     <div class="setting-row">
                         <span class="setting-label">Versione</span>
-                        <span class="setting-value">1.5.1</span>
+                        <span class="setting-value">1.5.2</span>
                     </div>
                     <div class="setting-row">
                         <span class="setting-label">Tema</span>
