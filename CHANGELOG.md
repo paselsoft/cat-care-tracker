@@ -6,6 +6,22 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [1.5.0] - 2025-12-07
+
+### Aggiunto
+- **Sincronizzazione GitHub**: i dati vengono salvati su GitHub e sincronizzati tra tutti i dispositivi
+- Nuova sezione "Sincronizzazione" nelle impostazioni
+- Configurazione Personal Access Token GitHub
+- Pulsante "Sincronizza ora" per forzare la sincronizzazione
+- Indicatore stato connessione (online/offline/errore)
+- Visualizzazione ultima sincronizzazione
+
+### Modificato
+- I dati vengono salvati sia localmente che su GitHub
+- All'avvio l'app scarica i dati più recenti da GitHub
+
+---
+
 ## [1.4.0] - 2025-12-07
 
 ### Aggiunto

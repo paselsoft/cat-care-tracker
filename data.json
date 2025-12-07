@@ -1,0 +1,23 @@
+{
+  "toilets": {
+    "grande": {
+      "lastClean": "2025-11-29"
+    },
+    "piccolo": {
+      "lastClean": "2025-11-30"
+    }
+  },
+  "history": [
+    {
+      "id": 1732924800000,
+      "toilet": "grande",
+      "date": "2025-11-29"
+    },
+    {
+      "id": 1733011200000,
+      "toilet": "piccolo",
+      "date": "2025-11-30"
+    }
+  ],
+  "lastUpdated": "2025-12-07T12:00:00Z"
+}
