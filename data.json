@@ -33,7 +33,7 @@
         "type": "crocchette",
         "brand": "Farmina",
         "flavor": "N&D Pumpkin Adult Quaglia, Zucca e Melograno Neutered",
-        "quantity": 1,
+        "quantity": 0,
         "size": null,
         "likesMinou": true,
         "likesMatisse": true,
@@ -43,5 +43,5 @@
     ],
     "lastUpdated": "2025-12-07T23:18:30.334Z"
   },
-  "lastUpdated": "2025-12-07T23:18:30.334Z"
+  "lastUpdated": "2025-12-07T23:18:37.586Z"
 }
