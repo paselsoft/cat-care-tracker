@@ -6,6 +6,16 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [1.5.1] - 2025-12-07
+
+### Corretto
+- **Fix layout Android**: la barra di navigazione ora si visualizza correttamente su tutti i dispositivi Android
+- Ridotte dimensioni pulsanti navigazione per adattarsi a schermi più piccoli
+- Corretto problema di scroll orizzontale sulla navbar
+- Migliorato layout responsive per dispositivi con diverse dimensioni schermo
+
+---
+
 ## [1.5.0] - 2025-12-07
 
 ### Aggiunto
