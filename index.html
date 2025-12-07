@@ -425,6 +425,17 @@
             gap: 14px;
             box-shadow: 0 2px 10px var(--shadow);
             border: 1px solid var(--border);
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .history-item:active {
+            transform: scale(0.98);
+            box-shadow: 0 1px 5px var(--shadow);
         }
 
         .history-icon {
@@ -435,6 +446,7 @@
             align-items: center;
             justify-content: center;
             font-size: 1.3rem;
+            pointer-events: none;
         }
 
         .history-icon.grande {
@@ -447,6 +459,7 @@
 
         .history-details {
             flex: 1;
+            pointer-events: none;
         }
 
         .history-title {
@@ -460,6 +473,12 @@
             color: var(--text-secondary);
         }
 
+        .history-edit-hint {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
         .history-delete {
             background: none;
             border: none;
@@ -471,7 +490,8 @@
             transition: all 0.2s ease;
         }
 
-        .history-delete:hover {
+        .history-delete:hover,
+        .history-delete:active {
             color: var(--danger);
             background: rgba(239, 68, 68, 0.1);
         }
@@ -748,6 +768,38 @@
 
         .modal-btn:active {
             transform: scale(0.96);
+        }
+
+        /* Date Picker */
+        .date-picker-wrapper {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .date-picker-wrapper label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .date-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: border-color 0.2s ease;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .date-input:focus {
+            outline: none;
+            border-color: var(--primary);
         }
 
         /* Toast */
@@ -1027,9 +1079,30 @@
             <div class="modal-icon">✨</div>
             <h3>Conferma pulizia</h3>
             <p id="modalText">Hai pulito la toilette del Bagno Grande?</p>
+            <div class="date-picker-wrapper">
+                <label for="cleaningDate">Data pulizia:</label>
+                <input type="date" id="cleaningDate" class="date-input">
+            </div>
             <div class="modal-buttons">
                 <button class="modal-btn cancel" onclick="closeModal()">Annulla</button>
                 <button class="modal-btn confirm" id="confirmBtn">Conferma</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <div class="modal-icon">📝</div>
+            <h3>Modifica pulizia</h3>
+            <p id="editModalText">Modifica la data di pulizia</p>
+            <div class="date-picker-wrapper">
+                <label for="editDate">Nuova data:</label>
+                <input type="date" id="editDate" class="date-input">
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" onclick="closeEditModal()">Annulla</button>
+                <button class="modal-btn confirm" id="editConfirmBtn">Salva</button>
             </div>
         </div>
     </div>
@@ -1216,13 +1289,14 @@
                 const toiletName = item.toilet === 'grande' ? 'Bagno Grande' : 'Bagno Piccolo';
                 const date = new Date(item.date);
                 return `
-                    <div class="history-item">
+                    <div class="history-item" data-id="${item.id}" onclick="showEditModal(${item.id})">
                         <div class="history-icon ${item.toilet}">🪣</div>
                         <div class="history-details">
                             <div class="history-title">${toiletName}</div>
                             <div class="history-date">${formatDateFull(date)}</div>
+                            <div class="history-edit-hint">Tocca per modificare</div>
                         </div>
-                        <button class="history-delete" onclick="deleteHistoryItem(${item.id})">🗑️</button>
+                        <button class="history-delete" onclick="event.stopPropagation(); deleteHistoryItem(${item.id})">🗑️</button>
                     </div>
                 `;
             }).join('');
@@ -1230,11 +1304,17 @@
 
         // Actions
         let currentToilet = null;
+        let currentEditId = null;
 
         function showConfirmModal(toilet) {
             currentToilet = toilet;
             const toiletName = toilet === 'grande' ? 'Bagno Grande' : 'Bagno Piccolo';
             document.getElementById('modalText').textContent = `Hai pulito la toilette del ${toiletName}?`;
+            
+            // Imposta la data di oggi come default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('cleaningDate').value = today;
+            
             document.getElementById('confirmModal').classList.add('active');
             document.getElementById('confirmBtn').onclick = () => confirmClean(toilet);
         }
@@ -1244,14 +1324,58 @@
             currentToilet = null;
         }
 
-        function confirmClean(toilet) {
-            const today = new Date().toISOString().split('T')[0];
+        function showEditModal(id) {
+            const item = appData.history.find(h => h.id === id);
+            if (!item) return;
             
-            appData.toilets[toilet].lastClean = today;
+            currentEditId = id;
+            const toiletName = item.toilet === 'grande' ? 'Bagno Grande' : 'Bagno Piccolo';
+            document.getElementById('editModalText').textContent = `Modifica la data di pulizia del ${toiletName}`;
+            document.getElementById('editDate').value = item.date;
+            
+            document.getElementById('editModal').classList.add('active');
+            document.getElementById('editConfirmBtn').onclick = () => confirmEdit();
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('active');
+            currentEditId = null;
+        }
+
+        function confirmEdit() {
+            const newDate = document.getElementById('editDate').value;
+            if (!newDate || !currentEditId) return;
+            
+            const item = appData.history.find(h => h.id === currentEditId);
+            if (!item) return;
+            
+            // Aggiorna la data nello storico
+            item.date = newDate;
+            
+            // Aggiorna l'ultima pulizia se necessario
+            const toiletHistory = appData.history
+                .filter(h => h.toilet === item.toilet)
+                .sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            if (toiletHistory.length > 0) {
+                appData.toilets[item.toilet].lastClean = toiletHistory[0].date;
+            }
+            
+            saveData();
+            updateUI();
+            closeEditModal();
+            showToast('Data modificata! ✏️');
+        }
+
+        function confirmClean(toilet) {
+            const selectedDate = document.getElementById('cleaningDate').value;
+            const cleanDate = selectedDate || new Date().toISOString().split('T')[0];
+            
+            appData.toilets[toilet].lastClean = cleanDate;
             appData.history.push({
                 id: Date.now(),
                 toilet: toilet,
-                date: today
+                date: cleanDate
             });
             
             saveData();
