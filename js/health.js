@@ -193,7 +193,8 @@ function selectEventCat(catId) {
     // Update visual selection
     document.querySelectorAll('.cat-select-btn').forEach(btn => {
         btn.classList.remove('active');
-        if (btn.id === `eventCat${catId.charAt(0).toUpperCase() + catId.slice(1)} `) {
+        // Fix: Removed trailing space in ID selector
+        if (btn.id === `eventCat${catId.charAt(0).toUpperCase() + catId.slice(1)}`) {
             btn.classList.add('active');
         }
     });
@@ -215,6 +216,10 @@ function editHealthEvent(id) {
 
     // Select Cat
     selectEventCat(event.catId);
+
+    // Disable "Both" option when editing specific event
+    const btnBoth = document.getElementById('eventCatBoth');
+    if (btnBoth) btnBoth.style.display = 'none';
 
     // Show delete button
     const btnDelete = document.getElementById('btnDeleteHealthEvent');
@@ -257,6 +262,29 @@ function deleteHealthEvent() {
     }
 }
 
+function showAddHealthEvent() {
+    // Reset modal fields
+    document.getElementById('eventId').value = ''; // Clear ID for new event
+    document.getElementById('eventType').value = 'vaccine';
+    document.getElementById('eventDate').value = new Date().toISOString().split('T')[0];
+    document.getElementById('eventNote').value = '';
+    document.getElementById('eventCost').value = '';
+    document.getElementById('eventNextDate').value = '';
+
+    // Default cat: minou (or last one) - Default to Minou for now
+    selectEventCat('minou');
+
+    // Show Check Both option
+    const btnBoth = document.getElementById('eventCatBoth');
+    if (btnBoth) btnBoth.style.display = 'inline-block';
+
+    // Hide delete button for new event
+    const btnDelete = document.getElementById('btnDeleteHealthEvent');
+    if (btnDelete) btnDelete.style.display = 'none';
+
+    showModal('healthEventModal');
+}
+
 function saveHealthEvent() {
     try {
         if (!currentCatId) {
@@ -277,29 +305,58 @@ function saveHealthEvent() {
             return;
         }
 
-        const eventData = {
-            id: id ? parseInt(id) : Date.now(),
-            catId: currentCatId,
-            type: type,
-            date: date,
-            note: note,
-            cost: cost > 0 ? (Math.round(cost * 100) / 100) : null,
-            nextDueDate: nextDueDate || null
-        };
-
         if (!appData.healthEvents) {
             appData.healthEvents = [];
         }
 
-        if (id) {
-            // Update existing
-            const index = appData.healthEvents.findIndex(e => e.id === parseInt(id));
-            if (index !== -1) {
-                appData.healthEvents[index] = eventData;
-            }
+        // Handle "Both" selection (Create 2 events)
+        if (currentCatId === 'both' && !id) {
+            // Event for Minou
+            const eventMinou = {
+                id: Date.now(),
+                catId: 'minou',
+                type: type,
+                date: date,
+                note: note,
+                cost: cost > 0 ? (Math.round(cost * 100) / 100) : null,
+                nextDueDate: nextDueDate || null
+            };
+            appData.healthEvents.push(eventMinou);
+
+            // Event for Matisse (slight delay for unique ID)
+            const eventMatisse = {
+                id: Date.now() + 1,
+                catId: 'matisse',
+                type: type,
+                date: date,
+                note: note,
+                cost: cost > 0 ? (Math.round(cost * 100) / 100) : null,
+                nextDueDate: nextDueDate || null
+            };
+            appData.healthEvents.push(eventMatisse);
+
         } else {
-            // Create new
-            appData.healthEvents.push(eventData);
+            // Single event (New or Edit)
+            const eventData = {
+                id: id ? parseInt(id) : Date.now(),
+                catId: currentCatId,
+                type: type,
+                date: date,
+                note: note,
+                cost: cost > 0 ? (Math.round(cost * 100) / 100) : null,
+                nextDueDate: nextDueDate || null
+            };
+
+            if (id) {
+                // Update existing
+                const index = appData.healthEvents.findIndex(e => e.id === parseInt(id));
+                if (index !== -1) {
+                    appData.healthEvents[index] = eventData;
+                }
+            } else {
+                // Create new
+                appData.healthEvents.push(eventData);
+            }
         }
 
         saveData(); // Save and sync
