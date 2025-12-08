@@ -496,150 +496,150 @@
                 <button class="modal-btn primary" onclick="saveCatProfile()">Salva</button>
             </div>
         </div>
+    </div>
 
-        <!-- Add/Edit Product Modal -->
-        <div class="modal-overlay" id="productModal">
-            <div class="modal modal-large">
-                <div class="modal-icon">🥫</div>
-                <h3 id="productModalTitle">Aggiungi Prodotto</h3>
+    <!-- Add/Edit Product Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal modal-large">
+            <div class="modal-icon">🥫</div>
+            <h3 id="productModalTitle">Aggiungi Prodotto</h3>
 
-                <div class="input-wrapper">
-                    <label for="productBrand">Marca:</label>
-                    <select id="productBrand" class="text-input">
-                        <option value="">Seleziona marca...</option>
-                        <option value="Natural Code">Natural Code</option>
-                        <option value="Schesir">Schesir</option>
-                        <option value="Oasy">Oasy</option>
-                        <option value="Life Cat">Life Cat</option>
-                        <option value="Farmina">Farmina</option>
-                        <option value="Altro">Altro...</option>
-                    </select>
-                </div>
+            <div class="input-wrapper">
+                <label for="productBrand">Marca:</label>
+                <select id="productBrand" class="text-input">
+                    <option value="">Seleziona marca...</option>
+                    <option value="Natural Code">Natural Code</option>
+                    <option value="Schesir">Schesir</option>
+                    <option value="Oasy">Oasy</option>
+                    <option value="Life Cat">Life Cat</option>
+                    <option value="Farmina">Farmina</option>
+                    <option value="Altro">Altro...</option>
+                </select>
+            </div>
 
-                <div class="input-wrapper" id="customBrandWrapper" style="display: none;">
-                    <label for="customBrand">Nome marca:</label>
-                    <input type="text" id="customBrand" class="text-input" placeholder="Inserisci marca">
-                </div>
+            <div class="input-wrapper" id="customBrandWrapper" style="display: none;">
+                <label for="customBrand">Nome marca:</label>
+                <input type="text" id="customBrand" class="text-input" placeholder="Inserisci marca">
+            </div>
 
-                <div class="input-wrapper">
-                    <label for="productFlavor">Gusto:</label>
-                    <select id="productFlavor" class="text-input">
-                        <option value="">Seleziona gusto...</option>
-                        <option value="Tonno">Tonno</option>
-                        <option value="Pollo">Pollo</option>
-                        <option value="Tacchino">Tacchino</option>
-                        <option value="Tonno e Pollo">Tonno e Pollo</option>
-                        <option value="Tonno e Tacchino">Tonno e Tacchino</option>
-                        <option value="Pollo e Tacchino">Pollo e Tacchino</option>
-                        <option value="Manzo">Manzo</option>
-                        <option value="Pesce">Pesce</option>
-                        <option value="Misto">Misto</option>
-                        <option value="Altro">Altro...</option>
-                    </select>
-                </div>
+            <div class="input-wrapper">
+                <label for="productFlavor">Gusto:</label>
+                <select id="productFlavor" class="text-input">
+                    <option value="">Seleziona gusto...</option>
+                    <option value="Tonno">Tonno</option>
+                    <option value="Pollo">Pollo</option>
+                    <option value="Tacchino">Tacchino</option>
+                    <option value="Tonno e Pollo">Tonno e Pollo</option>
+                    <option value="Tonno e Tacchino">Tonno e Tacchino</option>
+                    <option value="Pollo e Tacchino">Pollo e Tacchino</option>
+                    <option value="Manzo">Manzo</option>
+                    <option value="Pesce">Pesce</option>
+                    <option value="Misto">Misto</option>
+                    <option value="Altro">Altro...</option>
+                </select>
+            </div>
 
-                <div class="input-wrapper" id="customFlavorWrapper" style="display: none;">
-                    <label for="customFlavor">Nome gusto:</label>
-                    <input type="text" id="customFlavor" class="text-input" placeholder="Inserisci gusto">
-                </div>
+            <div class="input-wrapper" id="customFlavorWrapper" style="display: none;">
+                <label for="customFlavor">Nome gusto:</label>
+                <input type="text" id="customFlavor" class="text-input" placeholder="Inserisci gusto">
+            </div>
 
-                <div class="input-wrapper" id="sizeWrapper">
-                    <label for="productSize">Formato:</label>
-                    <select id="productSize" class="text-input">
-                        <option value="50g">50g</option>
-                        <option value="70g">70g</option>
-                        <option value="85g" selected>85g</option>
-                        <option value="400g">400g</option>
-                    </select>
-                </div>
+            <div class="input-wrapper" id="sizeWrapper">
+                <label for="productSize">Formato:</label>
+                <select id="productSize" class="text-input">
+                    <option value="50g">50g</option>
+                    <option value="70g">70g</option>
+                    <option value="85g" selected>85g</option>
+                    <option value="400g">400g</option>
+                </select>
+            </div>
 
-                <div class="input-wrapper">
-                    <label for="productQuantity">Quantità in stock:</label>
-                    <input type="number" id="productQuantity" class="text-input" min="0" value="0">
-                </div>
+            <div class="input-wrapper">
+                <label for="productQuantity">Quantità in stock:</label>
+                <input type="number" id="productQuantity" class="text-input" min="0" value="0">
+            </div>
 
-                <div class="input-wrapper">
-                    <label>Piace a:</label>
-                    <div class="preference-checkboxes">
-                        <label class="pref-checkbox">
-                            <input type="checkbox" id="likesMinou" checked>
-                            <span class="pref-check-label minou">Minou 🐱</span>
-                        </label>
-                        <label class="pref-checkbox">
-                            <input type="checkbox" id="likesMatisse" checked>
-                            <span class="pref-check-label matisse">Matisse 🐱</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="input-wrapper">
-                    <label>Valutazione:</label>
-                    <div class="rating-selector">
-                        <button type="button" class="rating-btn" data-rating="love" onclick="setRating('love')">❤️
-                            Adorano</button>
-                        <button type="button" class="rating-btn active" data-rating="like"
-                            onclick="setRating('like')">👍
-                            Piace</button>
-                        <button type="button" class="rating-btn" data-rating="ok" onclick="setRating('ok')">😐
-                            Ok</button>
-                        <button type="button" class="rating-btn" data-rating="dislike" onclick="setRating('dislike')">👎
-                            No</button>
-                    </div>
-                </div>
-
-                <div class="modal-buttons">
-                    <button class="modal-btn cancel" onclick="closeProductModal()">Annulla</button>
-                    <button class="modal-btn confirm" onclick="saveProduct()">Salva</button>
+            <div class="input-wrapper">
+                <label>Piace a:</label>
+                <div class="preference-checkboxes">
+                    <label class="pref-checkbox">
+                        <input type="checkbox" id="likesMinou" checked>
+                        <span class="pref-check-label minou">Minou 🐱</span>
+                    </label>
+                    <label class="pref-checkbox">
+                        <input type="checkbox" id="likesMatisse" checked>
+                        <span class="pref-check-label matisse">Matisse 🐱</span>
+                    </label>
                 </div>
             </div>
-        </div>
 
-        <!-- Confirm Modal -->
-        <div class="modal-overlay" id="confirmModal">
-            <div class="modal">
-                <div class="modal-icon">✨</div>
-                <h3>Conferma pulizia</h3>
-                <p id="modalText">Hai pulito la toilette del Bagno Grande?</p>
-                <div class="date-picker-wrapper">
-                    <label for="cleaningDate">Data Pulizia (Tocca per cambiare):</label>
-                    <input type="date" id="cleaningDate" class="date-input">
-                </div>
-                <div class="modal-buttons">
-                    <button class="modal-btn cancel" onclick="closeModal()">Annulla</button>
-                    <button class="modal-btn confirm" id="confirmBtn">Conferma</button>
+            <div class="input-wrapper">
+                <label>Valutazione:</label>
+                <div class="rating-selector">
+                    <button type="button" class="rating-btn" data-rating="love" onclick="setRating('love')">❤️
+                        Adorano</button>
+                    <button type="button" class="rating-btn active" data-rating="like" onclick="setRating('like')">👍
+                        Piace</button>
+                    <button type="button" class="rating-btn" data-rating="ok" onclick="setRating('ok')">😐
+                        Ok</button>
+                    <button type="button" class="rating-btn" data-rating="dislike" onclick="setRating('dislike')">👎
+                        No</button>
                 </div>
             </div>
-        </div>
 
-        <!-- Edit Modal -->
-        <div class="modal-overlay" id="editModal">
-            <div class="modal">
-                <div class="modal-icon">📝</div>
-                <h3>Modifica pulizia</h3>
-                <p id="editModalText">Modifica la data di pulizia</p>
-                <div class="date-picker-wrapper">
-                    <label for="editDate">Nuova Data:</label>
-                    <input type="date" id="editDate" class="date-input">
-                </div>
-                <div class="modal-buttons">
-                    <button class="modal-btn cancel" onclick="closeEditModal()">Annulla</button>
-                    <button class="modal-btn confirm" id="editConfirmBtn">Salva</button>
-                </div>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" onclick="closeProductModal()">Annulla</button>
+                <button class="modal-btn confirm" onclick="saveProduct()">Salva</button>
             </div>
         </div>
+    </div>
 
-        <!-- Toast -->
-        <div class="toast" id="toast">
-            <span>✅</span>
-            <span id="toastText">Pulizia registrata!</span>
+    <!-- Confirm Modal -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal">
+            <div class="modal-icon">✨</div>
+            <h3>Conferma pulizia</h3>
+            <p id="modalText">Hai pulito la toilette del Bagno Grande?</p>
+            <div class="date-picker-wrapper">
+                <label for="cleaningDate">Data Pulizia (Tocca per cambiare):</label>
+                <input type="date" id="cleaningDate" class="date-input">
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" onclick="closeModal()">Annulla</button>
+                <button class="modal-btn confirm" id="confirmBtn">Conferma</button>
+            </div>
         </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <div class="modal-icon">📝</div>
+            <h3>Modifica pulizia</h3>
+            <p id="editModalText">Modifica la data di pulizia</p>
+            <div class="date-picker-wrapper">
+                <label for="editDate">Nuova Data:</label>
+                <input type="date" id="editDate" class="date-input">
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" onclick="closeEditModal()">Annulla</button>
+                <button class="modal-btn confirm" id="editConfirmBtn">Salva</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span>✅</span>
+        <span id="toastText">Pulizia registrata!</span>
+    </div>
 
 
-        <script src="js/sync.js"></script>
-        <script src="js/toilets.js"></script>
-        <script src="js/app.js"></script>
-        <script src="js/food.js"></script>
-        <script src="js/health.js"></script>
+    <script src="js/sync.js"></script>
+    <script src="js/toilets.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/food.js"></script>
+    <script src="js/health.js"></script>
 </body>
 
 </html>
