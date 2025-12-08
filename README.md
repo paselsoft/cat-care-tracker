@@ -29,6 +29,7 @@ Creata per **Minou** e **Matisse** 🐱🐱
 ### Salute & Veterinario 🏥
 - **Profili Gatti**: Schede digitali con peso, età e microchip aggiornabili
 - **Diario Clinico**: Storico completo di vaccini, visite, antiparassitari e misurazioni peso
+- **Gestione Eventi**: Modifica e Cancellazione eventi (pulsante "Elimina" con conferma)
 - **Scadenze**: Visualizzazione chiara dei prossimi richiami o appuntamenti
 - **Monitoraggio Peso**: Grafico dell'andamento del peso (in arrivo)
 

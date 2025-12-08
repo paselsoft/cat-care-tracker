@@ -6,6 +6,16 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.3.0] - 2025-12-08
+
+### Aggiunto
+- **Cancellazione Eventi Sanitari**: possibilità di eliminare eventi inseriti per errore nel diario clinico (con conferma di sicurezza a due step).
+
+### Corretto
+- **Fix Codice Visibile**: rimosso blocco di codice duplicato che appariva come testo nelle Impostazioni.
+- **Fix Modali Sovrapposti**: risolto bug critico che fondeva la modale "Configura GitHub" con "Profilo Gatto", rendendo impossibile il salvataggio.
+- **Fix Duplicazione Sync**: il sistema ora riconosce correttamente gli eventi già esistenti evitando duplicati durante la sincronizzazione (gestione ID stringa/numero).
+
 ## [2.2.0] - 2025-12-08
 
 ### Aggiunto
