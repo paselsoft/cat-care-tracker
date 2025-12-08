@@ -1,15 +1,8 @@
-const CACHE_NAME = 'cat-care-v2-modular';
+const CACHE_NAME = 'cat-care-v1';
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
     '/manifest.json',
-    '/css/variables.css',
-    '/css/layout.css',
-    '/css/components.css',
-    '/js/app.js',
-    '/js/sync.js',
-    '/js/toilets.js',
-    '/js/food.js',
     '/icons/icon-192.png',
     '/icons/icon-512.png',
     'https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap'

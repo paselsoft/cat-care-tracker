@@ -1,7 +1,7 @@
 {
   "toilets": {
     "grande": {
-      "lastClean": null
+      "lastClean": "2025-11-29"
     },
     "piccolo": {
       "lastClean": "2025-11-30"
@@ -9,51 +9,19 @@
   },
   "history": [
     {
+      "id": 1732924800000,
+      "toilet": "grande",
+      "date": "2025-11-29"
+    },
+    {
       "id": 1733011200000,
       "toilet": "piccolo",
       "date": "2025-11-30"
     }
   ],
   "food": {
-    "products": [
-      {
-        "id": "1765149166645",
-        "type": "crocchette",
-        "brand": "Farmina",
-        "flavor": "N&D Quinoa Hairball",
-        "quantity": 1,
-        "size": null,
-        "likesMinou": true,
-        "likesMatisse": true,
-        "rating": "love",
-        "createdAt": "2025-12-07T23:12:46.645Z"
-      },
-      {
-        "id": "1765149510334",
-        "type": "crocchette",
-        "brand": "Farmina",
-        "flavor": "N&D Pumpkin Adult Quaglia, Zucca e Melograno Neutered",
-        "quantity": 0,
-        "size": null,
-        "likesMinou": true,
-        "likesMatisse": true,
-        "rating": "love",
-        "createdAt": "2025-12-07T23:18:30.334Z"
-      },
-      {
-        "id": "1765149885884",
-        "type": "scatoletta",
-        "brand": "Natural Code",
-        "flavor": "Pollo e Verdure",
-        "quantity": 2,
-        "size": "85g",
-        "likesMinou": true,
-        "likesMatisse": true,
-        "rating": "like",
-        "createdAt": "2025-12-07T23:24:45.884Z"
-      }
-    ],
-    "lastUpdated": "2025-12-07T23:24:45.884Z"
+    "products": [],
+    "lastUpdated": null
   },
-  "lastUpdated": "2025-12-07T23:24:50.893Z"
+  "lastUpdated": "2025-12-07T12:00:00Z"
 }
