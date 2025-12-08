@@ -270,10 +270,11 @@ async function syncToGitHub() {
         let remoteContent = null;
 
         try {
-            const getResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`, {
+            // Add timestamp to prevent caching without using Cache-Control header (which triggers CORS preflight issues on file://)
+            const getResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}?t=${Date.now()}`, {
                 headers: {
                     'Authorization': `token ${githubToken}`,
-                    'Cache-Control': 'no-cache' // Ensure we get fresh data
+                    'Accept': 'application/vnd.github.v3+json'
                 }
             });
 
