@@ -16,6 +16,16 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 - **Note salute**: possibilità di aggiungere note libere al diario
 - **UI Migliorata**: nuove icone, badge di stato e layout ottimizzato per le schede gatti
 
+## [2.2.1] - 2025-12-08
+
+### Corretto
+- **Fix Pagina Impostazioni**: risolto un problema che impediva la visualizzazione della pagina Impostazioni (era nidificata per errore).
+- **Tab Salute**: rimosso duplicato della Tab Salute che causava conflitti.
+
+### Migliorato
+- **Barra di Navigazione**: nuovo design moderno, senza bordi, con icone più grandi ed evidenziazione attiva migliorata.
+- **Header**: rimosso codice HTML visibile che compariva in alto (tag link malformato).
+
 ## [2.1.0] - 2025-12-08
 
 ### Aggiunto
