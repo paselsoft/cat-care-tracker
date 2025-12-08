@@ -16,6 +16,7 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 - **Critical Fix**: Risolto bug che nascondeva le finestre di conferma e modifica (errore di chiusura HTML).
 - **Critical Fix**: Risolto conflitto JavaScript che impediva la chiusura delle modali (tasti "Annulla" bloccati).
 - **Bug Fix**: Il tasto "Sincronizza ora" ora appare correttamente quando lo stato è "Connesso". Prima rimaneva nascosto.
+- **Bug Fix**: **Risolto definitivamente** il problema della data "Zombie" 🧟 che riappariva dopo essere stata cancellata. (Introdotto meccanismo di "Self-Healing").
 - **Bug Fix**: La home ora mostra sempre la *reale* ultima data di pulizia (anche se ne inserisci una passata manuale).
 - **Feature**: Aggiunto controllo anti-duplicati (impedisce di inserire due pulizie identiche lo stesso giorno).
 
