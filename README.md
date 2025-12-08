@@ -12,17 +12,30 @@ Creata per **Minou** e **Matisse** 🐱🐱
 - Alert colorato per la prossima pulizia programmata
 - Intervallo di pulizia: 15 giorni per toilette
 
+### Gestione Cibo 🍽️
+- Inventario scatolette e crocchette
+- Gestione quantità con pulsanti +/-
+- Avviso scorte basse (sotto 15 scatolette)
+- Preferenze per ogni gatta (Minou e Matisse)
+- Valutazioni prodotti: ❤️ Adorano, 👍 Piace, 😐 Ok, 👎 No
+
 ### Registrazione Pulizie
 - Pulsante "Segna come pulita" con selezione data
 - Storico completo delle pulizie
 - Possibilità di modificare la data delle pulizie registrate
 - Eliminazione voci dallo storico
 
+### Sincronizzazione
+- Sincronizzazione dati con GitHub
+- Funziona su tutti i dispositivi
+- Configurazione semplice con Personal Access Token
+
 ### PWA Features
 - Installabile su smartphone (Android e iOS)
 - Funziona offline
 - Tema automatico (chiaro/scuro) basato sulle impostazioni del dispositivo
 - Notifiche promemoria (giorno prima e giorno stesso)
+- Pull to refresh per aggiornamenti
 
 ## 🚀 Installazione
 
@@ -63,14 +76,17 @@ cat-care-tracker/
 - LocalStorage per persistenza dati
 - Service Worker per funzionalità offline
 - Google Fonts (Quicksand, Nunito)
+- GitHub API per sincronizzazione
 
 ## 📋 Roadmap
 
 - [x] Gestione pulizia toilette
 - [x] Storico pulizie con modifica data
-- [ ] Gestione cibo (scatolette e crocchette)
-- [ ] Inventario scorte
-- [ ] Avvisi scorte basse
+- [x] Gestione cibo (scatolette e crocchette)
+- [x] Inventario scorte
+- [x] Avvisi scorte basse
+- [x] Sincronizzazione GitHub
+- [ ] Statistiche e grafici
 
 ## 📄 Licenza
 

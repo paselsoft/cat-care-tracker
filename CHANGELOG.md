@@ -6,6 +6,16 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.0.1] - 2025-12-08
+
+### Corretto
+- **Fix scroll modale su iPad/smartphone in landscape**: la modale per aggiungere scatolette/crocchette ora è scrollabile e mostra sempre i pulsanti Salva/Annulla
+- Aggiunto `max-height: 85vh` e `overflow-y: auto` alla modale
+- Pulsanti della modale ora sono sticky in fondo per essere sempre visibili
+- Migliorato supporto per orientamento landscape su tutti i dispositivi
+
+---
+
 ## [2.0.0] - 2025-12-07
 
 ### Aggiunto
