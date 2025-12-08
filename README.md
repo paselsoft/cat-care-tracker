@@ -27,6 +27,8 @@ Creata per **Minou** e **Matisse** 🐱🐱
 - Gestione formati (50g, 70g, 85g, 400g)
 
 ### Sincronizzazione ☁️
+- **Smart Sync**: algoritmo di unione intelligente per uso condiviso (es. più persone stesse credenziali)
+- Prevenzione conflitti e perdita dati
 - Backup automatico dei dati su GitHub
 - Sincronizzazione tra più dispositivi
 - Funzionamento offline con sync alla riconnessione

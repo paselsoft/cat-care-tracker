@@ -6,6 +6,14 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.1.0] - 2025-12-08
+
+### Aggiunto
+- **Smart Sync (Unione Intelligente)**: sistema di sincronizzazione avanzato per uso multi-utente.
+- Logica di merge automatico per toilette, storico e inventario cibo.
+- Prevenzione sovrascrittura dati: "Pull-before-Push" automatico durante il salvataggio.
+- Migliorata la gestione dei conflitti di sincronizzazione.
+
 ## [2.0.0] - 2025-12-07
 
 ### Aggiunto

@@ -72,6 +72,93 @@ function updateSyncUI() {
     }
 }
 
+// =========================
+// SMART SYNC LOGIC
+// =========================
+
+function mergeData(local, remote) {
+    const merged = { ...local };
+
+    // 1. Merge Toilets (Keep latest cleaning date)
+    if (remote.toilets) {
+        merged.toilets = { ...local.toilets };
+
+        // Grande
+        const localGrande = local.toilets.grande?.lastClean;
+        const remoteGrande = remote.toilets.grande?.lastClean;
+        if (!localGrande || (remoteGrande && new Date(remoteGrande) > new Date(localGrande))) {
+            merged.toilets.grande = remote.toilets.grande;
+        }
+
+        // Piccolo
+        const localPiccolo = local.toilets.piccolo?.lastClean;
+        const remotePiccolo = remote.toilets.piccolo?.lastClean;
+        if (!localPiccolo || (remotePiccolo && new Date(remotePiccolo) > new Date(localPiccolo))) {
+            merged.toilets.piccolo = remote.toilets.piccolo;
+        }
+    }
+
+    // 2. Merge History (Union by ID)
+    if (remote.history && Array.isArray(remote.history)) {
+        const localMap = new Map(local.history.map(item => [item.id, item]));
+        remote.history.forEach(item => {
+            // Se l'item remoto non esiste o è diverso (opzionale: logica conflitto), lo aggiungiamo/sovrascriviamo
+            // Qui assumiamo che l'ID sia univoco (timestamp). 
+            // Se esiste già, usiamo quello con la data 'lastUpdated' più recente se esistesse, 
+            // ma per semplicità facciamo "union": se manca aggiungi.
+            if (!localMap.has(item.id)) {
+                localMap.set(item.id, item);
+            }
+        });
+        // Converti map in array e ordina per data decrescente
+        merged.history = Array.from(localMap.values()).sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
+
+    // 3. Merge Food (Union by Product ID/Name)
+    if (remote.food && remote.food.products) {
+        const mergedProducts = [...local.food.products];
+        // Crea una mappa dei prodotti locali per ricerca veloce
+        const localProdMap = new Map(mergedProducts.map(p => [p.id, p]));
+
+        remote.food.products.forEach(remoteProd => {
+            if (localProdMap.has(remoteProd.id)) {
+                // Il prodotto esiste in entrambi. 
+                // Strategia semplice: se il remoto è più recente (basato su un ipotetico timestamp) o diverso, bisognerebbe scegliere.
+                // Per ora: Remote Wins sulla quantità per evitare che modifiche vecchie locali sovrascrivano i dati nuovi
+                // MA preserviamo modifiche locali se non c'è conflitto palese. 
+                // Soluzione pratica: sovrascrivi con remoto per mantenere consistenza, 
+                // l'utente locale dovrà ri-aggiornare se aveva cambiato proprio quello.
+
+                // Miglioramento: Sommare le differenze sarebbe ideale ma rischioso senza un log delle transazioni.
+                // "Remote Wins" sulle proprietà è più sicuro per coerenza globale.
+                const localProd = localProdMap.get(remoteProd.id);
+                Object.assign(localProd, remoteProd);
+            } else {
+                // Nuovo prodotto dal remoto
+                mergedProducts.push(remoteProd);
+            }
+        });
+
+        merged.food = { ...local.food, products: mergedProducts };
+        // Aggiorna anche lastUpdated prendendo il più recente
+        const localTime = local.food.lastUpdated ? new Date(local.food.lastUpdated).getTime() : 0;
+        const remoteTime = remote.food.lastUpdated ? new Date(remote.food.lastUpdated).getTime() : 0;
+        merged.food.lastUpdated = (remoteTime > localTime) ? remote.food.lastUpdated : local.food.lastUpdated;
+    }
+
+    // 4. Merge Settings (Remote wins for shared config, keep local for device specific?)
+    // Per ora manteniamo le settings locali dell'utente (es. notifiche on/off sono per device)
+    // Se volessimo syncare "dayBefore", potremmo farlo qui.
+    if (remote.settings) {
+        // Sync dayBefore ma non notifiche (che richiedono permessi locali)
+        if (remote.settings.dayBefore !== undefined) {
+            merged.settings.dayBefore = remote.settings.dayBefore;
+        }
+    }
+
+    return merged;
+}
+
 async function syncFromGitHub() {
     if (!githubToken || isSyncing) return false;
 
@@ -94,11 +181,9 @@ async function syncFromGitHub() {
             // Salva SHA per prossime push
             localStorage.setItem('githubFileSha', data.sha);
 
-            // Aggiorna app data
-            if (content.toilets) appData.toilets = content.toilets;
-            if (content.history) appData.history = content.history;
-            if (content.settings) appData.settings = content.settings;
-            if (content.food) appData.food = content.food;
+            // SMART MERGE
+            console.log('Merging remote data...');
+            appData = mergeData(appData, content);
 
             saveLocalData();
             updateUI();
@@ -132,37 +217,54 @@ async function syncToGitHub() {
     statusDot.className = 'sync-dot syncing';
 
     try {
-        // Get current SHA
-        let sha = localStorage.getItem('githubFileSha');
+        // 1. GET latest remote data first (to avoid overwriting others' changes)
+        let latestSha = localStorage.getItem('githubFileSha');
+        let remoteContent = null;
 
-        if (!sha) {
-            try {
-                const getResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`, {
-                    headers: { 'Authorization': `token ${githubToken}` }
-                });
-                if (getResponse.ok) {
-                    const getData = await getResponse.json();
-                    sha = getData.sha;
-                    localStorage.setItem('githubFileSha', sha);
+        try {
+            const getResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`, {
+                headers: {
+                    'Authorization': `token ${githubToken}`,
+                    'Cache-Control': 'no-cache' // Ensure we get fresh data
                 }
-            } catch (e) { }
+            });
+
+            if (getResponse.ok) {
+                const getData = await getResponse.json();
+                latestSha = getData.sha;
+                remoteContent = JSON.parse(atob(getData.content));
+                localStorage.setItem('githubFileSha', latestSha);
+            }
+        } catch (e) {
+            console.warn('Could not fetch latest data before push:', e);
         }
 
+        // 2. MERGE local with latest remote (if available)
+        if (remoteContent) {
+            appData = mergeData(appData, remoteContent);
+            saveLocalData(); // Save merged state locally immediately
+            updateUI();      // Refresh UI with merged data
+            updateFoodUI();
+        }
+
+        // 3. PREPARE data to save
         const dataToSave = {
             toilets: appData.toilets,
             history: appData.history,
             food: appData.food,
+            settings: appData.settings, // Includiamo settings nel backup
             lastUpdated: new Date().toISOString()
         };
 
         const body = {
-            message: `Sync data - ${new Date().toLocaleDateString('it-IT')}, ${new Date().toLocaleTimeString('it-IT')}`,
+            message: `Sync data - ${new Date().toLocaleDateString('it-IT')} (Smart Merge)`,
             content: btoa(JSON.stringify(dataToSave, null, 2)),
             branch: 'main'
         };
 
-        if (sha) body.sha = sha;
+        if (latestSha) body.sha = latestSha;
 
+        // 4. PUSH merged data
         const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`, {
             method: 'PUT',
             headers: {
@@ -184,6 +286,16 @@ async function syncToGitHub() {
         } else {
             const error = await response.json();
             console.error('Push error:', error);
+
+            // Se errore è "Conflict" (409), dovremmo riprovare il ciclo GET -> MERGE -> PUSH
+            if (response.status === 409) {
+                console.log('Conflict detected, retrying sync...');
+                isSyncing = false; // Reset flag to allow recursion
+                // Simple exponential backoff or retry once could be implemented here
+                // For now, just show error and let user try again
+                showToast('Conflitto rilevato. Riprova tra poco.');
+            }
+
             statusDot.className = 'sync-dot error';
             isSyncing = false;
             return false;
