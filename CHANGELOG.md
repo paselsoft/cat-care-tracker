@@ -11,6 +11,7 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 - **CSS**: Estratto tutto il CSS inline da `index.html` in file separati (`variables.css`, `main.css`, `layout.css`, `components.css`).
 - **Performance**: Alleggerito `index.html` del 70%.
 - **Bug Fix**: Risolto problema "Zombie" 🧟‍♂️ sugli eventi eliminati che riapparivano dopo la sincronizzazione.
+- **UI**: Migliorato stile e visibilità del selettore data nelle modali (Pulizia e Modifica).
 
 ## [2.4.1] - 2025-10-27-08
 
