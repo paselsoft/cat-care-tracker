@@ -18,5 +18,9 @@
     "products": [],
     "lastUpdated": null
   },
-  "lastUpdated": "2025-12-08T10:08:49.455Z"
+  "settings": {
+    "notifications": true,
+    "dayBefore": true
+  },
+  "lastUpdated": "2025-12-08T14:53:53.254Z"
 }
