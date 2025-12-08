@@ -68,7 +68,7 @@ function updateHealthTimeline() {
         const dateDisplay = new Date(evt.date).toLocaleDateString('it-IT', { day: 'numeric', month: 'short' });
 
         return `
-            <div class="timeline-item ${evt.type}">
+            <div class="timeline-item ${evt.type}" onclick="editHealthEvent(${evt.id})" style="cursor: pointer;">
                 <div class="timeline-icon">${icon}</div>
                 <div class="timeline-content">
                     <div class="timeline-header">
@@ -78,6 +78,7 @@ function updateHealthTimeline() {
                     <h4>${getEventTypeLabel(evt.type)} ${evt.note ? '- ' + evt.note : ''}</h4>
                     ${evt.cost ? `<p class="timeline-cost">Prezzo: €${evt.cost}</p>` : ''}
                     ${evt.nextDueDate ? `<p style="font-size: 0.8rem; color: var(--warning); margin-top: 4px;">📅 Scadenza: ${new Date(evt.nextDueDate).toLocaleDateString()}</p>` : ''}
+                    <div style="font-size: 0.7rem; color: var(--text-muted); text-align: right; margin-top: 5px;">Tocca per modificare ✏️</div>
                 </div>
             </div>
         `;
@@ -90,7 +91,7 @@ function showCatProfile(catId) {
     currentCatId = catId;
     const cat = appData.cats[catId];
 
-    document.getElementById('catProfileTitle').textContent = `Profilo ${cat.name}`;
+    document.getElementById('catProfileTitle').textContent = `Profilo ${cat.name} `;
     document.getElementById('catWeight').value = cat.weight || 4.0;
     document.getElementById('catBirthDate').value = cat.birthDate || '';
     document.getElementById('catChip').value = cat.chip || '';
@@ -169,6 +170,7 @@ function getDaysUntil(dateStr) {
 
 function showAddHealthEvent() {
     // Reset modal fields
+    document.getElementById('eventId').value = ''; // Clear ID for new event
     document.getElementById('eventType').value = 'vaccine';
     document.getElementById('eventDate').value = new Date().toISOString().split('T')[0];
     document.getElementById('eventNote').value = '';
@@ -187,10 +189,30 @@ function selectEventCat(catId) {
     // Update visual selection
     document.querySelectorAll('.cat-select-btn').forEach(btn => {
         btn.classList.remove('active');
-        if (btn.id === `eventCat${catId.charAt(0).toUpperCase() + catId.slice(1)}`) {
+        if (btn.id === `eventCat${catId.charAt(0).toUpperCase() + catId.slice(1)} `) {
             btn.classList.add('active');
         }
     });
+}
+
+
+
+function editHealthEvent(id) {
+    const event = appData.healthEvents.find(e => e.id === id);
+    if (!event) return;
+
+    // Populate fields
+    document.getElementById('eventId').value = event.id;
+    document.getElementById('eventType').value = event.type;
+    document.getElementById('eventDate').value = event.date;
+    document.getElementById('eventNote').value = event.note || '';
+    document.getElementById('eventCost').value = event.cost || '';
+    document.getElementById('eventNextDate').value = event.nextDueDate || '';
+
+    // Select Cat
+    selectEventCat(event.catId);
+
+    showModal('healthEventModal');
 }
 
 function saveHealthEvent() {
@@ -200,6 +222,7 @@ function saveHealthEvent() {
             return;
         }
 
+        const id = document.getElementById('eventId').value;
         const type = document.getElementById('eventType').value;
         const date = document.getElementById('eventDate').value;
         const note = document.getElementById('eventNote').value;
@@ -212,13 +235,13 @@ function saveHealthEvent() {
             return;
         }
 
-        const newEvent = {
-            id: Date.now(),
+        const eventData = {
+            id: id ? parseInt(id) : Date.now(),
             catId: currentCatId,
             type: type,
             date: date,
             note: note,
-            cost: cost > 0 ? (Math.round(cost * 100) / 100) : null, // Ensure 2 decimal precision
+            cost: cost > 0 ? (Math.round(cost * 100) / 100) : null,
             nextDueDate: nextDueDate || null
         };
 
@@ -226,7 +249,16 @@ function saveHealthEvent() {
             appData.healthEvents = [];
         }
 
-        appData.healthEvents.push(newEvent);
+        if (id) {
+            // Update existing
+            const index = appData.healthEvents.findIndex(e => e.id === parseInt(id));
+            if (index !== -1) {
+                appData.healthEvents[index] = eventData;
+            }
+        } else {
+            // Create new
+            appData.healthEvents.push(eventData);
+        }
 
         saveData(); // Save and sync
         updateHealthUI();

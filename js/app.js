@@ -143,8 +143,19 @@ function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
         modal.classList.remove('active');
+        // Clear forms if present (optional, but good UX)
+        // const inputs = modal.querySelectorAll('input, select, textarea');
+        // Don't clear immediately if we want to preserve state
     }
 }
+
+// Global Modal Listener for Overlay Clicks
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal-overlay')) {
+        // Did user click strictly on the overlay?
+        e.target.classList.remove('active');
+    }
+});
 
 function updateUI() {
     updateToiletCards();
