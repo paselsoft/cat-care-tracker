@@ -7,18 +7,7 @@
       "lastClean": "2025-12-08"
     }
   },
-  "history": [
-    {
-      "id": 1765222393833,
-      "toilet": "piccolo",
-      "date": "2025-11-30"
-    },
-    {
-      "id": 1765222393833,
-      "toilet": "piccolo",
-      "date": "2025-11-30"
-    }
-  ],
+  "history": [],
   "food": {
     "products": [],
     "lastUpdated": null
@@ -81,5 +70,5 @@
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-08T20:15:10.526Z"
+  "lastUpdated": "2025-12-08T20:15:12.536Z"
 }
