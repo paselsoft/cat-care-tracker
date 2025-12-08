@@ -1,18 +1,13 @@
 {
   "toilets": {
     "grande": {
-      "lastClean": "2025-11-29"
+      "lastClean": null
     },
     "piccolo": {
       "lastClean": "2025-11-30"
     }
   },
   "history": [
-    {
-      "id": 1732924800000,
-      "toilet": "grande",
-      "date": "2025-11-29"
-    },
     {
       "id": 1733011200000,
       "toilet": "piccolo",
@@ -23,5 +18,5 @@
     "products": [],
     "lastUpdated": null
   },
-  "lastUpdated": "2025-12-07T12:00:00Z"
+  "lastUpdated": "2025-12-08T10:08:49.455Z"
 }
