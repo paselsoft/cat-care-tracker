@@ -165,15 +165,17 @@ function mergeData(local, remote) {
     // 5. Merge Health Events (Union by ID)
     if (remote.healthEvents && Array.isArray(remote.healthEvents)) {
         if (!merged.healthEvents) merged.healthEvents = [];
-        const localEvMap = new Map(merged.healthEvents.map(e => [e.id, e]));
+        // Use String IDs for map to handle potential type mismatches (number vs string)
+        const localEvMap = new Map(merged.healthEvents.map(e => [String(e.id), e]));
 
         remote.healthEvents.forEach(evt => {
-            if (!localEvMap.has(evt.id)) {
+            const evtIdStr = String(evt.id);
+            if (!localEvMap.has(evtIdStr)) {
                 // Aggiungi evento mancante
                 merged.healthEvents.push(evt);
             } else {
                 // Evento esistente: remote wins per aggiornamenti
-                Object.assign(localEvMap.get(evt.id), evt);
+                Object.assign(localEvMap.get(evtIdStr), evt);
             }
         });
 
