@@ -180,6 +180,10 @@ function showAddHealthEvent() {
     // Default cat: minou (or last one)
     selectEventCat('minou');
 
+    // Hide delete button for new event
+    const btnDelete = document.getElementById('btnDeleteHealthEvent');
+    if (btnDelete) btnDelete.style.display = 'none';
+
     showModal('healthEventModal');
 }
 
@@ -212,7 +216,45 @@ function editHealthEvent(id) {
     // Select Cat
     selectEventCat(event.catId);
 
+    // Show delete button
+    const btnDelete = document.getElementById('btnDeleteHealthEvent');
+    if (btnDelete) btnDelete.style.display = 'block';
+
     showModal('healthEventModal');
+}
+
+function deleteHealthEvent() {
+    const btn = document.getElementById('btnDeleteHealthEvent');
+
+    if (btn.dataset.confirm === 'true') {
+        // Second click: Perform delete
+        const id = document.getElementById('eventId').value;
+        if (!id) return;
+
+        appData.healthEvents = appData.healthEvents.filter(e => e.id !== parseInt(id));
+        saveData();
+        updateHealthUI();
+        closeModal('healthEventModal');
+
+        // Reset button for next time
+        btn.innerText = 'Elimina';
+        btn.dataset.confirm = 'false';
+        btn.classList.remove('confirm-danger');
+    } else {
+        // First click: Ask for confirmation
+        btn.innerText = 'Conferma?';
+        btn.dataset.confirm = 'true';
+        btn.classList.add('confirm-danger');
+
+        // Reset after 3 seconds
+        setTimeout(() => {
+            if (document.getElementById('healthEventModal').classList.contains('active')) {
+                btn.innerText = 'Elimina';
+                btn.dataset.confirm = 'false';
+                btn.classList.remove('confirm-danger');
+            }
+        }, 3000);
+    }
 }
 
 function saveHealthEvent() {

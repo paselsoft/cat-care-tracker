@@ -1141,6 +1141,20 @@
             color: white;
         }
 
+        .modal-btn.danger {
+            background: var(--danger);
+            color: white;
+            flex: 0 0 auto;
+            /* Ensure it doesn't stretch too much if we want it smaller, or flex:1 is fine */
+        }
+
+        .modal-btn.danger.confirm-danger {
+            background: #dc2626;
+            /* Darker red */
+            transform: scale(1.02);
+            font-weight: 800;
+        }
+
         .modal-btn:active {
             transform: scale(0.96);
         }
@@ -1638,6 +1652,8 @@
             </div>
 
             <div class="modal-buttons">
+                <button class="modal-btn danger" id="btnDeleteHealthEvent" onclick="deleteHealthEvent()"
+                    style="display: none;">Elimina</button>
                 <button class="modal-btn secondary" onclick="closeModal('healthEventModal')">Annulla</button>
                 <button class="modal-btn primary" onclick="saveHealthEvent()">Salva</button>
             </div>
