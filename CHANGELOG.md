@@ -10,6 +10,7 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 ### Refactor
 - **CSS**: Estratto tutto il CSS inline da `index.html` in file separati (`variables.css`, `main.css`, `layout.css`, `components.css`).
 - **Performance**: Alleggerito `index.html` del 70%.
+- **Bug Fix**: Risolto problema "Zombie" 🧟‍♂️ sugli eventi eliminati che riapparivano dopo la sincronizzazione.
 
 ## [2.4.1] - 2025-10-27-08
 
