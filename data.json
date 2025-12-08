@@ -7,7 +7,13 @@
       "lastClean": "2025-11-30"
     }
   },
-  "history": [],
+  "history": [
+    {
+      "id": 1765227403797,
+      "toilet": "piccolo",
+      "date": "2025-11-30"
+    }
+  ],
   "food": {
     "products": [
       {
@@ -23,7 +29,7 @@
         "createdAt": "2025-12-08T21:32:31.810Z"
       }
     ],
-    "lastUpdated": "2025-12-08T21:32:31.810Z"
+    "lastUpdated": "2025-12-08T21:33:47.039Z"
   },
   "cats": {
     "minou": {
@@ -43,6 +49,15 @@
   },
   "healthEvents": [
     {
+      "id": 1765214760984,
+      "catId": "matisse",
+      "type": "note",
+      "date": "2025-12-18",
+      "note": "Vacanza",
+      "cost": null,
+      "nextDueDate": null
+    },
+    {
       "id": 1765213244621,
       "catId": "minou",
       "type": "vaccine",
@@ -61,6 +76,33 @@
       "nextDueDate": "2026-12-10"
     },
     {
+      "id": 1765206602417,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-12-08",
+      "note": "3,5",
+      "cost": null,
+      "nextDueDate": null
+    },
+    {
+      "id": 1765207027374,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-12-08",
+      "note": "3,580",
+      "cost": null,
+      "nextDueDate": null
+    },
+    {
+      "id": 1765211891952,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-12-08",
+      "note": "3,500",
+      "cost": null,
+      "nextDueDate": "2026-01-10"
+    },
+    {
       "id": 1765212192462,
       "catId": "minou",
       "type": "weight",
@@ -70,6 +112,42 @@
       "nextDueDate": "2026-01-10"
     },
     {
+      "id": 1765213496954,
+      "catId": "matisse",
+      "type": "note",
+      "date": "2025-12-08",
+      "note": "Mangia un botto",
+      "cost": null,
+      "nextDueDate": null
+    },
+    {
+      "id": 1765210593784,
+      "catId": "minou",
+      "type": "vet",
+      "date": "2025-12-04",
+      "note": "",
+      "cost": null,
+      "nextDueDate": "2026-04-22"
+    },
+    {
+      "id": 1765213461372,
+      "catId": "minou",
+      "type": "note",
+      "date": "2025-12-04",
+      "note": "Mangia poco",
+      "cost": null,
+      "nextDueDate": null
+    },
+    {
+      "id": 1765212658555,
+      "catId": "minou",
+      "type": "meds",
+      "date": "2025-12-03",
+      "note": "Vermifugo",
+      "cost": null,
+      "nextDueDate": "2026-12-03"
+    },
+    {
       "id": 1765212618914,
       "catId": "matisse",
       "type": "vet",
@@ -77,11 +155,20 @@
       "note": "Controllo annuale",
       "cost": null,
       "nextDueDate": "2026-12-02"
+    },
+    {
+      "id": 1765206513403,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-11-29",
+      "note": "3,580",
+      "cost": null,
+      "nextDueDate": null
     }
   ],
   "settings": {
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-08T21:32:32.458Z"
+  "lastUpdated": "2025-12-08T21:33:47.610Z"
 }
