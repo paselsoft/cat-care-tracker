@@ -139,16 +139,6 @@ function showModal(modalId) {
     }
 }
 
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.remove('active');
-        // Clear forms if present (optional, but good UX)
-        // const inputs = modal.querySelectorAll('input, select, textarea');
-        // Don't clear immediately if we want to preserve state
-    }
-}
-
 // Global Modal Listener for Overlay Clicks
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('modal-overlay')) {
@@ -156,6 +146,15 @@ document.addEventListener('click', (e) => {
         e.target.classList.remove('active');
     }
 });
+
+function closeModal(modalId) {
+    if (modalId) {
+        document.getElementById(modalId).classList.remove('active');
+    } else {
+        // Fallback: try to close any active modal
+        document.querySelectorAll('.modal-overlay.active').forEach(el => el.classList.remove('active'));
+    }
+}
 
 function updateUI() {
     updateToiletCards();

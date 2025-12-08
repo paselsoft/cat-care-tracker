@@ -151,10 +151,8 @@ function showConfirmModal(toilet) {
     document.getElementById('confirmBtn').onclick = () => confirmClean(toilet);
 }
 
-function closeModal() {
-    document.getElementById('confirmModal').classList.remove('active');
-    currentToilet = null;
-}
+// function closeModal() removed - usage updated to use global
+
 
 function showEditModal(id) {
     // Normalize ID to string for comparison, but keep original for saving if needed (though we use currentEditId)
@@ -247,7 +245,7 @@ function confirmClean(toilet) {
     }
 
     // Always close modal
-    closeModal();
+    closeModal('confirmModal');
     showToast('Pulizia registrata! 🎉');
 }
 
