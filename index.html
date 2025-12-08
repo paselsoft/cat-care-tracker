@@ -1696,129 +1696,85 @@
                 </div>
             </div>
         </section>
-        <!-- Tab: Health -->
-        <div class="tabs-content" id="tab-health">
-            <div class="health-header">
-                <h2>Salute & Veterinario</h2>
-            </div>
+    </div> <!-- Closing tab-food -->
 
-            <!-- Cat Profiles -->
-            <div class="cat-profiles-container">
-                <!-- Minou -->
-                <div class="cat-profile-card minou" onclick="showCatProfile('minou')">
-                    <div class="cat-avatar">🐱</div>
-                    <div class="cat-info">
-                        <h3>Minou</h3>
-                        <div class="cat-weight">-- kg</div>
-                        <div class="next-event-badge upcoming">
-                            <span>...</span> Caricamento
-                        </div>
-                    </div>
+    <!-- Tab: Settings -->
+    <div class="tabs-content" id="tab-settings">
+        <section class="section">
+            <h2 class="section-title">⚙️ Impostazioni</h2>
+
+            <div class="settings-card">
+                <h3>🔔 Notifiche</h3>
+                <div class="setting-row">
+                    <span class="setting-label">Abilita notifiche</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="notificationsToggle" onchange="toggleNotifications()">
+                        <span class="toggle-slider"></span>
+                    </label>
                 </div>
-
-                <!-- Matisse -->
-                <div class="cat-profile-card matisse" onclick="showCatProfile('matisse')">
-                    <div class="cat-avatar">🐱</div>
-                    <div class="cat-info">
-                        <h3>Matisse</h3>
-                        <div class="cat-weight">-- kg</div>
-                        <div class="next-event-badge">
-                            <span>...</span> Caricamento
-                        </div>
-                    </div>
+                <div class="setting-row">
+                    <span class="setting-label">Promemoria giorno prima</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="dayBeforeToggle" checked onchange="saveSettings()">
+                        <span class="toggle-slider"></span>
+                    </label>
                 </div>
             </div>
 
-            <div class="section-divider"></div>
-
-            <!-- Health Timeline -->
-            <div class="health-actions">
-                <h3>Diario Clinico</h3>
-                <button class="btn-primary-small" onclick="showAddHealthEvent()">+ Nuovo Evento</button>
+            <div class="settings-card">
+                <h3>☁️ Sincronizzazione</h3>
+                <div class="setting-row">
+                    <span class="setting-label">Stato</span>
+                    <span class="sync-status" id="syncStatus">
+                        <span class="sync-dot offline"></span>
+                        <span id="syncStatusText">Non configurato</span>
+                    </span>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Ultima sync</span>
+                    <span class="setting-value" id="lastSyncTime">Mai</span>
+                </div>
+                <button class="sync-btn" id="syncConfigBtn" onclick="showSyncConfigModal()">
+                    ⚙️ Configura GitHub Token
+                </button>
+                <button class="sync-btn secondary" id="syncNowBtn" onclick="syncNow()" style="display: none;">
+                    🔄 Sincronizza ora
+                </button>
             </div>
 
-            <div class="health-timeline" id="healthTimeline">
-                <!-- Populated by JS -->
+            <div class="settings-card">
+                <h3>⏱️ Intervallo pulizia</h3>
+                <div class="setting-row">
+                    <span class="setting-label">Giorni tra le pulizie</span>
+                    <span class="setting-value" id="intervalValue">15 giorni</span>
+                </div>
             </div>
-        </div>
 
-        <!-- Tab: Settings -->
-        <div class="tabs-content" id="tab-settings">
-            <section class="section">
-                <h2 class="section-title">⚙️ Impostazioni</h2>
-
-                <div class="settings-card">
-                    <h3>🔔 Notifiche</h3>
-                    <div class="setting-row">
-                        <span class="setting-label">Abilita notifiche</span>
-                        <label class="toggle">
-                            <input type="checkbox" id="notificationsToggle" onchange="toggleNotifications()">
-                            <span class="toggle-slider"></span>
-                        </label>
-                    </div>
-                    <div class="setting-row">
-                        <span class="setting-label">Promemoria giorno prima</span>
-                        <label class="toggle">
-                            <input type="checkbox" id="dayBeforeToggle" checked onchange="saveSettings()">
-                            <span class="toggle-slider"></span>
-                        </label>
-                    </div>
+            <div class="settings-card">
+                <h3>🐱 Le tue gatte</h3>
+                <div class="setting-row">
+                    <span class="setting-label">Minou</span>
+                    <span class="cat-name minou">🐱</span>
                 </div>
-
-                <div class="settings-card">
-                    <h3>☁️ Sincronizzazione</h3>
-                    <div class="setting-row">
-                        <span class="setting-label">Stato</span>
-                        <span class="sync-status" id="syncStatus">
-                            <span class="sync-dot offline"></span>
-                            <span id="syncStatusText">Non configurato</span>
-                        </span>
-                    </div>
-                    <div class="setting-row">
-                        <span class="setting-label">Ultima sync</span>
-                        <span class="setting-value" id="lastSyncTime">Mai</span>
-                    </div>
-                    <button class="sync-btn" id="syncConfigBtn" onclick="showSyncConfigModal()">
-                        ⚙️ Configura GitHub Token
-                    </button>
-                    <button class="sync-btn secondary" id="syncNowBtn" onclick="syncNow()" style="display: none;">
-                        🔄 Sincronizza ora
-                    </button>
+                <div class="setting-row">
+                    <span class="setting-label">Matisse</span>
+                    <span class="cat-name matisse">🐱</span>
                 </div>
+            </div>
 
-                <div class="settings-card">
-                    <h3>⏱️ Intervallo pulizia</h3>
-                    <div class="setting-row">
-                        <span class="setting-label">Giorni tra le pulizie</span>
-                        <span class="setting-value" id="intervalValue">15 giorni</span>
-                    </div>
+            <div class="settings-card">
+                <h3>📱 App</h3>
+                <div class="setting-row">
+                    <span class="setting-label">Versione</span>
+                    <span class="setting-value">2.0.0</span>
                 </div>
-
-                <div class="settings-card">
-                    <h3>🐱 Le tue gatte</h3>
-                    <div class="setting-row">
-                        <span class="setting-label">Minou</span>
-                        <span class="cat-name minou">🐱</span>
-                    </div>
-                    <div class="setting-row">
-                        <span class="setting-label">Matisse</span>
-                        <span class="cat-name matisse">🐱</span>
-                    </div>
+                <div class="setting-row">
+                    <span class="setting-label">Tema</span>
+                    <span class="setting-value">Automatico</span>
                 </div>
-
-                <div class="settings-card">
-                    <h3>📱 App</h3>
-                    <div class="setting-row">
-                        <span class="setting-label">Versione</span>
-                        <span class="setting-value">2.0.0</span>
-                    </div>
-                    <div class="setting-row">
-                        <span class="setting-label">Tema</span>
-                        <span class="setting-value">Automatico</span>
-                    </div>
-                </div>
-            </section>
-        </div>
+            </div>
+        </section>
+    </div>
     </div>
 
     <!-- Bottom Navigation -->
