@@ -9,11 +9,6 @@
   },
   "history": [
     {
-      "id": 1765224894649,
-      "toilet": "piccolo",
-      "date": "2025-12-08"
-    },
-    {
       "id": 1765222393833,
       "toilet": "piccolo",
       "date": "2025-11-30"
@@ -86,5 +81,5 @@
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-08T20:14:55.124Z"
+  "lastUpdated": "2025-12-08T20:15:10.526Z"
 }
