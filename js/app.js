@@ -161,6 +161,9 @@ function updateUI() {
     updateToiletCards();
     updateNextAlert();
     updateHistory();
+    if (typeof updateHealthUI === 'function') {
+        updateHealthUI();
+    }
 }
 
 // =========================

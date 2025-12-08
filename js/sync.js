@@ -235,7 +235,7 @@ async function syncFromGitHub() {
             saveLocalData();
             updateUI();
             updateFoodUI();
-            // TODO: updateHealthUI(); <-- Da implementare
+            if (typeof updateHealthUI === 'function') updateHealthUI();
 
             localStorage.setItem('lastSyncTime', new Date().toISOString());
             updateSyncUI();
