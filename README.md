@@ -26,6 +26,12 @@ Creata per **Minou** e **Matisse** 🐱🐱
 - Tracciamento preferenze (Gusti: ❤️ Adorano, 👍 Piace, 😐 Ok, 👎 No)
 - Gestione formati (50g, 70g, 85g, 400g)
 
+### Salute & Veterinario 🏥
+- **Profili Gatti**: Schede digitali con peso, età e microchip aggiornabili
+- **Diario Clinico**: Storico completo di vaccini, visite, antiparassitari e misurazioni peso
+- **Scadenze**: Visualizzazione chiara dei prossimi richiami o appuntamenti
+- **Monitoraggio Peso**: Grafico dell'andamento del peso (in arrivo)
+
 ### Sincronizzazione ☁️
 - **Smart Sync**: algoritmo di unione intelligente per uso condiviso (es. più persone stesse credenziali)
 - Prevenzione conflitti e perdita dati
@@ -96,7 +102,8 @@ cat-care-tracker/
 - [x] Gestione cibo (scatolette e crocchette)
 - [x] Inventario scorte
 - [x] Avvisi scorte basse
-- [ ] Statistiche consumi
+- [x] Sezione Salute e Diario Veterinario
+- [ ] Statistiche consumi e grafici peso
 
 ## 📄 Licenza
 

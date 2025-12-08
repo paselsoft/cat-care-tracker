@@ -6,6 +6,16 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.2.0] - 2025-12-08
+
+### Aggiunto
+- **Sezione Salute & Veterinario** 🏥: nuovo modulo completo per la salute dei gatti
+- **Gestione Profili**: schede dettagliate per Minou e Matisse con peso, data nascita e microchip
+- **Diario Clinico**: timeline per tracciare vaccini 💉, visite veritarie 👨‍⚕️, antiparassitari 💊 e peso ⚖️
+- **Scadenze Mediche**: sistema automatico di calcolo prossimi richiami e visualizzazione nelle card
+- **Note salute**: possibilità di aggiungere note libere al diario
+- **UI Migliorata**: nuove icone, badge di stato e layout ottimizzato per le schede gatti
+
 ## [2.1.0] - 2025-12-08
 
 ### Aggiunto

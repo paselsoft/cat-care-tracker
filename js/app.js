@@ -22,7 +22,25 @@ let appData = {
     food: {
         products: [],
         lastUpdated: null
-    }
+    },
+    // New Health Section (v3.0.0)
+    cats: {
+        minou: {
+            name: 'Minou',
+            birthDate: '',
+            weight: 0,
+            chip: '',
+            color: '#ffb7b2' // Pastel Red/Pink
+        },
+        matisse: {
+            name: 'Matisse',
+            birthDate: '',
+            weight: 0,
+            chip: '',
+            color: '#b5ead7' // Pastel Green/Mint
+        }
+    },
+    healthEvents: [] // { id, catId, type, date, note, cost, nextDueDate }
 };
 
 let githubToken = null;
@@ -99,6 +117,20 @@ function saveSettings() {
 // UI UPDATES
 // =========================
 
+function showModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.add('active');
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('active');
+    }
+}
+
 function updateUI() {
     updateToiletCards();
     updateNextAlert();
@@ -119,7 +151,7 @@ function switchTab(tab, btn) {
     document.querySelectorAll('.tabs-content').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
 
-    document.getElementById(`tab${tab}`).classList.add('active');
+    document.getElementById(`tab-${tab}`).classList.add('active');
     if (btn) {
         btn.classList.add('active');
     }
@@ -131,13 +163,13 @@ function initNavigation() {
         const tabName = btn.getAttribute('data-tab');
 
         // Use touchend for iOS, click for desktop
-        btn.addEventListener('touchend', function(e) {
+        btn.addEventListener('touchend', function (e) {
             e.preventDefault();
             e.stopPropagation();
             switchTab(tabName, this);
         }, { passive: false });
 
-        btn.addEventListener('click', function(e) {
+        btn.addEventListener('click', function (e) {
             // Only handle click if not a touch device
             if (!('ontouchend' in window)) {
                 switchTab(tabName, this);

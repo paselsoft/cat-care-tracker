@@ -146,9 +146,42 @@ function mergeData(local, remote) {
         merged.food.lastUpdated = (remoteTime > localTime) ? remote.food.lastUpdated : local.food.lastUpdated;
     }
 
-    // 4. Merge Settings (Remote wins for shared config, keep local for device specific?)
-    // Per ora manteniamo le settings locali dell'utente (es. notifiche on/off sono per device)
-    // Se volessimo syncare "dayBefore", potremmo farlo qui.
+    // 4. Merge Cats (Remote wins properties, but preserve local changes if no conflict)
+    if (remote.cats) {
+        if (!merged.cats) merged.cats = { ...local.cats }; // Init if missing
+
+        ['minou', 'matisse'].forEach(catKey => {
+            const localCat = merged.cats[catKey];
+            const remoteCat = remote.cats[catKey];
+
+            if (remoteCat) {
+                // Semplice merge object: remote sovrascrive properties in conflitto
+                // Ideale: timestamp modifica profilo
+                Object.assign(localCat, remoteCat);
+            }
+        });
+    }
+
+    // 5. Merge Health Events (Union by ID)
+    if (remote.healthEvents && Array.isArray(remote.healthEvents)) {
+        if (!merged.healthEvents) merged.healthEvents = [];
+        const localEvMap = new Map(merged.healthEvents.map(e => [e.id, e]));
+
+        remote.healthEvents.forEach(evt => {
+            if (!localEvMap.has(evt.id)) {
+                // Aggiungi evento mancante
+                merged.healthEvents.push(evt);
+            } else {
+                // Evento esistente: remote wins per aggiornamenti
+                Object.assign(localEvMap.get(evt.id), evt);
+            }
+        });
+
+        // Ordina per data evento decrescente
+        merged.healthEvents.sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
+
+    // 6. Merge Settings (Remote wins for shared config)
     if (remote.settings) {
         // Sync dayBefore ma non notifiche (che richiedono permessi locali)
         if (remote.settings.dayBefore !== undefined) {
@@ -185,9 +218,22 @@ async function syncFromGitHub() {
             console.log('Merging remote data...');
             appData = mergeData(appData, content);
 
+            // Aggiorna app data
+            // Nota: mergeData ha già fatto il grosso, ma qui ci assicuriamo che struttura sia completa
+            // In realtà con appData = mergeData(...) fatto sopra, questo blocco if/if serviva solo nella versione vecchia.
+            // Ora appData è già l'oggetto mergiato completo.
+            // Possiamo rimuovere i vecchi if singoli se ci fidiamo del mergeData, 
+            // ma per sicurezza lasciamo sync.js pulito:
+            // appData = mergeData(appData, content); <--- questo è già fatto sopra nel codice
+
+            // Verifichiamo solo integrità (opzionale)
+            if (!appData.cats) appData.cats = content.cats;
+            if (!appData.healthEvents) appData.healthEvents = content.healthEvents;
+
             saveLocalData();
             updateUI();
             updateFoodUI();
+            // TODO: updateHealthUI(); <-- Da implementare
 
             localStorage.setItem('lastSyncTime', new Date().toISOString());
             updateSyncUI();
