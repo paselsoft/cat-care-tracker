@@ -301,6 +301,8 @@ async function syncToGitHub() {
             toilets: appData.toilets,
             history: appData.history,
             food: appData.food,
+            cats: appData.cats,
+            healthEvents: appData.healthEvents,
             settings: appData.settings, // Includiamo settings nel backup
             lastUpdated: new Date().toISOString()
         };
