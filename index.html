@@ -551,15 +551,16 @@
         .nav-item {
             background: transparent;
             border: none;
-            padding: 6px 16px;
+            padding: 6px 2px;
+            /* Reduced side padding for iPhone */
             border-radius: 16px;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 4px;
-            /* Reduced gap */
+            gap: 2px;
+            /* Minimal gap */
             color: var(--text-secondary);
             /* Muted inactive */
             text-decoration: none;
@@ -567,8 +568,10 @@
             transition: all 0.2s ease;
             flex: 1;
             /* Distribute space evenly */
-            max-width: 80px;
-            /* Prevent too wide on desktop */
+            max-width: none;
+            /* Allow full width to fit text */
+            min-width: 0;
+            /* Allow shrinking */
         }
 
         .nav-item.active {
@@ -586,13 +589,18 @@
             /* Slightly larger */
             line-height: 1;
             transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 2px;
         }
 
         .nav-label {
-            font-size: 0.7rem;
-            /* Slightly larger */
+            font-size: 0.65rem;
+            /* Slightly smaller to fit */
             font-weight: 700;
             line-height: 1;
+            white-space: nowrap;
+            /* Prevent wrapping */
+            overflow: visible;
+            /* Let it show */
         }
 
         /* Spazio extra per iOS safe area */
@@ -1575,7 +1583,7 @@
     </div>
     <!-- Health Event Modal -->
     <div class="modal-overlay" id="healthEventModal">
-        <div class="modal">
+        <div class="modal" onclick="event.stopPropagation()">
             <div class="modal-icon text-center" style="text-align: center; font-size: 2.5rem; margin-bottom: 10px;">🏥
             </div>
             <h3 style="text-align: center; margin-bottom: 20px;">Nuovo Evento</h3>
@@ -1780,7 +1788,6 @@
             <div class="settings-card">
                 <h3>📱 App</h3>
                 <div class="setting-row">
-                    <span class="setting-label">Versione</span>
                     <span class="setting-value">2.2.1</span>
                 </div>
                 <div class="setting-row">
@@ -1818,7 +1825,7 @@
 
     <!-- Sync Config Modal -->
     <div class="modal-overlay" id="syncConfigModal">
-        <div class="modal">
+        <div class="modal" onclick="event.stopPropagation()">
             <div class="modal-icon">🔑</div>
             <h3>Configura GitHub</h3>
             <p>Inserisci il tuo Personal Access Token per sincronizzare i dati</p>
@@ -1837,7 +1844,7 @@
 
         <!-- Cat Profile Modal -->
         <div class="modal-overlay" id="catProfileModal">
-            <div class="modal">
+            <div class="modal" onclick="event.stopPropagation()">
                 <div class="modal-icon" id="catProfileIcon"
                     style="text-align: center; font-size: 3rem; margin-bottom: 10px;">🐱</div>
                 <h3 id="catProfileTitle" style="text-align: center; margin-bottom: 20px;">Profilo Gatto</h3>

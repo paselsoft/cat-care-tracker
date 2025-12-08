@@ -194,36 +194,45 @@ function selectEventCat(catId) {
 }
 
 function saveHealthEvent() {
-    if (!currentCatId) return;
+    try {
+        if (!currentCatId) {
+            alert('Errore: Nessun gatto selezionato');
+            return;
+        }
 
-    const type = document.getElementById('eventType').value;
-    const date = document.getElementById('eventDate').value;
-    const note = document.getElementById('eventNote').value;
-    const cost = parseFloat(document.getElementById('eventCost').value) || 0;
-    const nextDueDate = document.getElementById('eventNextDate').value;
+        const type = document.getElementById('eventType').value;
+        const date = document.getElementById('eventDate').value;
+        const note = document.getElementById('eventNote').value;
+        const costInput = document.getElementById('eventCost').value;
+        const cost = costInput ? parseFloat(costInput) : 0;
+        const nextDueDate = document.getElementById('eventNextDate').value;
 
-    if (!date) {
-        alert('Inserisci almeno la data');
-        return;
+        if (!date) {
+            alert('Inserisci almeno la data');
+            return;
+        }
+
+        const newEvent = {
+            id: Date.now(),
+            catId: currentCatId,
+            type: type,
+            date: date,
+            note: note,
+            cost: cost > 0 ? (Math.round(cost * 100) / 100) : null, // Ensure 2 decimal precision
+            nextDueDate: nextDueDate || null
+        };
+
+        if (!appData.healthEvents) {
+            appData.healthEvents = [];
+        }
+
+        appData.healthEvents.push(newEvent);
+
+        saveData(); // Save and sync
+        updateHealthUI();
+        closeModal('healthEventModal');
+    } catch (e) {
+        console.error('Errore durante il salvataggio:', e);
+        alert('Si è verificato un errore durante il salvataggio: ' + e.message);
     }
-
-    const newEvent = {
-        id: Date.now(),
-        catId: currentCatId,
-        type: type,
-        date: date,
-        note: note,
-        cost: cost > 0 ? cost : null,
-        nextDueDate: nextDueDate || null
-    };
-
-    if (!appData.healthEvents) {
-        appData.healthEvents = [];
-    }
-
-    appData.healthEvents.push(newEvent);
-
-    saveData(); // Save and sync
-    updateHealthUI();
-    closeModal('healthEventModal');
 }
