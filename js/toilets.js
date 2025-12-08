@@ -125,14 +125,14 @@ function updateHistory() {
         const toiletName = item.toilet === 'grande' ? 'Bagno Grande' : 'Bagno Piccolo';
         const date = new Date(item.date);
         return `
-            <div class="history-item" data-id="${item.id}" onclick="showEditModal(${item.id})">
+            <div class="history-item" data-id="${item.id}" onclick="showEditModal('${item.id}')">
                 <div class="history-icon ${item.toilet}">🪣</div>
                 <div class="history-details">
                     <div class="history-title">${toiletName}</div>
                     <div class="history-date">${formatDateFull(date)}</div>
                     <div class="history-edit-hint">Tocca per modificare</div>
                 </div>
-                <button class="history-delete" onclick="event.stopPropagation(); deleteHistoryItem(${item.id})">🗑️</button>
+                <button class="history-delete" onclick="event.stopPropagation(); deleteHistoryItem('${item.id}')">🗑️</button>
             </div>
         `;
     }).join('');
@@ -157,10 +157,13 @@ function closeModal() {
 }
 
 function showEditModal(id) {
-    const item = appData.history.find(h => h.id === id);
+    // Normalize ID to string for comparison, but keep original for saving if needed (though we use currentEditId)
+    // Actually, appData.history ids might be numbers. 
+    // Let's find using loose comparison or string conversion
+    const item = appData.history.find(h => String(h.id) === String(id));
     if (!item) return;
 
-    currentEditId = id;
+    currentEditId = item.id; // Store the actual ID (number or string)
     const toiletName = item.toilet === 'grande' ? 'Bagno Grande' : 'Bagno Piccolo';
     document.getElementById('editModalText').textContent = `Modifica la data di pulizia del ${toiletName}`;
     document.getElementById('editDate').value = item.date;
@@ -217,18 +220,21 @@ function confirmClean(toilet) {
 }
 
 function deleteHistoryItem(id) {
-    const item = appData.history.find(h => h.id === id);
+    const item = appData.history.find(h => String(h.id) === String(id));
     if (!item) return;
+
+    // Use the actual ID found
+    const targetId = item.id;
 
     // Check if this is the most recent clean for that toilet
     const toiletHistory = appData.history
         .filter(h => h.toilet === item.toilet)
         .sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    appData.history = appData.history.filter(h => h.id !== id);
+    appData.history = appData.history.filter(h => h.id !== targetId);
 
     // Update last clean date
-    if (toiletHistory.length > 0 && toiletHistory[0].id === id) {
+    if (toiletHistory.length > 0 && toiletHistory[0].id === targetId) {
         if (toiletHistory.length > 1) {
             appData.toilets[item.toilet].lastClean = toiletHistory[1].date;
         } else {

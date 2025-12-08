@@ -873,17 +873,23 @@
     border: 2px solid var(--border);
     border-radius: 12px;
     font-family: 'Nunito', sans-serif;
-    font-size: 1rem;
-    background: var(--bg-secondary);
-    color: var(--text-primary);
+    font-size: 1.1rem;
+    /* Larger font */
+    font-weight: 600;
+    background: var(--bg-primary);
+    /* Stand out from modal bg */
+    color: var(--primary);
+    /* Primary color text */
     transition: border-color 0.2s ease;
     -webkit-appearance: none;
     appearance: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .date-input:focus {
     outline: none;
     border-color: var(--primary);
+    background: var(--bg-card);
 }
 
 /* Sync styles */
