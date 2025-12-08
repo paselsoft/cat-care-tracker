@@ -6,6 +6,16 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.4.0] - 2025-12-08
+
+### Aggiunto
+- **Eventi Condivisi**: Nuova opzione "Entrambe" nel modale salute per registrare un evento (visita, vaccino, ecc.) simultaneamente per Minou e Matisse.
+
+### Corretto
+- **Selezione Gatti**: Risolto bug che impediva l'evidenziazione corretta del gatto selezionato (spazio extra nell'ID).
+- **Stabilità Console**: Rimossi errori "null reference" e "script not found" (pulizia codice morto).
+- **Errore CORS**: Risolto problema di blocco sincronizzazione su rete locale rimuovendo header `Cache-Control`.
+
 ## [2.3.0] - 2025-12-08
 
 ### Aggiunto
