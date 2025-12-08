@@ -6,6 +6,11 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.4.1] - 2025-12-08
+
+### Corretto
+- **Problema Sync Dati**: Risolto un bug critico che escludeva i dati di salute (`healthEvents` e `cats`) dal backup su GitHub. Ora il file `data.json` remoto si aggiornerà correttamente con tutte le informazioni.
+
 ## [2.4.0] - 2025-12-08
 
 ### Aggiunto
