@@ -77,15 +77,6 @@
       "nextDueDate": "2026-04-22"
     },
     {
-      "id": 1765213461372,
-      "catId": "minou",
-      "type": "note",
-      "date": "2025-12-04",
-      "note": "Mangia poco",
-      "cost": null,
-      "nextDueDate": null
-    },
-    {
       "id": 1765212658555,
       "catId": "minou",
       "type": "meds",
@@ -108,5 +99,5 @@
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-08T18:21:41.565Z"
+  "lastUpdated": "2025-12-08T18:21:51.849Z"
 }
