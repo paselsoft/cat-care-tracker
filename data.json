@@ -24,11 +24,6 @@
       "date": "2025-11-30"
     },
     {
-      "id": 1765221761247,
-      "toilet": "piccolo",
-      "date": "2025-11-30"
-    },
-    {
       "id": 1765221762862,
       "toilet": "piccolo",
       "date": "2025-11-30"
@@ -40,11 +35,6 @@
     },
     {
       "id": 1765221746018,
-      "toilet": "piccolo",
-      "date": "2025-11-30"
-    },
-    {
-      "id": 1765221761247,
       "toilet": "piccolo",
       "date": "2025-11-30"
     },
@@ -131,5 +121,5 @@
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-08T19:32:40.612Z"
+  "lastUpdated": "2025-12-08T19:32:42.422Z"
 }
