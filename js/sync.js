@@ -50,7 +50,7 @@ function updateSyncUI() {
         statusDot.className = 'sync-dot offline';
         statusText.textContent = 'Non configurato';
         configBtn.textContent = '⚙️ Configura';
-        syncNowBtn.disabled = true;
+        syncNowBtn.style.display = 'none';
         lastSyncEl.textContent = 'Mai';
         return;
     }
@@ -58,6 +58,7 @@ function updateSyncUI() {
     statusDot.className = 'sync-dot online';
     statusText.textContent = 'Connesso';
     configBtn.textContent = '⚙️ Modifica';
+    syncNowBtn.style.display = 'inline-block';
     syncNowBtn.disabled = false;
 
     const lastSync = localStorage.getItem('lastSyncTime');
