@@ -77,15 +77,6 @@
       "nextDueDate": "2026-04-22"
     },
     {
-      "id": 1765212658555,
-      "catId": "minou",
-      "type": "meds",
-      "date": "2025-12-03",
-      "note": "Vermifugo",
-      "cost": null,
-      "nextDueDate": "2026-12-03"
-    },
-    {
       "id": 1765212618914,
       "catId": "matisse",
       "type": "vet",
@@ -99,5 +90,5 @@
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-08T18:21:51.849Z"
+  "lastUpdated": "2025-12-08T18:22:02.170Z"
 }
