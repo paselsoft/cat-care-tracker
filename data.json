@@ -59,6 +59,87 @@
       "nextDueDate": "2026-12-10"
     },
     {
+      "id": 1765205720760,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-12-08",
+      "note": "3,580",
+      "cost": null,
+      "nextDueDate": "2026-01-10"
+    },
+    {
+      "id": 1765205720942,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-12-08",
+      "note": "3,580",
+      "cost": null,
+      "nextDueDate": "2026-01-10"
+    },
+    {
+      "id": 1765205721309,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-12-08",
+      "note": "3,580",
+      "cost": null,
+      "nextDueDate": "2026-01-10"
+    },
+    {
+      "id": 1765205721496,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-12-08",
+      "note": "3,580",
+      "cost": null,
+      "nextDueDate": "2026-01-10"
+    },
+    {
+      "id": 1765205721643,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-12-08",
+      "note": "3,580",
+      "cost": null,
+      "nextDueDate": "2026-01-10"
+    },
+    {
+      "id": 1765205721831,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-12-08",
+      "note": "3,580",
+      "cost": null,
+      "nextDueDate": "2026-01-10"
+    },
+    {
+      "id": 1765205722776,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-12-08",
+      "note": "3,580",
+      "cost": null,
+      "nextDueDate": "2026-01-10"
+    },
+    {
+      "id": 1765205772261,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-12-08",
+      "note": "3,5",
+      "cost": null,
+      "nextDueDate": "2026-01-10"
+    },
+    {
+      "id": 1765209060475,
+      "catId": "minou",
+      "type": "vaccine",
+      "date": "2025-12-08",
+      "note": "Ghggg",
+      "cost": null,
+      "nextDueDate": null
+    },
+    {
       "id": 1765211891952,
       "catId": "minou",
       "type": "weight",
@@ -117,5 +198,5 @@
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-08T18:17:49.989Z"
+  "lastUpdated": "2025-12-08T18:19:59.351Z"
 }
