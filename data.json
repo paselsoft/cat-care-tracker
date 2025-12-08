@@ -7,28 +7,7 @@
       "lastClean": "2025-12-08"
     }
   },
-  "history": [
-    {
-      "id": 1765221746018,
-      "toilet": "piccolo",
-      "date": "2025-11-30"
-    },
-    {
-      "id": 1765221746018,
-      "toilet": "piccolo",
-      "date": "2025-11-30"
-    },
-    {
-      "id": 1765221820136,
-      "toilet": "piccolo",
-      "date": "2025-11-29"
-    },
-    {
-      "id": 1765221820136,
-      "toilet": "piccolo",
-      "date": "2025-11-29"
-    }
-  ],
+  "history": [],
   "food": {
     "products": [],
     "lastUpdated": null
@@ -91,5 +70,5 @@
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-08T19:32:46.776Z"
+  "lastUpdated": "2025-12-08T19:32:48.093Z"
 }
