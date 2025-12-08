@@ -18,11 +18,25 @@ Creata per **Minou** e **Matisse** 🐱🐱
 - Possibilità di modificare la data delle pulizie registrate
 - Eliminazione voci dallo storico
 
+### Gestione Cibo 🍽️
+- Inventario completo prodotti (scatolette e crocchette)
+- Database precaricato (Natural Code, Schesir, Oasy, Life Cat, Farmina)
+- Gestione quantità con aggiornamento rapido (+/-)
+- Avviso automatico scorte basse (< 15 unità)
+- Tracciamento preferenze (Gusti: ❤️ Adorano, 👍 Piace, 😐 Ok, 👎 No)
+- Gestione formati (50g, 70g, 85g, 400g)
+
+### Sincronizzazione ☁️
+- Backup automatico dei dati su GitHub
+- Sincronizzazione tra più dispositivi
+- Funzionamento offline con sync alla riconnessione
+
 ### PWA Features
 - Installabile su smartphone (Android e iOS)
 - Funziona offline
 - Tema automatico (chiaro/scuro) basato sulle impostazioni del dispositivo
 - Notifiche promemoria (giorno prima e giorno stesso)
+- Pull-to-refresh per aggiornamenti app
 
 ## 🚀 Installazione
 
@@ -30,6 +44,11 @@ Creata per **Minou** e **Matisse** 🐱🐱
 1. Apri https://paselsoft.github.io/cat-care-tracker/
 2. **Android**: tocca "Aggiungi a schermata Home" o menu → "Installa app"
 3. **iOS**: tocca icona condivisione → "Aggiungi alla schermata Home"
+
+### Configurazione Sincronizzazione
+1. Genera un Personal Access Token su GitHub (scope: `repo` o public_repo`)
+2. Inseriscilo nelle Impostazioni dell'app
+3. I tuoi dati verranno salvati in un file `data.json` nel tuo repository
 
 ### Self-hosting
 1. Clona il repository
@@ -43,6 +62,9 @@ cat-care-tracker/
 ├── index.html      # App principale
 ├── manifest.json   # Configurazione PWA
 ├── sw.js          # Service Worker per offline
+├── data.json      # Archivio dati sincronizzati
+├── css/           # Fogli di stile
+├── js/            # Logica applicativa
 ├── icons/         # Icone app
 │   ├── icon-72.png
 │   ├── icon-96.png
@@ -60,7 +82,8 @@ cat-care-tracker/
 
 - HTML5, CSS3, JavaScript (vanilla)
 - PWA (Progressive Web App)
-- LocalStorage per persistenza dati
+- LocalStorage per persistenza locale
+- GitHub API per sincronizzazione cloud
 - Service Worker per funzionalità offline
 - Google Fonts (Quicksand, Nunito)
 
@@ -68,9 +91,10 @@ cat-care-tracker/
 
 - [x] Gestione pulizia toilette
 - [x] Storico pulizie con modifica data
-- [ ] Gestione cibo (scatolette e crocchette)
-- [ ] Inventario scorte
-- [ ] Avvisi scorte basse
+- [x] Gestione cibo (scatolette e crocchette)
+- [x] Inventario scorte
+- [x] Avvisi scorte basse
+- [ ] Statistiche consumi
 
 ## 📄 Licenza
 
