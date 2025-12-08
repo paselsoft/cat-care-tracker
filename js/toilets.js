@@ -84,7 +84,7 @@ function updateNextAlert() {
 
     const toiletName = nextToilet === 'grande' ? 'Bagno Grande' : 'Bagno Piccolo';
     document.getElementById('nextToilet').textContent = toiletName;
-    document.getElementById('nextDate').textContent = formatDateShort(nextCleanDate);
+    document.getElementById('nextDate').textContent = formatDate(nextCleanDate);
 
     const daysUntil = getDaysUntil(nextCleanDate);
     let daysText;
