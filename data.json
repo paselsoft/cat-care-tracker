@@ -7,7 +7,13 @@
       "lastClean": "2025-12-08"
     }
   },
-  "history": [],
+  "history": [
+    {
+      "id": 1765222393833,
+      "toilet": "piccolo",
+      "date": "2025-11-30"
+    }
+  ],
   "food": {
     "products": [],
     "lastUpdated": null
@@ -70,5 +76,5 @@
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-08T19:32:48.093Z"
+  "lastUpdated": "2025-12-08T19:33:14.210Z"
 }
