@@ -79,7 +79,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 function loadLocalData() {
     const saved = localStorage.getItem('catCareData');
     if (saved) {
-        appData = JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        // Merge saved data with default structure to ensure new fields (cats, healthEvents) exist
+        appData = {
+            ...appData,
+            ...parsed,
+            // Ensure deeply nested or new critical objects exist if missing in parsed
+            cats: parsed.cats || appData.cats,
+            healthEvents: parsed.healthEvents || appData.healthEvents,
+            settings: { ...appData.settings, ...parsed.settings },
+            toilets: { ...appData.toilets, ...parsed.toilets },
+            food: { ...appData.food, ...parsed.food }
+        };
     } else {
         // Initial data: Bagno Grande cleaned on 29/11/2025
         appData.toilets.grande.lastClean = '2025-11-29';
@@ -92,8 +103,12 @@ function loadLocalData() {
     }
 
     // Load settings
-    document.getElementById('dayBeforeToggle').checked = appData.settings.dayBefore;
-    document.getElementById('notificationsToggle').checked = appData.settings.notifications;
+    if (document.getElementById('dayBeforeToggle')) {
+        document.getElementById('dayBeforeToggle').checked = appData.settings.dayBefore;
+    }
+    if (document.getElementById('notificationsToggle')) {
+        document.getElementById('notificationsToggle').checked = appData.settings.notifications;
+    }
 }
 
 function saveLocalData() {
