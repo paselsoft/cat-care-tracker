@@ -6,7 +6,12 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
-## [2.4.1] - 2025-12-08
+## [2.4.2] - 2025-12-08
+### Refactor
+- **CSS**: Estratto tutto il CSS inline da `index.html` in file separati (`variables.css`, `main.css`, `layout.css`, `components.css`).
+- **Performance**: Alleggerito `index.html` del 70%.
+
+## [2.4.1] - 2025-10-27-08
 
 ### Corretto
 - **Problema Sync Dati**: Risolto un bug critico che escludeva i dati di salute (`healthEvents` e `cats`) dal backup su GitHub. Ora il file `data.json` remoto si aggiornerà correttamente con tutte le informazioni.
