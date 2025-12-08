@@ -100,13 +100,21 @@ function mergeData(local, remote) {
 
     // 2. Merge History (Union by ID)
     if (remote.history && Array.isArray(remote.history)) {
-        const localMap = new Map(local.history.map(item => [item.id, item]));
+        const localMap = new Map(local.history.map(item => [String(item.id), item]));
+        const lastSync = localStorage.getItem('lastSyncTime');
+        const lastSyncTime = lastSync ? new Date(lastSync).getTime() : 0;
+
         remote.history.forEach(item => {
-            // Se l'item remoto non esiste o è diverso (opzionale: logica conflitto), lo aggiungiamo/sovrascriviamo
-            // Qui assumiamo che l'ID sia univoco (timestamp). 
-            // Se esiste già, usiamo quello con la data 'lastUpdated' più recente se esistesse, 
-            // ma per semplicità facciamo "union": se manca aggiungi.
-            if (!localMap.has(item.id)) {
+            const itemIdStr = String(item.id);
+            const itemTime = parseInt(item.id); // ID is timestamp
+
+            if (!localMap.has(itemIdStr)) {
+                // HEURISTIC: check creation time vs last sync
+                if (itemTime > lastSyncTime || lastSyncTime === 0) {
+                    localMap.set(item.id, item);
+                }
+            } else {
+                // Overwrite with remote (optional, assumes remote is newer/better)
                 localMap.set(item.id, item);
             }
         });
@@ -117,30 +125,31 @@ function mergeData(local, remote) {
     // 3. Merge Food (Union by Product ID/Name)
     if (remote.food && remote.food.products) {
         const mergedProducts = [...local.food.products];
-        // Crea una mappa dei prodotti locali per ricerca veloce
-        const localProdMap = new Map(mergedProducts.map(p => [p.id, p]));
+        const localProdMap = new Map(mergedProducts.map(p => [String(p.id), p]));
+        const lastSync = localStorage.getItem('lastSyncTime');
+        const lastSyncTime = lastSync ? new Date(lastSync).getTime() : 0;
 
         remote.food.products.forEach(remoteProd => {
-            if (localProdMap.has(remoteProd.id)) {
-                // Il prodotto esiste in entrambi. 
-                // Strategia semplice: se il remoto è più recente (basato su un ipotetico timestamp) o diverso, bisognerebbe scegliere.
-                // Per ora: Remote Wins sulla quantità per evitare che modifiche vecchie locali sovrascrivano i dati nuovi
-                // MA preserviamo modifiche locali se non c'è conflitto palese. 
-                // Soluzione pratica: sovrascrivi con remoto per mantenere consistenza, 
-                // l'utente locale dovrà ri-aggiornare se aveva cambiato proprio quello.
+            const prodIdStr = String(remoteProd.id);
+            const prodTime = parseInt(remoteProd.id);
 
-                // Miglioramento: Sommare le differenze sarebbe ideale ma rischioso senza un log delle transazioni.
-                // "Remote Wins" sulle proprietà è più sicuro per coerenza globale.
-                const localProd = localProdMap.get(remoteProd.id);
+            if (localProdMap.has(prodIdStr)) {
+                // Il prodotto esiste in entrambi. 
+                // Strategia semplice: sovrascrivi con remoto per mantenere consistenza, 
+                const localProd = localProdMap.get(prodIdStr);
                 Object.assign(localProd, remoteProd);
             } else {
                 // Nuovo prodotto dal remoto
-                mergedProducts.push(remoteProd);
+                // HEURISTIC: Aggiungi solo se è più recente dell'ultimo sync (quindi creato altrove dopo il nostro sync)
+                // oppure se non abbiamo mai sincronizzato (lastSyncTime == 0)
+                if (prodTime > lastSyncTime || lastSyncTime === 0) {
+                    mergedProducts.push(remoteProd);
+                }
+                // Se è vecchio e non lo abbiamo, significa che lo abbiamo cancellato noi. Ignora.
             }
         });
 
         merged.food = { ...local.food, products: mergedProducts };
-        // Aggiorna anche lastUpdated prendendo il più recente
         const localTime = local.food.lastUpdated ? new Date(local.food.lastUpdated).getTime() : 0;
         const remoteTime = remote.food.lastUpdated ? new Date(remote.food.lastUpdated).getTime() : 0;
         merged.food.lastUpdated = (remoteTime > localTime) ? remote.food.lastUpdated : local.food.lastUpdated;
@@ -167,12 +176,19 @@ function mergeData(local, remote) {
         if (!merged.healthEvents) merged.healthEvents = [];
         // Use String IDs for map to handle potential type mismatches (number vs string)
         const localEvMap = new Map(merged.healthEvents.map(e => [String(e.id), e]));
+        const lastSync = localStorage.getItem('lastSyncTime');
+        const lastSyncTime = lastSync ? new Date(lastSync).getTime() : 0;
 
         remote.healthEvents.forEach(evt => {
             const evtIdStr = String(evt.id);
+            const evtTime = parseInt(evt.id); // ID is timestamp
+
             if (!localEvMap.has(evtIdStr)) {
-                // Aggiungi evento mancante
-                merged.healthEvents.push(evt);
+                // Aggiungi evento mancante SOLO se è nuovo (creato altrove) o siamo in "init" (lastSyncTime == 0)
+                if (evtTime > lastSyncTime || lastSyncTime === 0) {
+                    merged.healthEvents.push(evt);
+                }
+                // Altrimenti: era un evento vecchio che non abbiamo più -> CANCELLATO localmente. Non ripristinare.
             } else {
                 // Evento esistente: remote wins per aggiornamenti
                 Object.assign(localEvMap.get(evtIdStr), evt);
