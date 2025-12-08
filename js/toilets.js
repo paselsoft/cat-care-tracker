@@ -263,13 +263,17 @@ function deleteHistoryItem(id) {
 
     appData.history = appData.history.filter(h => h.id !== targetId);
 
-    // Update last clean date
-    if (toiletHistory.length > 0 && toiletHistory[0].id === targetId) {
-        if (toiletHistory.length > 1) {
-            appData.toilets[item.toilet].lastClean = toiletHistory[1].date;
-        } else {
-            appData.toilets[item.toilet].lastClean = null;
-        }
+    // UNCONDITIONALLY Recalculate Last Clean (Max Date)
+    // ensuring true consistency even if data was previously desynced
+    const remainingHistory = appData.history.filter(h => h.toilet === item.toilet);
+
+    if (remainingHistory.length > 0) {
+        const latestInfo = remainingHistory.reduce((latest, current) => {
+            return new Date(current.date) > new Date(latest.date) ? current : latest;
+        });
+        appData.toilets[item.toilet].lastClean = latestInfo.date;
+    } else {
+        appData.toilets[item.toilet].lastClean = null;
     }
 
     saveData();

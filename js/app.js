@@ -58,6 +58,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadLocalData();
     loadGitHubToken();
     updateSyncUI();
+    // Self-Healing: Ensure lastClean matches actual history max date
+    // (Fixes "Zombie Dates" if local storage got desynced)
+    ['grande', 'piccolo'].forEach(toilet => {
+        const events = appData.history.filter(h => h.toilet === toilet);
+        if (events.length > 0) {
+            const maxDate = events.reduce((latest, current) => {
+                return new Date(current.date) > new Date(latest.date) ? current : latest;
+            }).date;
+            // Force update if different
+            if (appData.toilets[toilet].lastClean !== maxDate) {
+                console.log(`Fixing corrupted date for ${toilet}: ${appData.toilets[toilet].lastClean} -> ${maxDate}`);
+                appData.toilets[toilet].lastClean = maxDate;
+            }
+        } else {
+            // If no history, lastClean MUST be null
+            if (appData.toilets[toilet].lastClean) {
+                appData.toilets[toilet].lastClean = null;
+            }
+        }
+    });
+
     updateUI();
     updateFoodUI();
     checkInstallPrompt();
