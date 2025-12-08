@@ -206,15 +206,47 @@ function confirmClean(toilet) {
     const selectedDate = document.getElementById('cleaningDate').value;
     const cleanDate = selectedDate || new Date().toISOString().split('T')[0];
 
-    appData.toilets[toilet].lastClean = cleanDate;
+    // 1. Prevent Duplicates
+    const alreadyExists = appData.history.some(h =>
+        h.toilet === toilet && h.date === cleanDate
+    );
+
+    if (alreadyExists) {
+        showToast('Pulizia già registrata per questa data! ⚠️');
+        closeModal();
+        return;
+    }
+
+    // 2. Add to History
     appData.history.push({
         id: Date.now(),
         toilet: toilet,
         date: cleanDate
     });
 
-    saveData();
-    updateUI();
+    // 3. Recalculate Last Clean (Max Date)
+    // Don't just set it to cleanDate, because we might be adding an old date
+    const toiletHistory = appData.history
+        .filter(h => h.toilet === toilet);
+
+    if (toiletHistory.length > 0) {
+        // Find max date
+        const latestInfo = toiletHistory.reduce((latest, current) => {
+            return new Date(current.date) > new Date(latest.date) ? current : latest;
+        });
+        appData.toilets[toilet].lastClean = latestInfo.date;
+    } else {
+        appData.toilets[toilet].lastClean = cleanDate;
+    }
+
+    try {
+        saveData(); // Sync might be async, but we don't await result for UI close
+        updateUI();
+    } catch (e) {
+        console.error('Save/Update Error:', e);
+    }
+
+    // Always close modal
     closeModal();
     showToast('Pulizia registrata! 🎉');
 }
