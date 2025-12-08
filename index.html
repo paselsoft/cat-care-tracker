@@ -1854,34 +1854,47 @@
                 </div>
                 <div class="modal-buttons">
                     <button class="modal-btn secondary" onclick="closeModal('syncConfigModal')">Annulla</button>
-                    <button class="modal-btn primary" onclick="saveGitHubConfig()">Salva</button>
-                    <label>Peso (kg)</label>
-                    <div style="display: flex; align-items: center; gap: 10px; justify-content: center;">
-                        <button class="qty-btn minus" onclick="adjustWeight(-0.1)">-</button>
-                        <input type="number" id="catWeight" step="0.1"
-                            style="font-size: 1.5rem; width: 80px; text-align: center; border: none; font-weight: bold; font-family: 'Quicksand', sans-serif;"
-                            readonly>
-                        <button class="qty-btn plus" onclick="adjustWeight(0.1)">+</button>
-                    </div>
+                    <button class="modal-btn primary" onclick="saveSyncConfig()">Salva</button>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="form-group">
-                    <label>Data di Nascita</label>
-                    <input type="date" id="catBirthDate" class="form-input"
-                        style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--border);">
-                </div>
+    <!-- Cat Profile Modal -->
+    <div class="modal-overlay" id="catProfileModal">
+        <div class="modal">
+            <div class="modal-icon">🐱</div>
+            <h3 id="catProfileTitle">Profilo Gatto</h3>
 
-                <div class="form-group">
-                    <label>Microchip</label>
-                    <input type="text" id="catChip" class="form-input"
-                        style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--border);"
-                        placeholder="Numero Microchip">
-                </div>
+            <input type="hidden" id="currentCatId">
 
-                <div class="modal-buttons">
-                    <button class="modal-btn secondary" onclick="closeModal('catProfileModal')">Annulla</button>
-                    <button class="modal-btn primary" onclick="saveCatProfile()">Salva</button>
+            <div class="form-group" style="text-align: center; margin-bottom: 20px;">
+                <label>Peso (kg)</label>
+                <div style="display: flex; align-items: center; gap: 10px; justify-content: center;">
+                    <button class="qty-btn minus" onclick="adjustWeight(-0.1)">-</button>
+                    <input type="number" id="catWeight" step="0.1"
+                        style="font-size: 1.5rem; width: 80px; text-align: center; border: none; font-weight: bold; font-family: 'Quicksand', sans-serif;"
+                        readonly>
+                    <button class="qty-btn plus" onclick="adjustWeight(0.1)">+</button>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label>Data di Nascita</label>
+                <input type="date" id="catBirthDate" class="form-input"
+                    style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--border);">
+            </div>
+
+            <div class="form-group">
+                <label>Microchip</label>
+                <input type="text" id="catChip" class="form-input"
+                    style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--border);"
+                    placeholder="Numero Microchip">
+            </div>
+
+            <div class="modal-buttons">
+                <button class="modal-btn secondary" onclick="closeModal('catProfileModal')">Annulla</button>
+                <button class="modal-btn primary" onclick="saveCatProfile()">Salva</button>
             </div>
         </div>
 
