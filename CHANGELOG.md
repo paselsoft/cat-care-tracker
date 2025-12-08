@@ -14,6 +14,8 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 - **Bug Fix**: Risolto problema "Zombie" 🧟‍♂️ sugli eventi eliminati che riapparivano dopo la sincronizzazione.
 - **UI**: Migliorato stile e visibilità del selettore data nelle modali (Pulizia e Modifica).
 - **Critical Fix**: Risolto bug che nascondeva le finestre di conferma e modifica (errore di chiusura HTML).
+- **Bug Fix**: La home ora mostra sempre la *reale* ultima data di pulizia (anche se ne inserisci una passata manuale).
+- **Feature**: Aggiunto controllo anti-duplicati (impedisce di inserire due pulizie identiche lo stesso giorno).
 
 ## [2.4.1] - 2025-10-27-08
 
