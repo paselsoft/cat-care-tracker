@@ -689,6 +689,27 @@
     background: var(--primary-dark);
 }
 
+/* Utilities (v2.6.3) */
+.mt-sm {
+    margin-top: 10px;
+}
+
+.mb-md {
+    margin-bottom: 20px;
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.w-full {
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
 .pref-header {
     display: flex;
     justify-content: space-between;
