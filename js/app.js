@@ -3,6 +3,7 @@
 // =========================
 
 // Constants
+const APP_VERSION = '2.4.3';
 const CLEANING_INTERVAL = 15; // days
 const LOW_STOCK_THRESHOLD = 15; // scatolette
 const GITHUB_REPO = 'paselsoft/cat-care-tracker';
@@ -86,6 +87,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     initNavigation();
     initProductModalListeners();
     initPullToRefresh();
+
+    // Aggiorna versione UI
+    const versionEl = document.getElementById('appVersion');
+    if (versionEl) versionEl.textContent = APP_VERSION;
 
     // Se abbiamo il token, sincronizza all'avvio
     if (githubToken) {
