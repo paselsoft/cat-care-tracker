@@ -49,6 +49,41 @@ function populateFoodSelects() {
 }
 
 let currentListType = null; // 'brands' or 'flavors'
+let currentBrandFilter = null; // Global filter state
+
+function renderBrandFilters() {
+    const filterContainer = document.getElementById('brandFilters');
+    if (!filterContainer) return;
+
+    const brands = appData.food.brands || [];
+
+    // Add "All" option
+    let html = `
+        <button class="brand-filter-btn ${currentBrandFilter === null ? 'active' : ''}" 
+                onclick="setBrandFilter(null)">
+            Tutte
+        </button>
+    `;
+
+    // Add brands
+    brands.sort().forEach(brand => {
+        html += `
+            <button class="brand-filter-btn ${currentBrandFilter === brand ? 'active' : ''}" 
+                    onclick="setBrandFilter('${brand.replace(/'/g, "\\'")}')">
+                ${brand}
+            </button>
+        `;
+    });
+
+    filterContainer.innerHTML = html;
+}
+
+function setBrandFilter(brand) {
+    currentBrandFilter = brand;
+    renderBrandFilters();
+    updateFoodLists();
+    triggerHaptic('light');
+}
 
 function openManageListModal(type) {
     currentListType = type;

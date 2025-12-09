@@ -61,21 +61,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadLocalData();
     loadGitHubToken();
     updateSyncUI();
-    // Self-Healing: Ensure lastClean matches actual history max date
-    // (Fixes "Zombie Dates" if local storage got desynced)
+
+    // Self-Healing
     ['grande', 'piccolo'].forEach(toilet => {
         const events = appData.history.filter(h => h.toilet === toilet);
         if (events.length > 0) {
             const maxDate = events.reduce((latest, current) => {
                 return new Date(current.date) > new Date(latest.date) ? current : latest;
             }).date;
-            // Force update if different
             if (appData.toilets[toilet].lastClean !== maxDate) {
-
                 appData.toilets[toilet].lastClean = maxDate;
             }
         } else {
-            // If no history, lastClean MUST be null
             if (appData.toilets[toilet].lastClean) {
                 appData.toilets[toilet].lastClean = null;
             }
@@ -90,11 +87,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     initProductModalListeners();
     initPullToRefresh();
 
-    // Aggiorna versione UI
     const versionEl = document.getElementById('appVersion');
     if (versionEl) versionEl.textContent = APP_VERSION;
 
-    // Header scroll effect
     const header = document.querySelector('.header');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 10) {
@@ -104,7 +99,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // Se abbiamo il token, sincronizza all'avvio
     if (githubToken) {
         await syncFromGitHub();
     }
