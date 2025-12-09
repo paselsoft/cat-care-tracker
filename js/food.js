@@ -330,7 +330,6 @@ function saveProduct() {
     }
 
     appData.food.lastUpdated = new Date().toISOString();
-    appData.food.lastUpdated = new Date().toISOString();
     saveData();
     updateFoodUI();
     closeProductModal();
