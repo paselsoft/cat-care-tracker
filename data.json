@@ -44,9 +44,21 @@
         "likesMatisse": true,
         "rating": "like",
         "createdAt": "2025-12-08T21:35:28.549Z"
+      },
+      {
+        "id": "1765314754405",
+        "type": "scatoletta",
+        "brand": "Almo Nature",
+        "flavor": "Tonno dell'Atlantico",
+        "quantity": 10,
+        "size": "70g",
+        "likesMinou": true,
+        "likesMatisse": true,
+        "rating": "like",
+        "createdAt": "2025-12-09T21:12:34.405Z"
       }
     ],
-    "lastUpdated": "2025-12-09T17:37:08.737Z",
+    "lastUpdated": "2025-12-09T21:12:34.405Z",
     "brands": [
       "Almo Nature",
       "Farmina",
@@ -209,5 +221,5 @@
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-09T21:12:08.090Z"
+  "lastUpdated": "2025-12-09T21:12:34.747Z"
 }
