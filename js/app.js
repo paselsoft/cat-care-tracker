@@ -92,6 +92,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     const versionEl = document.getElementById('appVersion');
     if (versionEl) versionEl.textContent = APP_VERSION;
 
+    // Header scroll effect
+    const header = document.querySelector('.header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 10) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
     // Se abbiamo il token, sincronizza all'avvio
     if (githubToken) {
         await syncFromGitHub();

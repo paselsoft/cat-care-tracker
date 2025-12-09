@@ -7,9 +7,22 @@
 
 /* Header */
 .header {
-    padding: 24px 0 16px;
+    padding: 16px 0 16px;
     text-align: center;
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid transparent;
+    /* Ready for scroll effect if needed */
+}
+
+/* Optional: add a slight shadow or border to separate when sticky.
+   For now, simple sticky as requested. */
+.header.scrolled {
+    border-bottom-color: var(--border);
+    box-shadow: 0 4px 6px -1px var(--shadow);
 }
 
 .header::before {
