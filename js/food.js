@@ -163,6 +163,7 @@ function updateFoodUI() {
     }
 
     updateFoodSummary();
+    renderBrandFilters(); // v2.7.0
     updateFoodLists();
     updatePreferences();
     checkLowStock();
@@ -192,6 +193,7 @@ function updateFoodLists() {
     const cansList = document.getElementById('cansList');
     const cans = products
         .filter(p => p.type === 'scatoletta')
+        .filter(p => !currentBrandFilter || p.brand === currentBrandFilter) // v2.7.0
         .sort((a, b) => a.brand.localeCompare(b.brand) || a.flavor.localeCompare(b.flavor));
 
     if (cans.length === 0) {
@@ -208,6 +210,7 @@ function updateFoodLists() {
     const kibbleList = document.getElementById('kibbleList');
     const kibble = products
         .filter(p => p.type === 'crocchette')
+        .filter(p => !currentBrandFilter || p.brand === currentBrandFilter) // v2.7.0
         .sort((a, b) => a.brand.localeCompare(b.brand) || a.flavor.localeCompare(b.flavor));
 
     if (kibble.length === 0) {
@@ -342,6 +345,7 @@ function showAddProductModal(type) {
     currentProductType = type;
     editingProductId = null;
     currentRating = 'like';
+    let currentBrandFilter = null; // v2.7.0
 
     document.getElementById('productModalTitle').textContent =
         type === 'scatoletta' ? 'Aggiungi Scatoletta' : 'Aggiungi Crocchette';

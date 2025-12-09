@@ -6,6 +6,10 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.7.0] - 2025-12-09
+### Added
+- **Filtro Marche**: Aggiunta una barra di navigazione nella sezione Cibo per filtrare i prodotti per marca. Basta cliccare sul nome della marca per vedere solo quei prodotti.
+
 ## [2.6.7] - 2025-12-09
 ### Fixed
 - **Pulizia Automatica**: All'avvio l'app rimuove automaticamente eventuali doppi ingressi in cronologia.
