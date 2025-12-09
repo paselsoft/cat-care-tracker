@@ -146,10 +146,16 @@ function updateHistory() {
 
     // Add Swipe Listeners
     document.querySelectorAll('.history-item').forEach(item => {
-        addSwipeAction(item, () => {
-            const id = item.getAttribute('data-id');
-            deleteHistoryItem(id);
-        });
+        addSwipeAction(item,
+            () => { // Left: Delete
+                const id = item.getAttribute('data-id');
+                deleteHistoryItem(id);
+            },
+            () => { // Right: Edit
+                const id = item.getAttribute('data-id');
+                showEditModal(id);
+            }
+        );
     });
 }
 

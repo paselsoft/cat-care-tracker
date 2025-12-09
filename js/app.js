@@ -3,7 +3,7 @@
 // =========================
 
 // Constants
-const APP_VERSION = '2.7.0';
+const APP_VERSION = '2.7.1';
 const CLEANING_INTERVAL = 15; // days
 const LOW_STOCK_THRESHOLD = 15; // scatolette
 const GITHUB_REPO = 'paselsoft/cat-care-tracker';
@@ -450,7 +450,7 @@ function getDaysUntil(date) {
     return Math.floor((then - now) / (1000 * 60 * 60 * 24));
 }
 
-function addSwipeAction(element, onSwipeLeft) {
+function addSwipeAction(element, onSwipeLeft, onSwipeRight) {
     let startX = 0;
     let currentX = 0;
     let isDragging = false;
@@ -460,7 +460,7 @@ function addSwipeAction(element, onSwipeLeft) {
         startX = e.touches[0].clientX;
         isDragging = true;
         element.style.transition = 'none';
-        currentX = startX; // Reset currentX
+        currentX = startX;
     }, { passive: true });
 
     element.addEventListener('touchmove', (e) => {
@@ -468,8 +468,8 @@ function addSwipeAction(element, onSwipeLeft) {
         currentX = e.touches[0].clientX;
         const diff = currentX - startX;
 
-        // Only allow swipe left
-        if (diff < 0) {
+        // Limit swipe range visually to avoid confusion
+        if (Math.abs(diff) < 200) {
             element.style.transform = `translateX(${diff}px)`;
         }
     }, { passive: true });
@@ -480,11 +480,22 @@ function addSwipeAction(element, onSwipeLeft) {
         element.style.transition = 'transform 0.3s ease';
 
         const diff = currentX - startX;
-        if (diff < -threshold) {
-            // Swipe completato
+
+        if (diff < -threshold && onSwipeLeft) {
+            // Swipe Left (Delete)
             element.style.transform = 'translateX(-100%)';
             setTimeout(() => {
-                if (onSwipeLeft) onSwipeLeft();
+                onSwipeLeft();
+                // Reset transform if not removed by callback
+                setTimeout(() => { element.style.transform = ''; }, 100);
+            }, 300);
+        } else if (diff > threshold && onSwipeRight) {
+            // Swipe Right (Edit)
+            element.style.transform = 'translateX(100%)'; // Or some other visual cue
+            setTimeout(() => {
+                onSwipeRight();
+                // Reset transform immediately as edit usually opens modal
+                element.style.transform = '';
             }, 300);
         } else {
             // Reset

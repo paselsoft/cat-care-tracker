@@ -222,6 +222,20 @@ function updateFoodLists() {
     } else {
         kibbleList.innerHTML = kibble.map(p => renderFoodItem(p)).join('');
     }
+
+    // Add Swipe Listeners to all food items
+    document.querySelectorAll('.food-item').forEach(item => {
+        addSwipeAction(item,
+            () => { // Left: Delete
+                const id = item.querySelector('.delete-btn, .food-action-btn:last-child').getAttribute('onclick').match(/'([^']+)'/)[1];
+                deleteProduct(id);
+            },
+            () => { // Right: Edit
+                const id = item.querySelector('.edit-btn, .food-action-btn:first-child').getAttribute('onclick').match(/'([^']+)'/)[1];
+                editProduct(id);
+            }
+        );
+    });
 }
 
 function renderFoodItem(product) {

@@ -6,6 +6,13 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.7.1] - 2025-12-09
+### UI/UX
+- **Swipe Actions**: Implementate azioni swipe per liste più fluide e veloci! 📱
+  - **Swipe Sinistra** (←): Elimina elemento (Cibo o Storico).
+  - **Swipe Destra** (→): Modifica elemento.
+- **Feedback Visivo**: Migliore gestione dello swipe con limiti visivi per evitare falsi positivi.
+
 ## [2.7.0] - 2025-12-09
 ### Added
 - **Filtro Marche**: Aggiunta una barra di navigazione nella sezione Cibo per filtrare i prodotti per marca. Basta cliccare sul nome della marca per vedere solo quei prodotti.
