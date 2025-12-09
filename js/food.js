@@ -4,15 +4,110 @@
 
 // Product Modal Listeners
 function initProductModalListeners() {
-    document.getElementById('productBrand').addEventListener('change', function () {
-        const customWrapper = document.getElementById('customBrandWrapper');
-        customWrapper.style.display = this.value === 'Altro' ? 'block' : 'none';
+    // No specific listeners needed for selects anymore as they are populated dynamically
+}
+
+function initFoodData() {
+    // Ensure brands and flavors exist in appData
+    if (!appData.food.brands) {
+        appData.food.brands = ['Natural Code', 'Schesir', 'Oasy', 'Life Cat', 'Farmina'];
+    }
+    if (!appData.food.flavors) {
+        appData.food.flavors = ['Tonno', 'Pollo', 'Tacchino', 'Tonno e Pollo', 'Tonno e Tacchino', 'Pollo e Tacchino', 'Manzo', 'Pesce', 'Misto'];
+    }
+}
+
+function populateFoodSelects() {
+    const brandSelect = document.getElementById('productBrand');
+    const flavorSelect = document.getElementById('productFlavor');
+
+    // Save current selection if any
+    const currentBrand = brandSelect.value;
+    const currentFlavor = flavorSelect.value;
+
+    // Clear and repopulate Brands
+    brandSelect.innerHTML = '<option value="">Seleziona marca...</option>';
+    appData.food.brands.sort().forEach(brand => {
+        const option = document.createElement('option');
+        option.value = brand;
+        option.textContent = brand;
+        brandSelect.appendChild(option);
     });
 
-    document.getElementById('productFlavor').addEventListener('change', function () {
-        const customWrapper = document.getElementById('customFlavorWrapper');
-        customWrapper.style.display = this.value === 'Altro' ? 'block' : 'none';
+    // Clear and repopulate Flavors
+    flavorSelect.innerHTML = '<option value="">Seleziona gusto...</option>';
+    appData.food.flavors.sort().forEach(flavor => {
+        const option = document.createElement('option');
+        option.value = flavor;
+        option.textContent = flavor;
+        flavorSelect.appendChild(option);
     });
+
+    // Restore selection if it still exists
+    if (appData.food.brands.includes(currentBrand)) brandSelect.value = currentBrand;
+    if (appData.food.flavors.includes(currentFlavor)) flavorSelect.value = currentFlavor;
+}
+
+let currentListType = null; // 'brands' or 'flavors'
+
+function openManageListModal(type) {
+    currentListType = type;
+    const title = type === 'brands' ? 'Gestisci Marche' : 'Gestisci Gusti';
+    document.getElementById('listManagerTitle').textContent = title;
+    document.getElementById('newItemInput').value = '';
+    renderListItems();
+    document.getElementById('listManagerModal').classList.add('active');
+}
+
+function closeListManagerModal() {
+    document.getElementById('listManagerModal').classList.remove('active');
+    currentListType = null;
+    populateFoodSelects(); // Refresh dropdowns in main modal
+}
+
+function renderListItems() {
+    const listContainer = document.getElementById('manageListItems');
+    const items = currentListType === 'brands' ? appData.food.brands : appData.food.flavors;
+
+    listContainer.innerHTML = items.sort().map(item => `
+        <div class="list-item-row">
+            <span>${item}</span>
+            <button class="action-btn delete-btn" onclick="deleteListItem('${item}')">🗑️</button>
+        </div>
+    `).join('');
+}
+
+function addListItem() {
+    const input = document.getElementById('newItemInput');
+    const value = input.value.trim();
+
+    if (!value) return;
+
+    const list = currentListType === 'brands' ? appData.food.brands : appData.food.flavors;
+
+    if (list.includes(value)) {
+        showToast('Elemento già esistente');
+        return;
+    }
+
+    list.push(value);
+    saveData(); // Persist changes
+    input.value = '';
+    renderListItems();
+    showToast('Aggiunto!');
+}
+
+function deleteListItem(item) {
+    if (!confirm(`Eliminare "${item}"?`)) return;
+
+    if (currentListType === 'brands') {
+        appData.food.brands = appData.food.brands.filter(i => i !== item);
+    } else {
+        appData.food.flavors = appData.food.flavors.filter(i => i !== item);
+    }
+
+    saveData();
+    renderListItems();
 }
 
 function updateFoodUI() {
@@ -200,13 +295,12 @@ function showAddProductModal(type) {
     document.getElementById('productModalTitle').textContent =
         type === 'scatoletta' ? 'Aggiungi Scatoletta' : 'Aggiungi Crocchette';
 
+    // Ensure selects are populated
+    populateFoodSelects();
+
     // Reset form
     document.getElementById('productBrand').value = '';
-    document.getElementById('customBrand').value = '';
-    document.getElementById('customBrandWrapper').style.display = 'none';
     document.getElementById('productFlavor').value = '';
-    document.getElementById('customFlavor').value = '';
-    document.getElementById('customFlavorWrapper').style.display = 'none';
     document.getElementById('productQuantity').value = type === 'scatoletta' ? '1' : '1';
     document.getElementById('likesMinou').checked = true;
     document.getElementById('likesMatisse').checked = true;
@@ -232,24 +326,11 @@ function editProduct(productId) {
 
     document.getElementById('productModalTitle').textContent = 'Modifica Prodotto';
 
-    // Popola form
-    if (['Natural Code', 'Schesir', 'Oasy', 'Life Cat', 'Farmina'].includes(product.brand)) {
-        document.getElementById('productBrand').value = product.brand;
-        document.getElementById('customBrandWrapper').style.display = 'none';
-    } else {
-        document.getElementById('productBrand').value = 'Altro';
-        document.getElementById('customBrand').value = product.brand;
-        document.getElementById('customBrandWrapper').style.display = 'block';
-    }
+    populateFoodSelects();
 
-    if (['Tonno', 'Pollo', 'Tacchino', 'Tonno e Pollo', 'Tonno e Tacchino', 'Pollo e Tacchino', 'Manzo', 'Pesce', 'Misto'].includes(product.flavor)) {
-        document.getElementById('productFlavor').value = product.flavor;
-        document.getElementById('customFlavorWrapper').style.display = 'none';
-    } else {
-        document.getElementById('productFlavor').value = 'Altro';
-        document.getElementById('customFlavor').value = product.flavor;
-        document.getElementById('customFlavorWrapper').style.display = 'block';
-    }
+    // Popola form
+    document.getElementById('productBrand').value = product.brand;
+    document.getElementById('productFlavor').value = product.flavor;
 
     document.getElementById('productQuantity').value = product.quantity;
     document.getElementById('likesMinou').checked = product.likesMinou;
@@ -277,15 +358,8 @@ function setRating(rating) {
 }
 
 function saveProduct() {
-    let brand = document.getElementById('productBrand').value;
-    if (brand === 'Altro') {
-        brand = document.getElementById('customBrand').value.trim();
-    }
-
-    let flavor = document.getElementById('productFlavor').value;
-    if (flavor === 'Altro') {
-        flavor = document.getElementById('customFlavor').value.trim();
-    }
+    const brand = document.getElementById('productBrand').value;
+    const flavor = document.getElementById('productFlavor').value;
 
     const quantity = parseInt(document.getElementById('productQuantity').value) || 0;
     const size = currentProductType === 'scatoletta' ? document.getElementById('productSize').value : null;

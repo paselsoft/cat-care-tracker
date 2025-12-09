@@ -6,6 +6,12 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.6.0] - 2025-12-09
+### Features
+- **Dynamic Food Management**: Manage Brands and Flavors directly from the Setup tab.
+- **Custom Lists**: Add or remove brands and flavors; they automatically appear in dropdowns.
+- **UI**: Added "Gestione Cibo" section in Setup.
+
 ## [2.5.4] - 2025-12-09
 ### Fixes
 - **Modal Overflow**: Added scrolling for modals on small screens (e.g. iPhone mini).

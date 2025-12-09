@@ -3,7 +3,7 @@
 // =========================
 
 // Constants
-const APP_VERSION = '2.5.4';
+const APP_VERSION = '2.6.0';
 const CLEANING_INTERVAL = 15; // days
 const LOW_STOCK_THRESHOLD = 15; // scatolette
 const GITHUB_REPO = 'paselsoft/cat-care-tracker';
@@ -22,7 +22,9 @@ let appData = {
     },
     food: {
         products: [],
-        lastUpdated: null
+        lastUpdated: null,
+        brands: ['Natural Code', 'Schesir', 'Oasy', 'Life Cat', 'Farmina'],
+        flavors: ['Tonno', 'Pollo', 'Tacchino', 'Tonno e Pollo', 'Tonno e Tacchino', 'Pollo e Tacchino', 'Manzo', 'Pesce', 'Misto']
     },
     // New Health Section (v3.0.0)
     cats: {
@@ -117,7 +119,10 @@ function loadLocalData() {
     if (saved) {
         const parsed = JSON.parse(saved);
         // Merge saved data with default structure to ensure new fields (cats, healthEvents) exist
-        appData = {
+        if (appData.food) {
+            initFoodData(); // Ensure defaults exist (v2.6.0)
+            updateFoodUI();
+        } appData = {
             ...appData,
             ...parsed,
             // Ensure deeply nested or new critical objects exist if missing in parsed

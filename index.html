@@ -378,6 +378,23 @@
             </div>
 
             <div class="settings-card">
+                <h3>🍽️ Gestione Cibo</h3>
+                <div class="settings-group">
+                    <button class="settings-btn" onclick="openManageListModal('brands')">
+                        <span class="btn-icon">🏷️</span>
+                        <span class="btn-text">Gestisci Marche</span>
+                        <span class="btn-arrow">❯</span>
+                    </button>
+                    <div class="divider"></div>
+                    <button class="settings-btn" onclick="openManageListModal('flavors')">
+                        <span class="btn-icon">🍽️</span>
+                        <span class="btn-text">Gestisci Gusti</span>
+                        <span class="btn-arrow">❯</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="settings-card">
                 <h3>☁️ Sincronizzazione</h3>
                 <div class="setting-row">
                     <span class="setting-label">Stato</span>
@@ -526,40 +543,14 @@
                     <label for="productBrand">Marca:</label>
                     <select id="productBrand" class="text-input">
                         <option value="">Seleziona marca...</option>
-                        <option value="Natural Code">Natural Code</option>
-                        <option value="Schesir">Schesir</option>
-                        <option value="Oasy">Oasy</option>
-                        <option value="Life Cat">Life Cat</option>
-                        <option value="Farmina">Farmina</option>
-                        <option value="Altro">Altro...</option>
                     </select>
-                </div>
-
-                <div class="input-wrapper" id="customBrandWrapper" style="display: none;">
-                    <label for="customBrand">Nome marca:</label>
-                    <input type="text" id="customBrand" class="text-input" placeholder="Inserisci marca">
                 </div>
 
                 <div class="input-wrapper">
                     <label for="productFlavor">Gusto:</label>
                     <select id="productFlavor" class="text-input">
                         <option value="">Seleziona gusto...</option>
-                        <option value="Tonno">Tonno</option>
-                        <option value="Pollo">Pollo</option>
-                        <option value="Tacchino">Tacchino</option>
-                        <option value="Tonno e Pollo">Tonno e Pollo</option>
-                        <option value="Tonno e Tacchino">Tonno e Tacchino</option>
-                        <option value="Pollo e Tacchino">Pollo e Tacchino</option>
-                        <option value="Manzo">Manzo</option>
-                        <option value="Pesce">Pesce</option>
-                        <option value="Misto">Misto</option>
-                        <option value="Altro">Altro...</option>
                     </select>
-                </div>
-
-                <div class="input-wrapper" id="customFlavorWrapper" style="display: none;">
-                    <label for="customFlavor">Nome gusto:</label>
-                    <input type="text" id="customFlavor" class="text-input" placeholder="Inserisci gusto">
                 </div>
 
                 <div class="input-wrapper" id="sizeWrapper">
@@ -657,6 +648,25 @@
 
     <script src="js/sync.js"></script>
     <script src="js/toilets.js"></script>
+    <!-- Generic List Management Modal -->
+    <div class="modal-overlay" id="listManagerModal">
+        <div class="modal">
+            <h3 id="listManagerTitle">Gestisci Lista</h3>
+            <div class="modal-body">
+                <div class="add-item-row">
+                    <input type="text" id="newItemInput" class="text-input" placeholder="Nuovo elemento...">
+                    <button class="action-btn add-btn" onclick="addListItem()">+</button>
+                </div>
+                <div id="manageListItems" class="manage-list">
+                    <!-- Items will be populated here -->
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn confirm" onclick="closeListManagerModal()">Chiudi</button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/app.js"></script>
     <script src="js/food.js"></script>
     <script src="js/health.js"></script>
