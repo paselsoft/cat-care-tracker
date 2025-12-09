@@ -256,6 +256,20 @@
     font-weight: 500;
 }
 
+/* Health Section Specific Styles */
+
+.chart-container {
+    background: var(--bg-card);
+    padding: 16px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px var(--shadow);
+    border: 1px solid var(--border);
+    height: 250px;
+    min-height: 200px;
+    position: relative;
+}
+
 /* Event Modal Styles */
 .cat-selector {
     display: flex;

@@ -175,7 +175,7 @@ function getEventTypeLabel(type) {
 
 // === Health Event Management ===
 
-// function showAddHealthEvent() { ... } // Duplicate removed, using the one at line 265
+
 
 
 function selectEventCat(catId) {
@@ -463,10 +463,14 @@ function renderWeightChart() {
         weightChartInstance.destroy();
     }
 
+    // Detect dark mode
+    const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)';
+    const textColor = isDark ? '#a0aec0' : '#4b5563';
+
     weightChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
-            // Labels will be auto-handled by x/y scatter or needs unified labels. 
             // Simplified approach: Unique sorted dates as labels.
             labels: [...new Set(weightEvents.map(e => new Date(e.date).toLocaleDateString('it-IT', { day: 'numeric', month: 'short' })))],
             datasets: datasets
@@ -481,13 +485,31 @@ function renderWeightChart() {
                     suggestedMax: 7,
                     title: {
                         display: true,
-                        text: 'Peso (kg)'
+                        text: 'Peso (kg)',
+                        color: textColor
+                    },
+                    grid: {
+                        color: gridColor
+                    },
+                    ticks: {
+                        color: textColor
+                    }
+                },
+                x: {
+                    grid: {
+                        color: gridColor
+                    },
+                    ticks: {
+                        color: textColor
                     }
                 }
             },
             plugins: {
                 legend: {
                     position: 'top',
+                    labels: {
+                        color: textColor
+                    }
                 }
             }
         }
