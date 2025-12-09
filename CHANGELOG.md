@@ -6,6 +6,12 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.4.4] - 2025-12-09
+### Fix e Pulizia
+- **Manifest**: Risolto problema di scope duplicato nel file `manifest.json`.
+- **Bug Fix**: Corretto confronto ID in `saveProduct()` per evitare errori nel salvataggio prodotti.
+- **Cleanup**: Rimossi file temporanei e di backup per mantenere il progetto pulito.
+
 ## [2.4.3] - 2025-12-09
 ### Refactor e Fix (Post-Report Opus 4.5)
 - **Code Quality**: Rimossa funzione duplicata `showAddHealthEvent` in `health.js` che creava confusione nel codice.

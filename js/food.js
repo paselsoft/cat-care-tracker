@@ -282,7 +282,7 @@ function saveProduct() {
 
     if (editingProductId) {
         // Modifica prodotto esistente
-        const product = appData.food.products.find(p => p.id === editingProductId);
+        const product = appData.food.products.find(p => String(p.id) === String(editingProductId));
         if (product) {
             product.brand = brand;
             product.flavor = flavor;
