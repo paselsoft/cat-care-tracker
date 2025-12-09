@@ -230,6 +230,7 @@ function initNavigation() {
         btn.addEventListener('touchend', function (e) {
             e.preventDefault();
             e.stopPropagation();
+            triggerHaptic('light');
             switchTab(tabName, this);
         }, { passive: false });
 
@@ -237,6 +238,9 @@ function initNavigation() {
             // Only handle click if not a touch device
             if (!('ontouchend' in window)) {
                 switchTab(tabName, this);
+            } else {
+                // Hybrid devices might fire both, ensure haptic if click is primary
+                // triggerHaptic('light'); // Optional, usually touch handles it
             }
         });
     });
@@ -455,6 +459,32 @@ function addSwipeAction(element, onSwipeLeft) {
     });
 }
 
+function triggerHaptic(type = 'medium') {
+    if (!navigator.vibrate) return;
+
+    // Solo se abilitato nelle impostazioni (opzionale, per ora sempre attivo se supportato)
+    // if (!appData.settings.haptic) return; 
+
+    switch (type) {
+        case 'light':
+            navigator.vibrate(10);
+            break;
+        case 'medium':
+            navigator.vibrate(20);
+            break;
+        case 'heavy':
+            navigator.vibrate(40);
+            break;
+        case 'success':
+            navigator.vibrate([20, 50, 20]);
+            break;
+        case 'error':
+            navigator.vibrate([50, 100, 50, 100, 50]);
+            break;
+        default:
+            navigator.vibrate(20);
+    }
+}
 
 function initPullToRefresh() {
     const pullIndicator = document.getElementById('pullToRefresh');

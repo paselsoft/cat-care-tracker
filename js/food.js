@@ -172,6 +172,7 @@ function updateQuantity(productId, delta) {
         product.quantity = Math.max(0, product.quantity + delta);
         saveData();
         updateFoodUI();
+        triggerHaptic('light');
     }
 }
 
@@ -313,9 +314,11 @@ function saveProduct() {
     }
 
     appData.food.lastUpdated = new Date().toISOString();
+    appData.food.lastUpdated = new Date().toISOString();
     saveData();
     updateFoodUI();
     closeProductModal();
+    triggerHaptic('success');
 }
 
 function deleteProduct(productId) {
@@ -323,6 +326,7 @@ function deleteProduct(productId) {
         appData.food.products = appData.food.products.filter(p => String(p.id) !== String(productId));
         saveData();
         updateFoodUI();
+        triggerHaptic('success');
         showToast('Prodotto eliminato');
     }
 }

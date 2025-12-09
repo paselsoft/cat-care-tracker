@@ -258,6 +258,7 @@ function confirmClean(toilet) {
 
     // Always close modal
     closeModal('confirmModal');
+    triggerHaptic('success');
     showToast('Pulizia registrata! 🎉');
 }
 
@@ -290,5 +291,6 @@ function deleteHistoryItem(id) {
 
     saveData();
     updateUI();
+    triggerHaptic('medium');
     showToast('Voce eliminata');
 }

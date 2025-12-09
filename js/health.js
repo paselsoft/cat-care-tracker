@@ -225,6 +225,7 @@ function deleteHealthEvent() {
         appData.healthEvents = appData.healthEvents.filter(e => e.id !== parseInt(id));
         saveData();
         updateHealthUI();
+        triggerHaptic('medium');
         closeModal('healthEventModal');
 
         // Reset button for next time
@@ -348,6 +349,8 @@ function saveHealthEvent() {
         saveData(); // Save and sync
         updateHealthUI();
         closeModal('healthEventModal');
+        triggerHaptic('success');
+        showToast('Evento salvato! 📝');
     } catch (e) {
         console.error('Errore durante il salvataggio:', e);
         alert('Si è verificato un errore durante il salvataggio: ' + e.message);
