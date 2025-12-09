@@ -68,15 +68,16 @@
       "Schesir"
     ],
     "flavors": [
-      "Tonno",
-      "Pollo",
-      "Tacchino",
-      "Tonno e Pollo",
-      "Tonno e Tacchino",
-      "Pollo e Tacchino",
       "Manzo",
+      "Misto",
       "Pesce",
-      "Misto"
+      "Petto di pollo",
+      "Pollo",
+      "Pollo e Tacchino",
+      "Tacchino",
+      "Tonno",
+      "Tonno e Pollo",
+      "Tonno e Tacchino"
     ]
   },
   "cats": {
@@ -111,5 +112,5 @@
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-09T17:36:25.679Z"
+  "lastUpdated": "2025-12-09T17:36:46.064Z"
 }
