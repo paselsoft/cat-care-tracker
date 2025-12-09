@@ -241,12 +241,6 @@ function updateUI() {
 // =========================
 
 function switchTab(tab, btn) {
-    // Prevent double-tap zoom on iOS
-    if (window.lastTap && (Date.now() - window.lastTap) < 300) {
-        return;
-    }
-    window.lastTap = Date.now();
-
     document.querySelectorAll('.tabs-content').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
 
@@ -261,22 +255,9 @@ function initNavigation() {
     navButtons.forEach(btn => {
         const tabName = btn.getAttribute('data-tab');
 
-        // Use touchend for iOS, click for desktop
-        btn.addEventListener('touchend', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
+        btn.addEventListener('click', function (e) {
             triggerHaptic('light');
             switchTab(tabName, this);
-        }, { passive: false });
-
-        btn.addEventListener('click', function (e) {
-            // Only handle click if not a touch device
-            if (!('ontouchend' in window)) {
-                switchTab(tabName, this);
-            } else {
-                // Hybrid devices might fire both, ensure haptic if click is primary
-                // triggerHaptic('light'); // Optional, usually touch handles it
-            }
         });
     });
 }
