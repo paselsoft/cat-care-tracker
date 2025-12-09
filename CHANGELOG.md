@@ -6,6 +6,12 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.5.3] - 2025-12-09
+### UI/UX Refinements
+- **Setup Tab**: Renamed "Impostazioni" to "Setup" for better fit.
+- **Swipe Logic**: Restricted pull-to-refresh to Home tab only.
+- **Modal**: Compacted Food Modal styles for smaller screens.
+
 ## [2.5.2] - 2025-12-09
 ### Polished
 - **Log Cleanup**: Removed debug console logs for production readiness.
