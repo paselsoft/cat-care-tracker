@@ -457,6 +457,51 @@
     cursor: pointer;
 }
 
+/* Brand Filters (Chips) */
+.brand-filters {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 4px 4px 16px 4px;
+    margin-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scroll on iOS */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.brand-filters::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+.brand-filter-btn {
+    flex: 0 0 auto;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.brand-filter-btn:active {
+    transform: scale(0.95);
+}
+
+.brand-filter-btn.active {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+}
+
 .food-list {
     display: flex;
     flex-direction: column;

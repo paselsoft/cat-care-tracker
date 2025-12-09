@@ -6,6 +6,11 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.7.3] - 2025-12-09
+### UX Improvements
+- **Filtro Marche**: Nuova interfaccia a "Chips" orizzontali nella sezione Cibo per filtrare i prodotti per marca (stile Almo Nature).
+- **Stabilità**: Risolto crash critico all'avvio causato da funzione mancante (v2.7.2).
+
 ## [2.7.1] - 2025-12-09
 ### UI/UX
 - **Swipe Actions**: Implementate azioni swipe per liste più fluide e veloci! 📱
