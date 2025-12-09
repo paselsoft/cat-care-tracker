@@ -190,7 +190,9 @@ function updateFoodLists() {
 
     // Lista scatolette
     const cansList = document.getElementById('cansList');
-    const cans = products.filter(p => p.type === 'scatoletta');
+    const cans = products
+        .filter(p => p.type === 'scatoletta')
+        .sort((a, b) => a.brand.localeCompare(b.brand) || a.flavor.localeCompare(b.flavor));
 
     if (cans.length === 0) {
         cansList.innerHTML = `
@@ -204,7 +206,9 @@ function updateFoodLists() {
 
     // Lista crocchette
     const kibbleList = document.getElementById('kibbleList');
-    const kibble = products.filter(p => p.type === 'crocchette');
+    const kibble = products
+        .filter(p => p.type === 'crocchette')
+        .sort((a, b) => a.brand.localeCompare(b.brand) || a.flavor.localeCompare(b.flavor));
 
     if (kibble.length === 0) {
         kibbleList.innerHTML = `
@@ -416,6 +420,14 @@ function saveProduct() {
     if (!brand || !flavor) {
         showToast('Inserisci marca e gusto');
         return;
+    }
+
+    // Auto-add new Brand/Flavor if missing (v2.6.7)
+    if (!appData.food.brands.includes(brand)) {
+        appData.food.brands.push(brand);
+    }
+    if (!appData.food.flavors.includes(flavor)) {
+        appData.food.flavors.push(flavor);
     }
 
     // Check for similar product (v2.6.1)

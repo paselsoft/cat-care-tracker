@@ -3,7 +3,7 @@
 // =========================
 
 // Constants
-const APP_VERSION = '2.6.6';
+const APP_VERSION = '2.6.7';
 const CLEANING_INTERVAL = 15; // days
 const LOW_STOCK_THRESHOLD = 15; // scatolette
 const GITHUB_REPO = 'paselsoft/cat-care-tracker';
@@ -149,6 +149,36 @@ function loadLocalData() {
     }
     if (document.getElementById('notificationsToggle')) {
         document.getElementById('notificationsToggle').checked = appData.settings.notifications;
+    }
+    if (document.getElementById('notificationsToggle')) {
+        document.getElementById('notificationsToggle').checked = appData.settings.notifications;
+    }
+
+    cleanupHistory();
+}
+
+function cleanupHistory() {
+    if (!appData.history || appData.history.length === 0) return;
+
+    const uniqueHistory = [];
+    const seen = new Set();
+    const seenContent = new Set();
+
+    appData.history.forEach(item => {
+        const idKey = String(item.id);
+        const contentKey = `${item.toilet}-${item.date}`;
+
+        if (!seen.has(idKey) && !seenContent.has(contentKey)) {
+            seen.add(idKey);
+            seenContent.add(contentKey);
+            uniqueHistory.push(item);
+        }
+    });
+
+    if (uniqueHistory.length !== appData.history.length) {
+        console.log(`Cleaned up ${appData.history.length - uniqueHistory.length} duplicate history items.`);
+        appData.history = uniqueHistory;
+        saveData();
     }
 }
 

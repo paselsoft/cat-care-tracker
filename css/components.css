@@ -858,6 +858,18 @@
     border-color: rgba(191, 219, 254, 0.5);
 }
 
+@media (prefers-color-scheme: dark) {
+    .settings-btn:nth-child(1) {
+        background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.05));
+        border-color: rgba(251, 191, 36, 0.3);
+    }
+
+    .settings-btn:nth-child(2) {
+        background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(59, 130, 246, 0.05));
+        border-color: rgba(96, 165, 250, 0.3);
+    }
+}
+
 .settings-btn:active {
     transform: scale(0.97);
     box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);

@@ -6,6 +6,13 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.6.7] - 2025-12-09
+### Fixed
+- **Pulizia Automatica**: All'avvio l'app rimuove automaticamente eventuali doppi ingressi in cronologia.
+- **Ordinamento**: I prodotti sono (finalmente) ordinati correttamente per Marca e poi Gusto.
+- **Logica**: Salvare un prodotto con gusto/marca nuovi li aggiunge automaticamente alle liste.
+- **UI Dark**: Migliorati i colori dei nuovi pulsanti Setup in modalità scura.
+
 ## [2.6.6] - 2025-12-09
 ### UI/UX
 - **UI Premium**: Completamente ridisegnati i pulsanti di gestione. Ora sono card colorate, con icone grandi, sottotitolo descrittivo e pulsante azione dedicato. Molto più bello da vedere e facile da usare! 🎨
