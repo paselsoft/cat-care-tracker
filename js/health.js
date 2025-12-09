@@ -16,7 +16,10 @@ function updateCatCards() {
         if (!card) return;
 
         // Update basic info
-        card.querySelector('.cat-weight').textContent = cat.weight ? `${cat.weight} kg` : '-- kg';
+        const weightEl = card.querySelector('.cat-weight');
+        weightEl.classList.remove('skeleton', 'skeleton-text');
+        weightEl.style.width = '';
+        weightEl.textContent = cat.weight ? `${cat.weight} kg` : '-- kg';
 
         // Find next deadline for this cat
         const nextEvent = getNextEventForCat(catId);
@@ -24,9 +27,13 @@ function updateCatCards() {
 
         if (nextEvent) {
             const days = getDaysUntil(nextEvent.nextDueDate);
+            badge.classList.remove('skeleton', 'skeleton-text');
+            badge.style.width = '';
             badge.textContent = `${getEventTypeLabel(nextEvent.type)}: ${days === 0 ? 'Oggi' : days + 'gg'}`;
             badge.className = 'next-event-badge ' + (days < 7 ? 'urgent' : 'upcoming');
         } else {
+            badge.classList.remove('skeleton', 'skeleton-text');
+            badge.style.width = '';
             badge.textContent = 'Nessuna scadenza';
             badge.className = 'next-event-badge';
         }

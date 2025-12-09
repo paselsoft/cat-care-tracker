@@ -1004,6 +1004,31 @@
     font-size: 0.8rem;
 }
 
+/* Skeleton Loading */
+.skeleton {
+    background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--border) 50%, var(--bg-secondary) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    color: transparent !important;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.skeleton-text {
+    height: 1em;
+    width: 100%;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
 /* Toast */
 .toast {
     position: fixed;

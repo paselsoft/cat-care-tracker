@@ -15,6 +15,8 @@ function updateToiletCards() {
 
         if (lastClean) {
             const date = new Date(lastClean);
+            lastCleanEl.classList.remove('skeleton', 'skeleton-text');
+            lastCleanEl.style.width = '';
             lastCleanEl.textContent = formatDate(date);
 
             const daysSince = getDaysSince(date);
@@ -36,6 +38,8 @@ function updateToiletCards() {
                 progressEl.className = 'progress-fill ok';
             }
         } else {
+            lastCleanEl.classList.remove('skeleton', 'skeleton-text');
+            lastCleanEl.style.width = '';
             lastCleanEl.textContent = 'Mai pulita';
             statusEl.className = 'status-badge urgent';
             statusEl.innerHTML = '<span>⚠️</span> Da pulire!';
