@@ -6,6 +6,13 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.4.3] - 2025-12-09
+### Refactor e Fix (Post-Report Opus 4.5)
+- **Code Quality**: Rimossa funzione duplicata `showAddHealthEvent` in `health.js` che creava confusione nel codice.
+- **Bug Fix**: Unificata la logica di calcolo giorni in `app.js` (rimossa versione ridondante in `health.js`) e resa più robusta per evitare errori `NaN`.
+- **Bug Fix**: Corretti i confronti ID in `food.js` per gestire correttamente sia ID numerici (vecchi) che stringa (nuovi).
+- **Stability**: Migliorata la robustezza della sincronizzazione (`sync.js`) aggiungendo blocchi `try-finally` per garantire che lo stato "Syncing..." venga sempre resettato, anche in caso di errori imprevisti.
+
 ## [2.4.2] - 2025-12-08
 ### Refactor
 - **CSS**: Estratto tutto il CSS inline da `index.html` in file separati (`variables.css`, `main.css`, `layout.css`, `components.css`).

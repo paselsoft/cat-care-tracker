@@ -4,12 +4,12 @@
 
 // Product Modal Listeners
 function initProductModalListeners() {
-    document.getElementById('productBrand').addEventListener('change', function() {
+    document.getElementById('productBrand').addEventListener('change', function () {
         const customWrapper = document.getElementById('customBrandWrapper');
         customWrapper.style.display = this.value === 'Altro' ? 'block' : 'none';
     });
 
-    document.getElementById('productFlavor').addEventListener('change', function() {
+    document.getElementById('productFlavor').addEventListener('change', function () {
         const customWrapper = document.getElementById('customFlavorWrapper');
         customWrapper.style.display = this.value === 'Altro' ? 'block' : 'none';
     });
@@ -167,7 +167,7 @@ function checkLowStock() {
 }
 
 function updateQuantity(productId, delta) {
-    const product = appData.food.products.find(p => p.id === productId);
+    const product = appData.food.products.find(p => String(p.id) === String(productId));
     if (product) {
         product.quantity = Math.max(0, product.quantity + delta);
         saveData();
@@ -206,7 +206,7 @@ function showAddProductModal(type) {
 }
 
 function editProduct(productId) {
-    const product = appData.food.products.find(p => p.id === productId);
+    const product = appData.food.products.find(p => String(p.id) === String(productId));
     if (!product) return;
 
     editingProductId = productId;
@@ -320,7 +320,7 @@ function saveProduct() {
 
 function deleteProduct(productId) {
     if (confirm('Eliminare questo prodotto?')) {
-        appData.food.products = appData.food.products.filter(p => p.id !== productId);
+        appData.food.products = appData.food.products.filter(p => String(p.id) !== String(productId));
         saveData();
         updateFoodUI();
         showToast('Prodotto eliminato');

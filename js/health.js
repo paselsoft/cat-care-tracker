@@ -154,38 +154,13 @@ function getEventTypeLabel(type) {
     return labels[type] || 'Evento';
 }
 
-function getDaysUntil(dateStr) {
-    if (!dateStr) return -1;
-    const target = new Date(dateStr);
-    const now = new Date();
-    target.setHours(0, 0, 0, 0);
-    now.setHours(0, 0, 0, 0);
+// getDaysUntil is now imported from app.js
 
-    const diffTime = target - now;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays;
-}
 
 // === Health Event Management ===
 
-function showAddHealthEvent() {
-    // Reset modal fields
-    document.getElementById('eventId').value = ''; // Clear ID for new event
-    document.getElementById('eventType').value = 'vaccine';
-    document.getElementById('eventDate').value = new Date().toISOString().split('T')[0];
-    document.getElementById('eventNote').value = '';
-    document.getElementById('eventCost').value = '';
-    document.getElementById('eventNextDate').value = '';
+// function showAddHealthEvent() { ... } // Duplicate removed, using the one at line 265
 
-    // Default cat: minou (or last one)
-    selectEventCat('minou');
-
-    // Hide delete button for new event
-    const btnDelete = document.getElementById('btnDeleteHealthEvent');
-    if (btnDelete) btnDelete.style.display = 'none';
-
-    showModal('healthEventModal');
-}
 
 function selectEventCat(catId) {
     currentCatId = catId;
@@ -204,7 +179,11 @@ function selectEventCat(catId) {
 
 function editHealthEvent(id) {
     const event = appData.healthEvents.find(e => e.id === id);
-    if (!event) return;
+    if (!event) {
+        console.warn('Evento non trovato:', id);
+        showToast('Evento non trovato');
+        return;
+    }
 
     // Populate fields
     document.getElementById('eventId').value = event.id;

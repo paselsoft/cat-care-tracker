@@ -385,9 +385,13 @@ function getDaysSince(date) {
 }
 
 function getDaysUntil(date) {
+    if (!date) return -1;
     const now = new Date();
     now.setHours(0, 0, 0, 0);
     const then = new Date(date);
+    // Invalida date check
+    if (isNaN(then.getTime())) return -1;
+
     then.setHours(0, 0, 0, 0);
     return Math.floor((then - now) / (1000 * 60 * 60 * 24));
 }

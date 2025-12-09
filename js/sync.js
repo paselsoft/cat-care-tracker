@@ -237,14 +237,6 @@ async function syncFromGitHub() {
             console.log('Merging remote data...');
             appData = mergeData(appData, content);
 
-            // Aggiorna app data
-            // Nota: mergeData ha già fatto il grosso, ma qui ci assicuriamo che struttura sia completa
-            // In realtà con appData = mergeData(...) fatto sopra, questo blocco if/if serviva solo nella versione vecchia.
-            // Ora appData è già l'oggetto mergiato completo.
-            // Possiamo rimuovere i vecchi if singoli se ci fidiamo del mergeData, 
-            // ma per sicurezza lasciamo sync.js pulito:
-            // appData = mergeData(appData, content); <--- questo è già fatto sopra nel codice
-
             // Verifichiamo solo integrità (opzionale)
             if (!appData.cats) appData.cats = content.cats;
             if (!appData.healthEvents) appData.healthEvents = content.healthEvents;
@@ -258,19 +250,18 @@ async function syncFromGitHub() {
             updateSyncUI();
 
             statusDot.className = 'sync-dot online';
-            isSyncing = false;
             return true;
         } else {
             console.error('Sync error:', response.status);
             statusDot.className = 'sync-dot error';
-            isSyncing = false;
             return false;
         }
     } catch (error) {
         console.error('Sync error:', error);
         statusDot.className = 'sync-dot error';
-        isSyncing = false;
         return false;
+    } finally {
+        isSyncing = false;
     }
 }
 
@@ -349,7 +340,6 @@ async function syncToGitHub() {
             localStorage.setItem('lastSyncTime', new Date().toISOString());
             updateSyncUI();
             statusDot.className = 'sync-dot online';
-            isSyncing = false;
             return true;
         } else {
             const error = await response.json();
@@ -358,21 +348,20 @@ async function syncToGitHub() {
             // Se errore è "Conflict" (409), dovremmo riprovare il ciclo GET -> MERGE -> PUSH
             if (response.status === 409) {
                 console.log('Conflict detected, retrying sync...');
-                isSyncing = false; // Reset flag to allow recursion
                 // Simple exponential backoff or retry once could be implemented here
                 // For now, just show error and let user try again
                 showToast('Conflitto rilevato. Riprova tra poco.');
             }
 
             statusDot.className = 'sync-dot error';
-            isSyncing = false;
             return false;
         }
     } catch (error) {
         console.error('Push error:', error);
         statusDot.className = 'sync-dot error';
-        isSyncing = false;
         return false;
+    } finally {
+        isSyncing = false;
     }
 }
 
