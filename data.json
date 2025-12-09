@@ -63,6 +63,7 @@
       "Pollo e Tacchino",
       "Tacchino",
       "Tonno",
+      "Tonno dell'Atlantico",
       "Tonno e Pollo",
       "Tonno e Tacchino"
     ]
@@ -208,5 +209,5 @@
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-09T21:11:31.560Z"
+  "lastUpdated": "2025-12-09T21:12:08.090Z"
 }
