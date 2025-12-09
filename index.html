@@ -355,84 +355,97 @@
     </div> <!-- Closing tab-food -->
 
     <!-- Tab: Settings -->
-    <div class="setting-row">
-        <span class="setting-label">Promemoria giorno prima</span>
-        <label class="toggle">
-            <input type="checkbox" id="dayBeforeToggle" checked onchange="saveSettings()">
-            <span class="toggle-slider"></span>
-        </label>
-    </div>
-    </div>
+    <div class="tabs-content" id="tab-settings">
+        <section class="section">
+            <h2 class="section-title">⚙️ Impostazioni</h2>
 
-    <div class="settings-card">
-        <h3>🍽️ Gestione Cibo</h3>
-        <div class="settings-group">
-            <button class="settings-btn" onclick="openManageListModal('brands')">
-                <span class="btn-icon">🏷️</span>
-                <span class="btn-text">Gestisci Marche</span>
-                <span class="btn-arrow">❯</span>
-            </button>
-            <div class="divider"></div>
-            <button class="settings-btn" onclick="openManageListModal('flavors')">
-                <span class="btn-icon">🍽️</span>
-                <span class="btn-text">Gestisci Gusti</span>
-                <span class="btn-arrow">❯</span>
-            </button>
-        </div>
-    </div>
+            <div class="settings-card">
+                <h3>🔔 Notifiche</h3>
+                <div class="setting-row">
+                    <span class="setting-label">Abilita notifiche</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="notificationsToggle" onchange="toggleNotifications()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Promemoria giorno prima</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="dayBeforeToggle" checked onchange="saveSettings()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
 
-    <div class="settings-card">
-        <h3>☁️ Sincronizzazione</h3>
-        <div class="setting-row">
-            <span class="setting-label">Stato</span>
-            <span class="sync-status" id="syncStatus">
-                <span class="sync-dot offline"></span>
-                <span id="syncStatusText">Non configurato</span>
-            </span>
-        </div>
-        <div class="setting-row">
-            <span class="setting-label">Ultima sync</span>
-            <span class="setting-value" id="lastSyncTime">Mai</span>
-        </div>
-        <button class="sync-btn" id="syncConfigBtn" onclick="showSyncConfigModal()">
-            ⚙️ Configura GitHub Token
-        </button>
-        <button class="sync-btn secondary" id="syncNowBtn" onclick="syncNow()" style="display: none;">
-            🔄 Sincronizza ora
-        </button>
-    </div>
+            <div class="settings-card">
+                <h3>🍽️ Gestione Cibo</h3>
+                <div class="settings-group">
+                    <button class="settings-btn" onclick="openManageListModal('brands')">
+                        <span class="btn-icon">🏷️</span>
+                        <span class="btn-text">Gestisci Marche</span>
+                        <span class="btn-arrow">❯</span>
+                    </button>
+                    <div class="divider"></div>
+                    <button class="settings-btn" onclick="openManageListModal('flavors')">
+                        <span class="btn-icon">🍽️</span>
+                        <span class="btn-text">Gestisci Gusti</span>
+                        <span class="btn-arrow">❯</span>
+                    </button>
+                </div>
+            </div>
 
-    <div class="settings-card">
-        <h3>⏱️ Intervallo pulizia</h3>
-        <div class="setting-row">
-            <span class="setting-label">Giorni tra le pulizie</span>
-            <span class="setting-value" id="intervalValue">15 giorni</span>
-        </div>
-    </div>
+            <div class="settings-card">
+                <h3>☁️ Sincronizzazione</h3>
+                <div class="setting-row">
+                    <span class="setting-label">Stato</span>
+                    <span class="sync-status" id="syncStatus">
+                        <span class="sync-dot offline"></span>
+                        <span id="syncStatusText">Non configurato</span>
+                    </span>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Ultima sync</span>
+                    <span class="setting-value" id="lastSyncTime">Mai</span>
+                </div>
+                <button class="sync-btn" id="syncConfigBtn" onclick="showSyncConfigModal()">
+                    ⚙️ Configura GitHub Token
+                </button>
+                <button class="sync-btn secondary" id="syncNowBtn" onclick="syncNow()" style="display: none;">
+                    🔄 Sincronizza ora
+                </button>
+            </div>
 
-    <div class="settings-card">
-        <h3>🐱 Le tue gatte</h3>
-        <div class="setting-row">
-            <span class="setting-label">Minou</span>
-            <span class="cat-name minou">🐱</span>
-        </div>
-        <div class="setting-row">
-            <span class="setting-label">Matisse</span>
-            <span class="cat-name matisse">🐱</span>
-        </div>
-    </div>
+            <div class="settings-card">
+                <h3>⏱️ Intervallo pulizia</h3>
+                <div class="setting-row">
+                    <span class="setting-label">Giorni tra le pulizie</span>
+                    <span class="setting-value" id="intervalValue">15 giorni</span>
+                </div>
+            </div>
 
-    <div class="settings-card">
-        <h3>📱 App</h3>
-        <div class="setting-row">
-            <span class="setting-value" id="appVersion">--</span>
-        </div>
-        <div class="setting-row">
-            <span class="setting-label">Tema</span>
-            <span class="setting-value">Automatico</span>
-        </div>
-    </div>
-    </section>
+            <div class="settings-card">
+                <h3>🐱 Le tue gatte</h3>
+                <div class="setting-row">
+                    <span class="setting-label">Minou</span>
+                    <span class="cat-name minou">🐱</span>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Matisse</span>
+                    <span class="cat-name matisse">🐱</span>
+                </div>
+            </div>
+
+            <div class="settings-card">
+                <h3>📱 App</h3>
+                <div class="setting-row">
+                    <span class="setting-value" id="appVersion">--</span>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Tema</span>
+                    <span class="setting-value">Automatico</span>
+                </div>
+            </div>
+        </section>
     </div>
     </div>
 

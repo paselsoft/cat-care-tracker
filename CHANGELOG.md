@@ -6,6 +6,10 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.6.4] - 2025-12-09
+### Fixed
+- **UI**: Fixed bug where Setup tab content was visible in all tabs.
+
 ## [2.6.3] - 2025-12-09
 ### Fixed
 - **Data Cleanup**: Merged duplicate product entries.
