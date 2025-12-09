@@ -58,7 +58,26 @@
         "createdAt": "2025-12-09T17:13:29.141Z"
       }
     ],
-    "lastUpdated": "2025-12-09T17:13:29.142Z"
+    "lastUpdated": "2025-12-09T17:13:29.142Z",
+    "brands": [
+      "Almo Nature",
+      "Farmina",
+      "Life Cat",
+      "Natural Code",
+      "Oasy",
+      "Schesir"
+    ],
+    "flavors": [
+      "Tonno",
+      "Pollo",
+      "Tacchino",
+      "Tonno e Pollo",
+      "Tonno e Tacchino",
+      "Pollo e Tacchino",
+      "Manzo",
+      "Pesce",
+      "Misto"
+    ]
   },
   "cats": {
     "minou": {
@@ -92,5 +111,5 @@
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-09T17:13:34.124Z"
+  "lastUpdated": "2025-12-09T17:36:25.679Z"
 }
