@@ -46,18 +46,6 @@
         "createdAt": "2025-12-08T21:35:28.549Z"
       },
       {
-        "id": "1765300409141",
-        "type": "scatoletta",
-        "brand": "Almo Nature",
-        "flavor": "Petto di pollo",
-        "quantity": 1,
-        "size": "70g",
-        "likesMinou": true,
-        "likesMatisse": true,
-        "rating": "like",
-        "createdAt": "2025-12-09T17:13:29.141Z"
-      },
-      {
         "id": "1765301828737",
         "type": "scatoletta",
         "brand": "Almo Nature",
@@ -231,5 +219,5 @@
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-09T21:11:00.307Z"
+  "lastUpdated": "2025-12-09T21:11:03.179Z"
 }
