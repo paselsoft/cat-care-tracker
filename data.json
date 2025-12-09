@@ -9,12 +9,7 @@
   },
   "history": [
     {
-      "id": 1765230001877,
-      "toilet": "piccolo",
-      "date": "2025-11-30"
-    },
-    {
-      "id": 1765230001877,
+      "id": 1765227403797,
       "toilet": "piccolo",
       "date": "2025-11-30"
     }
@@ -56,11 +51,34 @@
         "likesMatisse": true,
         "rating": "like",
         "createdAt": "2025-12-09T16:26:48.097Z"
+      },
+      {
+        "id": "1765300409141",
+        "type": "scatoletta",
+        "brand": "Almo Nature",
+        "flavor": "Petto di pollo",
+        "quantity": 1,
+        "size": "70g",
+        "likesMinou": true,
+        "likesMatisse": true,
+        "rating": "like",
+        "createdAt": "2025-12-09T17:13:29.141Z"
+      },
+      {
+        "id": "1765301828737",
+        "type": "scatoletta",
+        "brand": "Almo Nature",
+        "flavor": "Petto di pollo",
+        "quantity": 1,
+        "size": "70g",
+        "likesMinou": true,
+        "likesMatisse": true,
+        "rating": "like",
+        "createdAt": "2025-12-09T17:37:08.737Z"
       }
     ],
     "lastUpdated": "2025-12-09T17:37:08.737Z",
     "brands": [
-      "Almo Nature",
       "Farmina",
       "Life Cat",
       "Natural Code",
@@ -68,15 +86,15 @@
       "Schesir"
     ],
     "flavors": [
-      "Tonno",
-      "Pollo",
-      "Tacchino",
-      "Tonno e Pollo",
-      "Tonno e Tacchino",
-      "Pollo e Tacchino",
       "Manzo",
+      "Misto",
       "Pesce",
-      "Misto"
+      "Pollo",
+      "Pollo e Tacchino",
+      "Tacchino",
+      "Tonno",
+      "Tonno e Pollo",
+      "Tonno e Tacchino"
     ]
   },
   "cats": {
@@ -97,6 +115,15 @@
   },
   "healthEvents": [
     {
+      "id": 1765214760984,
+      "catId": "matisse",
+      "type": "note",
+      "date": "2025-12-18",
+      "note": "Vacanza",
+      "cost": null,
+      "nextDueDate": null
+    },
+    {
       "id": 1765213244621,
       "catId": "minou",
       "type": "vaccine",
@@ -115,6 +142,33 @@
       "nextDueDate": "2026-12-10"
     },
     {
+      "id": 1765206602417,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-12-08",
+      "note": "3,5",
+      "cost": null,
+      "nextDueDate": null
+    },
+    {
+      "id": 1765207027374,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-12-08",
+      "note": "3,580",
+      "cost": null,
+      "nextDueDate": null
+    },
+    {
+      "id": 1765211891952,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-12-08",
+      "note": "3,500",
+      "cost": null,
+      "nextDueDate": "2026-01-10"
+    },
+    {
       "id": 1765212192462,
       "catId": "minou",
       "type": "weight",
@@ -123,11 +177,66 @@
       "cost": null,
       "nextDueDate": "2026-01-10",
       "weight": 4.6
+    },
+    {
+      "id": 1765213496954,
+      "catId": "matisse",
+      "type": "note",
+      "date": "2025-12-08",
+      "note": "Mangia un botto",
+      "cost": null,
+      "nextDueDate": null
+    },
+    {
+      "id": 1765210593784,
+      "catId": "minou",
+      "type": "vet",
+      "date": "2025-12-04",
+      "note": "",
+      "cost": null,
+      "nextDueDate": "2026-04-22"
+    },
+    {
+      "id": 1765213461372,
+      "catId": "minou",
+      "type": "note",
+      "date": "2025-12-04",
+      "note": "Mangia poco",
+      "cost": null,
+      "nextDueDate": null
+    },
+    {
+      "id": 1765212658555,
+      "catId": "minou",
+      "type": "meds",
+      "date": "2025-12-03",
+      "note": "Vermifugo",
+      "cost": null,
+      "nextDueDate": "2026-12-03"
+    },
+    {
+      "id": 1765212618914,
+      "catId": "matisse",
+      "type": "vet",
+      "date": "2025-12-02",
+      "note": "Controllo annuale",
+      "cost": null,
+      "nextDueDate": "2026-12-02",
+      "weight": null
+    },
+    {
+      "id": 1765206513403,
+      "catId": "minou",
+      "type": "weight",
+      "date": "2025-11-29",
+      "note": "3,580",
+      "cost": null,
+      "nextDueDate": null
     }
   ],
   "settings": {
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-09T21:07:52.447Z"
+  "lastUpdated": "2025-12-09T21:10:48.821Z"
 }
