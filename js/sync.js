@@ -234,7 +234,7 @@ async function syncFromGitHub() {
             localStorage.setItem('githubFileSha', data.sha);
 
             // SMART MERGE
-            console.log('Merging remote data...');
+
             appData = mergeData(appData, content);
 
             // Verifichiamo solo integrità (opzionale)
@@ -347,7 +347,7 @@ async function syncToGitHub() {
 
             // Se errore è "Conflict" (409), dovremmo riprovare il ciclo GET -> MERGE -> PUSH
             if (response.status === 409) {
-                console.log('Conflict detected, retrying sync...');
+
                 // Simple exponential backoff or retry once could be implemented here
                 // For now, just show error and let user try again
                 showToast('Conflitto rilevato. Riprova tra poco.');

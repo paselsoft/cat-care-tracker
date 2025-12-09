@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }).date;
             // Force update if different
             if (appData.toilets[toilet].lastClean !== maxDate) {
-                console.log(`Fixing corrupted date for ${toilet}: ${appData.toilets[toilet].lastClean} -> ${maxDate}`);
+
                 appData.toilets[toilet].lastClean = maxDate;
             }
         } else {
@@ -562,7 +562,7 @@ function initPullToRefresh() {
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
         .then(reg => {
-            console.log('Service Worker registered');
+
 
             // Check for updates every minute
             setInterval(() => {

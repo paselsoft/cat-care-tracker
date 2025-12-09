@@ -6,6 +6,19 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.5.2] - 2025-12-09
+### Polished
+- **Log Cleanup**: Removed debug console logs for production readiness.
+- **Changelog**: Updated documentation to reflect all recent changes.
+
+## [2.5.1] - 2025-12-09
+### Fixed
+- **Chart Container**: Added proper CSS class with fixed height to prevent layout shifts.
+- **Dark Mode Chart**: Grid and text colors now adapt to system theme.
+- **Swipe to Delete**: Verified and enabled on history items.
+- **Cleanup**: Removed server.log from repository tracking.
+- **Code Quality**: Removed obsolete comments.
+
 ## [2.5.0] - 2025-12-09
 ### Added
 - **Weight Chart**: Interactive line chart to track cat weight trends.
