@@ -6,6 +6,12 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.5.0] - 2025-12-09
+### Added
+- **Weight Chart**: Interactive line chart to track cat weight trends.
+- **Chart.js**: Integrated charting library.
+- **Weight Input**: Specialized input field in "New Event" modal.
+
 ## [2.4.4] - 2025-12-09
 ### Fix e Pulizia
 - **Manifest**: Risolto problema di scope duplicato nel file `manifest.json`.

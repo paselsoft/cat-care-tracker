@@ -31,7 +31,7 @@ Creata per **Minou** e **Matisse** 🐱🐱
 - **Diario Clinico**: Storico completo di vaccini, visite, antiparassitari e misurazioni peso
 - **Gestione Eventi**: Modifica, Cancellazione e Creazione Simultanea ("Entrambe")
 - **Scadenze**: Visualizzazione chiara dei prossimi richiami o appuntamenti
-- **Monitoraggio Peso**: Grafico dell'andamento del peso (in arrivo)
+- **Monitoraggio Peso**: Grafico interattivo dell'andamento del peso (v2.5.0)
 
 ### Sincronizzazione ☁️
 - **Smart Sync**: algoritmo di unione intelligente per uso condiviso (es. più persone stesse credenziali)
@@ -104,7 +104,7 @@ cat-care-tracker/
 - [x] Inventario scorte
 - [x] Avvisi scorte basse
 - [x] Sezione Salute e Diario Veterinario
-- [ ] Statistiche consumi e grafici peso
+- [x] Statistiche consumi e grafici peso
 
 ## 📄 Licenza
 

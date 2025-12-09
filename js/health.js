@@ -7,6 +7,7 @@ let currentCatId = null; // 'minou' or 'matisse'
 function updateHealthUI() {
     updateCatCards();
     updateHealthTimeline();
+    renderWeightChart();
 }
 
 function updateCatCards() {
@@ -207,6 +208,15 @@ function editHealthEvent(id) {
     document.getElementById('eventNote').value = event.note || '';
     document.getElementById('eventCost').value = event.cost || '';
     document.getElementById('eventNextDate').value = event.nextDueDate || '';
+    document.getElementById('eventWeight').value = event.weight || '';
+
+    // Show/Hide Weight Input
+    const weightGroup = document.getElementById('weightInputGroup');
+    if (event.type === 'weight') {
+        weightGroup.style.display = 'block';
+    } else {
+        weightGroup.style.display = 'none';
+    }
 
     // Select Cat
     selectEventCat(event.catId);
@@ -221,6 +231,7 @@ function editHealthEvent(id) {
 
     showModal('healthEventModal');
 }
+
 
 function deleteHealthEvent() {
     const btn = document.getElementById('btnDeleteHealthEvent');
@@ -265,6 +276,8 @@ function showAddHealthEvent() {
     document.getElementById('eventNote').value = '';
     document.getElementById('eventCost').value = '';
     document.getElementById('eventNextDate').value = '';
+    document.getElementById('eventWeight').value = '';
+    document.getElementById('weightInputGroup').style.display = 'none'; // Default hidden
 
     // Default cat: minou (or last one) - Default to Minou for now
     selectEventCat('minou');
@@ -294,9 +307,16 @@ function saveHealthEvent() {
         const costInput = document.getElementById('eventCost').value;
         const cost = costInput ? parseFloat(costInput) : 0;
         const nextDueDate = document.getElementById('eventNextDate').value;
+        const weightInput = document.getElementById('eventWeight').value;
+        const weight = (type === 'weight' && weightInput) ? parseFloat(weightInput) : null;
 
         if (!date) {
             alert('Inserisci almeno la data');
+            return;
+        }
+
+        if (type === 'weight' && !weight) {
+            alert('Inserisci il peso');
             return;
         }
 
@@ -314,9 +334,14 @@ function saveHealthEvent() {
                 date: date,
                 note: note,
                 cost: cost > 0 ? (Math.round(cost * 100) / 100) : null,
-                nextDueDate: nextDueDate || null
+                nextDueDate: nextDueDate || null,
+                weight: weight
             };
             appData.healthEvents.push(eventMinou);
+
+            // Update current weight if date is today or future? No, usually latest.
+            // Let's simple update if it's new data.
+            if (weight) appData.cats.minou.weight = weight;
 
             // Event for Matisse (slight delay for unique ID)
             const eventMatisse = {
@@ -326,9 +351,11 @@ function saveHealthEvent() {
                 date: date,
                 note: note,
                 cost: cost > 0 ? (Math.round(cost * 100) / 100) : null,
-                nextDueDate: nextDueDate || null
+                nextDueDate: nextDueDate || null,
+                weight: weight
             };
             appData.healthEvents.push(eventMatisse);
+            if (weight) appData.cats.matisse.weight = weight;
 
         } else {
             // Single event (New or Edit)
@@ -339,7 +366,8 @@ function saveHealthEvent() {
                 date: date,
                 note: note,
                 cost: cost > 0 ? (Math.round(cost * 100) / 100) : null,
-                nextDueDate: nextDueDate || null
+                nextDueDate: nextDueDate || null,
+                weight: weight
             };
 
             if (id) {
@@ -352,6 +380,11 @@ function saveHealthEvent() {
                 // Create new
                 appData.healthEvents.push(eventData);
             }
+
+            // Update Cat Weight logic (simplistic: if adding/editing weight, update profile)
+            if (type === 'weight' && weight) {
+                appData.cats[currentCatId].weight = weight;
+            }
         }
 
         saveData(); // Save and sync
@@ -363,4 +396,100 @@ function saveHealthEvent() {
         console.error('Errore durante il salvataggio:', e);
         alert('Si è verificato un errore durante il salvataggio: ' + e.message);
     }
+}
+
+// Chart instance
+let weightChartInstance = null;
+
+function toggleWeightInput(selectElement) {
+    const weightGroup = document.getElementById('weightInputGroup');
+    if (selectElement && selectElement.value === 'weight') {
+        weightGroup.style.display = 'block';
+    } else {
+        weightGroup.style.display = 'none';
+    }
+}
+
+function renderWeightChart() {
+    const ctx = document.getElementById('weightChart');
+    if (!ctx) return;
+
+    const events = appData.healthEvents || [];
+    const weightEvents = events
+        .filter(e => e.type === 'weight' && e.weight)
+        .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    // If no events, try to use current weight as a single point? No, need history.
+    if (weightEvents.length === 0) {
+        if (weightChartInstance) {
+            weightChartInstance.destroy();
+            weightChartInstance = null;
+        }
+        return;
+    }
+
+    const minouData = weightEvents
+        .filter(e => e.catId === 'minou')
+        .map(e => ({ x: e.date, y: e.weight }));
+
+    const matisseData = weightEvents
+        .filter(e => e.catId === 'matisse')
+        .map(e => ({ x: e.date, y: e.weight }));
+
+    // Prepare datasets
+    const datasets = [];
+    if (minouData.length > 0) {
+        datasets.push({
+            label: 'Minou',
+            data: minouData,
+            borderColor: '#f59e0b', // Amber
+            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+            tension: 0.3,
+            fill: false
+        });
+    }
+    if (matisseData.length > 0) {
+        datasets.push({
+            label: 'Matisse',
+            data: matisseData,
+            borderColor: '#3b82f6', // Blue
+            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+            tension: 0.3,
+            fill: false
+        });
+    }
+
+    if (weightChartInstance) {
+        weightChartInstance.destroy();
+    }
+
+    weightChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            // Labels will be auto-handled by x/y scatter or needs unified labels. 
+            // Simplified approach: Unique sorted dates as labels.
+            labels: [...new Set(weightEvents.map(e => new Date(e.date).toLocaleDateString('it-IT', { day: 'numeric', month: 'short' })))],
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    suggestedMin: 3,
+                    suggestedMax: 7,
+                    title: {
+                        display: true,
+                        text: 'Peso (kg)'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
 }
