@@ -254,7 +254,11 @@
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
-    touch-action: manipulation;
+    touch-action: pan-y;
+    /* Allow vertical scroll but handle horizontal in JS */
+    position: relative;
+    overflow: hidden;
+    /* Ensure content doesn't spill during swipe */
 }
 
 .history-item:active {

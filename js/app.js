@@ -409,11 +409,52 @@ function getDaysUntil(date) {
 
     then.setHours(0, 0, 0, 0);
     return Math.floor((then - now) / (1000 * 60 * 60 * 24));
+    return Math.floor((then - now) / (1000 * 60 * 60 * 24));
 }
 
-// =========================
-// PULL TO REFRESH
-// =========================
+function addSwipeAction(element, onSwipeLeft) {
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+    const threshold = 100;
+
+    element.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        element.style.transition = 'none';
+        currentX = startX; // Reset currentX
+    }, { passive: true });
+
+    element.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentX = e.touches[0].clientX;
+        const diff = currentX - startX;
+
+        // Only allow swipe left
+        if (diff < 0) {
+            element.style.transform = `translateX(${diff}px)`;
+        }
+    }, { passive: true });
+
+    element.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        element.style.transition = 'transform 0.3s ease';
+
+        const diff = currentX - startX;
+        if (diff < -threshold) {
+            // Swipe completato
+            element.style.transform = 'translateX(-100%)';
+            setTimeout(() => {
+                if (onSwipeLeft) onSwipeLeft();
+            }, 300);
+        } else {
+            // Reset
+            element.style.transform = '';
+        }
+    });
+}
+
 
 function initPullToRefresh() {
     const pullIndicator = document.getElementById('pullToRefresh');

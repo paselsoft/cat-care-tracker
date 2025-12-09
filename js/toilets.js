@@ -140,6 +140,14 @@ function updateHistory() {
             </div>
         `;
     }).join('');
+
+    // Add Swipe Listeners
+    document.querySelectorAll('.history-item').forEach(item => {
+        addSwipeAction(item, () => {
+            const id = item.getAttribute('data-id');
+            deleteHistoryItem(id);
+        });
+    });
 }
 
 function showConfirmModal(toilet) {

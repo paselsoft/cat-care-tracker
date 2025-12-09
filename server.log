@@ -1,8 +1,2 @@
-::1 - - [09/Dec/2025 13:16:06] "GET /sw.js HTTP/1.1" 304 -
-::1 - - [09/Dec/2025 13:16:06] "GET /js/sync.js HTTP/1.1" 304 -
-::1 - - [09/Dec/2025 13:16:06] "GET /js/toilets.js HTTP/1.1" 200 -
-::1 - - [09/Dec/2025 13:16:06] "GET /js/health.js HTTP/1.1" 200 -
-::1 - - [09/Dec/2025 13:16:06] "GET /js/food.js HTTP/1.1" 304 -
-::1 - - [09/Dec/2025 13:16:06] "GET /js/app.js HTTP/1.1" 304 -
-::1 - - [09/Dec/2025 13:16:07] "GET /icons/icon-144.png HTTP/1.1" 304 -
-::1 - - [09/Dec/2025 13:16:08] "GET /sw.js HTTP/1.1" 304 -
+::1 - - [09/Dec/2025 13:25:02] "GET /sw.js HTTP/1.1" 304 -
+::1 - - [09/Dec/2025 13:25:07] "GET /sw.js HTTP/1.1" 304 -
