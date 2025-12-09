@@ -6,6 +6,10 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.5.4] - 2025-12-09
+### Fixes
+- **Modal Overflow**: Added scrolling for modals on small screens (e.g. iPhone mini).
+
 ## [2.5.3] - 2025-12-09
 ### UI/UX Refinements
 - **Setup Tab**: Renamed "Impostazioni" to "Setup" for better fit.

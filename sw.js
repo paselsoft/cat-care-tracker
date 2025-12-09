@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cat-care-v2.5.0';
+const CACHE_NAME = 'cat-care-v2.5.4';
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
