@@ -625,21 +625,44 @@
 .list-item-row span {
     font-weight: 500;
     color: var(--text-primary);
+    flex: 1;
+    /* Allow text to take space */
 }
 
-.delete-btn {
-    background: transparent;
-    color: var(--danger);
-    width: 40px;
-    height: 40px;
+.list-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn {
+    /* Base class for list actions */
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.edit-btn {
+    background: transparent;
+    color: var(--warning);
+    /* Adjust if var exists, or use hex */
+}
+
+.edit-btn:active {
+    background: rgba(255, 193, 7, 0.15);
+    /* Yellow tint */
+    transform: scale(0.9);
+}
+
+.delete-btn {
+    background: transparent;
+    color: var(--danger);
 }
 
 .delete-btn:active {

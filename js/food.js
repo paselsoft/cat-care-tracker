@@ -72,7 +72,10 @@ function renderListItems() {
     listContainer.innerHTML = items.sort().map(item => `
         <div class="list-item-row">
             <span>${item}</span>
-            <button class="action-btn delete-btn" onclick="deleteListItem('${item}')">🗑️</button>
+            <div class="list-actions">
+                <button class="action-btn edit-btn" onclick="editListItem('${item.replace(/'/g, "\\'")}')">✏️</button>
+                <button class="action-btn delete-btn" onclick="deleteListItem('${item.replace(/'/g, "\\'")}')">🗑️</button>
+            </div>
         </div>
     `).join('');
 }
@@ -95,6 +98,50 @@ function addListItem() {
     input.value = '';
     renderListItems();
     showToast('Aggiunto!');
+}
+
+function editListItem(oldName) {
+    const newName = prompt(`Modifica "${oldName}":`, oldName);
+    if (newName && newName.trim() !== "" && newName !== oldName) {
+        updateListItem(oldName, newName.trim());
+    }
+}
+
+function updateListItem(oldName, newName) {
+    const list = currentListType === 'brands' ? appData.food.brands : appData.food.flavors;
+
+    // Check if new name already exists
+    if (list.includes(newName)) {
+        showToast('Questo nome esiste già');
+        return;
+    }
+
+    // Update list
+    const index = list.indexOf(oldName);
+    if (index !== -1) {
+        list[index] = newName;
+    }
+
+    // Propagate change to products
+    let updatedCount = 0;
+    appData.food.products.forEach(p => {
+        if (currentListType === 'brands' && p.brand === oldName) {
+            p.brand = newName;
+            updatedCount++;
+        } else if (currentListType === 'flavors' && p.flavor === oldName) {
+            p.flavor = newName;
+            updatedCount++;
+        }
+    });
+
+    saveData();
+    renderListItems();
+
+    if (updatedCount > 0) {
+        showToast(`Aggiornato e applicato a ${updatedCount} prodotti!`);
+    } else {
+        showToast('Aggiornato!');
+    }
 }
 
 function deleteListItem(item) {

@@ -6,6 +6,11 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.6.2] - 2025-12-09
+### Features
+- **Edit Brands/Flavors**: Added ability to rename brands and flavors.
+- **Auto-Update**: Renaming a brand/flavor automatically updates all associated products.
+
 ## [2.6.1] - 2025-12-09
 ### Fixed
 - **CSS**: Improved styles for List Manager modal (missing classes).

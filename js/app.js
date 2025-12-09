@@ -3,7 +3,7 @@
 // =========================
 
 // Constants
-const APP_VERSION = '2.6.1';
+const APP_VERSION = '2.6.2';
 const CLEANING_INTERVAL = 15; // days
 const LOW_STOCK_THRESHOLD = 15; // scatolette
 const GITHUB_REPO = 'paselsoft/cat-care-tracker';
