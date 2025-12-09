@@ -324,16 +324,39 @@
     background: rgba(239, 68, 68, 0.1);
 }
 
-.empty-history {
+/* Empty States */
+.empty-state,
+.empty-history,
+.empty-prefs {
     text-align: center;
     padding: 40px 20px;
     color: var(--text-muted);
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px dashed var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
 }
 
+.empty-state-icon,
 .empty-history-icon {
-    font-size: 3rem;
-    margin-bottom: 12px;
-    opacity: 0.5;
+    font-size: 3.5rem;
+    opacity: 0.6;
+    margin-bottom: 8px;
+    filter: grayscale(0.5);
+}
+
+.empty-state p,
+.empty-history p,
+.empty-prefs p {
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.empty-state-action {
+    margin-top: 12px;
 }
 
 /* Food Section Styles */

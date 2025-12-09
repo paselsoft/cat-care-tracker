@@ -51,7 +51,11 @@ function updateFoodLists() {
     const cans = products.filter(p => p.type === 'scatoletta');
 
     if (cans.length === 0) {
-        cansList.innerHTML = '<div class="empty-prefs">Nessuna scatoletta aggiunta</div>';
+        cansList.innerHTML = `
+            <div class="empty-prefs">
+                <div class="empty-state-icon">🥫</div>
+                <p>Nessuna scatoletta aggiunta</p>
+            </div>`;
     } else {
         cansList.innerHTML = cans.map(p => renderFoodItem(p)).join('');
     }
@@ -61,7 +65,11 @@ function updateFoodLists() {
     const kibble = products.filter(p => p.type === 'crocchette');
 
     if (kibble.length === 0) {
-        kibbleList.innerHTML = '<div class="empty-prefs">Nessuna crocchetta aggiunta</div>';
+        kibbleList.innerHTML = `
+            <div class="empty-prefs">
+                <div class="empty-state-icon">🥣</div>
+                <p>Nessuna crocchetta aggiunta</p>
+            </div>`;
     } else {
         kibbleList.innerHTML = kibble.map(p => renderFoodItem(p)).join('');
     }
@@ -119,7 +127,11 @@ function updatePreferences() {
     const minouProducts = products.filter(p => p.likesMinou && p.rating !== 'dislike');
 
     if (minouProducts.length === 0) {
-        minouPrefs.innerHTML = '<div class="empty-prefs">Nessuna preferenza</div>';
+        minouPrefs.innerHTML = `
+            <div class="empty-prefs">
+                <div class="empty-state-icon">😿</div>
+                <p>Nessuna preferenza</p>
+            </div>`;
     } else {
         minouPrefs.innerHTML = minouProducts.slice(0, 5).map(p => `
             <div class="pref-item">
@@ -134,7 +146,11 @@ function updatePreferences() {
     const matisseProducts = products.filter(p => p.likesMatisse && p.rating !== 'dislike');
 
     if (matisseProducts.length === 0) {
-        matissePrefs.innerHTML = '<div class="empty-prefs">Nessuna preferenza</div>';
+        matissePrefs.innerHTML = `
+            <div class="empty-prefs">
+                <div class="empty-state-icon">😿</div>
+                <p>Nessuna preferenza</p>
+            </div>`;
     } else {
         matissePrefs.innerHTML = matisseProducts.slice(0, 5).map(p => `
             <div class="pref-item">

@@ -57,7 +57,15 @@ function getNextEventForCat(catId) {
 function updateHealthTimeline() {
     const container = document.getElementById('healthTimeline');
     if (!appData.healthEvents || appData.healthEvents.length === 0) {
-        container.innerHTML = '<p class="empty-state" style="text-align: center; color: var(--text-muted); padding: 20px;">Nessun evento registrato</p>';
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">🩺</div>
+                <p>Nessun evento salute registrato</p>
+                <div class="empty-state-action">
+                    <small>Tocca "Aggiungi" per iniziare</small>
+                </div>
+            </div>
+        `;
         return;
     }
 

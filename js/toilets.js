@@ -117,6 +117,9 @@ function updateHistory() {
             <div class="empty-history">
                 <div class="empty-history-icon">📝</div>
                 <p>Nessuna pulizia registrata</p>
+                <div class="empty-state-action">
+                    <small>Usa i pulsanti in alto per aggiungere</small>
+                </div>
             </div>
         `;
         return;
