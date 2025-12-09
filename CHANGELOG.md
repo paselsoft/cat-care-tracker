@@ -6,31 +6,38 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.6.5] - 2025-12-09
+### UI/UX
+- **Restyling**: Aggiornato il design dei pulsanti "Gestione Cibo" nel Setup. Ora hanno uno stile moderno a "card" con icone e frecce, in linea con il resto dell'app.
+- **Localizzazione**: Changelog e comunicazioni tornano ad essere in Italiano.
+
 ## [2.6.4] - 2025-12-09
 ### Fixed
-- **UI**: Fixed bug where Setup tab content was visible in all tabs.
+- **UI**: Risolto bug dove il contenuto del tab Setup era visibile in tutti i tab.
 
 ## [2.6.3] - 2025-12-09
 ### Fixed
-- **Data Cleanup**: Merged duplicate product entries.
-- **UX**: Products are now automatically sorted by Brand and Flavor.
-- **Code Quality**: Reduced usage of inline styles.
+- **Pulizia Dati**: Uniti i prodotti duplicati (es. scatolette doppie).
+- **UX**: I prodotti sono ora ordinati automaticamente per Marca e Gusto.
+- **Qualità Codice**: Ridotto l'uso di stili inline.
 
 ## [2.6.2] - 2025-12-09
 ### Features
-- **Edit Brands/Flavors**: Added ability to rename brands and flavors.
-- **Auto-Update**: Renaming a brand/flavor automatically updates all associated products.
+- **Modifica Marche/Gusti**: Aggiunta possibilità di rinominare marche e gusti.
+- **Propagazione Automatica**: Le modifiche ai nomi si riflettono automaticamente su tutti i prodotti associati.
+- **UI**: Aggiunto bottone "Modifica" (✏️) nelle liste.
 
 ## [2.6.1] - 2025-12-09
 ### Fixed
-- **CSS**: Improved styles for List Manager modal (missing classes).
-- **UX**: Added warning when adding a duplicate product.
-- **Data**: Removed duplicate entries from history and product list.
+- **CSS**: Aggiunti stili mancanti per il modale di gestione liste.
+- **Dati**: Aggiunto controllo per prevenire duplicati salvati.
+- **Pulizia**: Rimossi duplicati obsoleti dai file dati.
 
 ## [2.6.0] - 2025-12-09
-### Features
-- **Dynamic Food Management**: Manage Brands and Flavors directly from the Setup tab.
-- **Custom Lists**: Add or remove brands and flavors; they automatically appear in dropdowns.
+### Added
+- **Liste Dinamiche**: Nuova gestione per Marche e Gusti nel tab Setup.
+- **Modale Gestione**: Interfaccia per aggiungere/rimuovere elementi dalle liste.
+- **Dati**: I selettori prodotto ora usano le liste dinamiche invece di valori fissi.
 - **UI**: Added "Gestione Cibo" section in Setup.
 
 ## [2.5.4] - 2025-12-09
