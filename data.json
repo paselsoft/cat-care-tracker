@@ -34,18 +34,6 @@
         "createdAt": "2025-12-08T21:32:31.810Z"
       },
       {
-        "id": "1765229728549",
-        "type": "crocchette",
-        "brand": "Farmina",
-        "flavor": "quinoa",
-        "quantity": 2,
-        "size": null,
-        "likesMinou": true,
-        "likesMatisse": true,
-        "rating": "like",
-        "createdAt": "2025-12-08T21:35:28.549Z"
-      },
-      {
         "id": "1765297608097",
         "type": "scatoletta",
         "brand": "Almo Nature",
@@ -56,9 +44,21 @@
         "likesMatisse": true,
         "rating": "like",
         "createdAt": "2025-12-09T16:26:48.097Z"
+      },
+      {
+        "id": "1765300409141",
+        "type": "scatoletta",
+        "brand": "Almo Nature",
+        "flavor": "Petto di pollo",
+        "quantity": 1,
+        "size": "70g",
+        "likesMinou": true,
+        "likesMatisse": true,
+        "rating": "like",
+        "createdAt": "2025-12-09T17:13:29.141Z"
       }
     ],
-    "lastUpdated": "2025-12-09T16:26:48.097Z"
+    "lastUpdated": "2025-12-09T17:13:29.142Z"
   },
   "cats": {
     "minou": {
@@ -78,37 +78,19 @@
   },
   "healthEvents": [
     {
-      "id": 1765213244621,
-      "catId": "minou",
-      "type": "vaccine",
-      "date": "2025-12-10",
-      "note": "",
-      "cost": 40,
-      "nextDueDate": "2026-12-10"
-    },
-    {
-      "id": 1765213244622,
+      "id": 1765212618914,
       "catId": "matisse",
-      "type": "vaccine",
-      "date": "2025-12-10",
-      "note": "",
-      "cost": 40,
-      "nextDueDate": "2026-12-10"
-    },
-    {
-      "id": 1765212192462,
-      "catId": "minou",
-      "type": "weight",
-      "date": "2025-12-08",
-      "note": "4,600",
+      "type": "vet",
+      "date": "2025-12-02",
+      "note": "Controllo annuale",
       "cost": null,
-      "nextDueDate": "2026-01-10",
-      "weight": 4.6
+      "nextDueDate": "2026-12-02",
+      "weight": null
     }
   ],
   "settings": {
     "notifications": true,
     "dayBefore": true
   },
-  "lastUpdated": "2025-12-09T16:26:48.565Z"
+  "lastUpdated": "2025-12-09T17:13:29.612Z"
 }
