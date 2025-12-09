@@ -371,6 +371,20 @@ function saveProduct() {
         return;
     }
 
+    // Check for similar product (v2.6.1)
+    if (!editingProductId) {
+        const similar = appData.food.products.find(p =>
+            p.brand === brand &&
+            p.flavor === flavor &&
+            p.type === currentProductType
+        );
+        if (similar) {
+            if (!confirm(`"${brand} - ${flavor}" esiste già. Vuoi aggiungere una copia?`)) {
+                return;
+            }
+        }
+    }
+
     if (editingProductId) {
         // Modifica prodotto esistente
         const product = appData.food.products.find(p => String(p.id) === String(editingProductId));

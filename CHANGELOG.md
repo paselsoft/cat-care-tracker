@@ -6,6 +6,12 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.6.1] - 2025-12-09
+### Fixed
+- **CSS**: Improved styles for List Manager modal (missing classes).
+- **UX**: Added warning when adding a duplicate product.
+- **Data**: Removed duplicate entries from history and product list.
+
 ## [2.6.0] - 2025-12-09
 ### Features
 - **Dynamic Food Management**: Manage Brands and Flavors directly from the Setup tab.
