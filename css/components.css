@@ -813,6 +813,100 @@
     background: rgba(124, 58, 237, 0.1);
 }
 
+/* Settings Buttons (v2.6.6) */
+.settings-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.settings-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    /* More padding */
+    background: var(--bg-card);
+    /* Ensure contrast */
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    /* Rounder corners */
+    color: var(--text-primary);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    /* Subtle shadow */
+}
+
+/* Specific background for distinct look */
+.settings-btn:nth-child(1) {
+    /* Brands */
+    background: linear-gradient(135deg, rgba(254, 243, 199, 0.3), rgba(253, 230, 138, 0.1));
+    border-color: rgba(253, 230, 138, 0.5);
+}
+
+.settings-btn:nth-child(2) {
+    /* Flavors */
+    background: linear-gradient(135deg, rgba(219, 234, 254, 0.3), rgba(191, 219, 254, 0.1));
+    border-color: rgba(191, 219, 254, 0.5);
+}
+
+.settings-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+}
+
+.settings-btn .btn-icon {
+    font-size: 1.8rem;
+    /* Larger icon */
+    margin-right: 16px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.settings-btn .btn-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+/* Optional subtitle if we want to add spans later or just style text */
+.settings-btn .btn-text::after {
+    content: 'Modifica lista';
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+.settings-btn .btn-arrow {
+    background: var(--bg-primary);
+    /* Circle background */
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.settings-btn:hover .btn-arrow {
+    transform: translateX(3px);
+    color: var(--primary);
+}
+
 /* Settings */
 .settings-card {
     background: var(--bg-card);

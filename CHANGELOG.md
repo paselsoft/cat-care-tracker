@@ -6,6 +6,10 @@ Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.0.0/)
 
 ---
 
+## [2.6.6] - 2025-12-09
+### UI/UX
+- **UI Premium**: Completamente ridisegnati i pulsanti di gestione. Ora sono card colorate, con icone grandi, sottotitolo descrittivo e pulsante azione dedicato. Molto più bello da vedere e facile da usare! 🎨
+
 ## [2.6.5] - 2025-12-09
 ### UI/UX
 - **Restyling**: Aggiornato il design dei pulsanti "Gestione Cibo" nel Setup. Ora hanno uno stile moderno a "card" con icone e frecce, in linea con il resto dell'app.
