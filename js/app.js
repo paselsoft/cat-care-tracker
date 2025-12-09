@@ -494,8 +494,9 @@ function initPullToRefresh() {
     const threshold = 80;
 
     document.addEventListener('touchstart', (e) => {
-        // Solo se siamo in cima alla pagina
-        if (window.scrollY === 0) {
+        // Solo se siamo in cima alla pagina E siamo nella tab HOME
+        const homeTab = document.getElementById('tab-home');
+        if (window.scrollY === 0 && homeTab && homeTab.classList.contains('active')) {
             startY = e.touches[0].pageY;
             pulling = true;
         }

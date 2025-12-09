@@ -806,7 +806,7 @@
 .modal {
     background: var(--bg-card);
     border-radius: 24px;
-    padding: 28px;
+    padding: 20px;
     max-width: 340px;
     width: 100%;
     transform: scale(0.9);
@@ -819,8 +819,8 @@
 }
 
 .modal-icon {
-    font-size: 4rem;
-    margin-bottom: 16px;
+    font-size: 3rem;
+    margin-bottom: 12px;
 }
 
 .modal h3 {
@@ -990,7 +990,7 @@
 }
 
 .input-wrapper {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     text-align: left;
 }
 
@@ -1003,7 +1003,7 @@
 
 .text-input {
     width: 100%;
-    padding: 14px 16px;
+    padding: 10px 14px;
     border: 2px solid var(--border);
     border-radius: 12px;
     font-family: 'Nunito', sans-serif;
